@@ -82,7 +82,7 @@ component RegisterTemp 			IS PORT(
     clk : IN STD_LOGIC;
     S1, S2 , S3, S4: out std_LOGIC_VECTOR(15 downto 0)
 );
-END component;
+end component;
    
 component InstructionQueue 	IS PORT(
     reset 	: in std_logic;
@@ -105,7 +105,7 @@ component DataBus 				IS PORT(
 	 SGeneral, SBIURegs: out std_LOGIC_VECTOR(15 downto 0);
 	 STemp1, STemp2: out std_LOGIC_VECTOR(15 downto 0)
 );
-END component;
+end component;
 
 component BusControlLogic 		IS PORT(
 	 Dado: in std_LOGIC_VECTOR(15 downto 0);
@@ -114,7 +114,7 @@ component BusControlLogic 		IS PORT(
 	 SaidaQueue: out std_LOGIC_VECTOR(7 downto 0);
     SaidaRegs: out std_LOGIC_VECTOR(15 downto 0)
 );
-END component;
+end component;
 
 component AddressBus 			IS PORT(
     A, B : in std_logic_vector(15 downto 0);
@@ -122,7 +122,7 @@ component AddressBus 			IS PORT(
 	 controle : in std_logic_vector(1 downto 0);
 	 Saida : out std_logic_vector(19 downto 0)
 );
-END component;
+end component;
 
 component BIURegisters 			IS PORT(
 	--entrada de 16 bits nos registradores de memoria.
@@ -134,7 +134,7 @@ component BIURegisters 			IS PORT(
 	 --tres saidas de 16 bits
     Saida1, Saida2 , Saida3													: OUT STD_LOGIC_VECTOR(15 downto 0)
 );
-END component;
+end component;
 
 component ULA 						IS PORT(
 		clk, ADDSUB: in std_logic;
