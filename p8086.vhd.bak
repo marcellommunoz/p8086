@@ -1,0 +1,19 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+ 
+entity p8086 is
+  port (
+	clock : in std_logic;
+	reset : in std_logic;
+   entrada 	: in  std_logic_vector(7 downto 0);
+   saida : out std_logic_vector(7 downto 0);
+    );
+end p8086;
+ 
+architecture description of p8086 is
+   
+begin
+ 
+  
+end description;
