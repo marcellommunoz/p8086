@@ -51,9 +51,9 @@ signal control_OPULA																												: std_logic_vector;
 --saida da ULA para o ADB e o FR.
 signal ULAtoADB, ULAtoFR																										: std_logic_vector(15 downto 0);
 --saida de dados da BR.
-signal DATABUS 																													: std_logic_vector(15 downto 0);
---saida do endereco da ADDRESBUS.
-signal ADDRESBUS 																													: std_logic_vector(19 downto 0);
+signal BRtoBSL 																													: std_logic_vector(15 downto 0);
+--saida do endereco da ABtoBSL.
+signal ABtoBSL 																													: std_logic_vector(19 downto 0);
 --controle de escrita na memoria e de se e dados.
 signal control_wMEM, control_dMEM 																							: std_logic;
 --saida do BSL para o BR
@@ -63,7 +63,7 @@ component EU_Control_System 	IS PORT(
     clk     					: in std_logic;
     entradaInstrucao 		: in  std_logic_vector(7 downto 0);
 	 entradaRG1, entradaRG2, saidaRG1, saidaRG2	: out std_logic_vector(3 downto 0);
-	 saidaDataBUS				: out std_logic_vector(2 downto 0)
+	 saidaBRtoBSL				: out std_logic_vector(2 downto 0)
     );
 end component;
 
@@ -96,7 +96,7 @@ component InstructionQueue 	IS PORT(
     );
 end component;
 
-component DataBus 				IS PORT(
+component BRtoBSL 				IS PORT(
 	 InControl : in std_LOGIC_VECTOR(2 downto 0);
     TemporalReg1, TemporalReg2 : in std_LOGIC_VECTOR(15 downto 0);
 	 GeneralReg, BIURegs: in std_LOGIC_VECTOR(15 downto 0);
@@ -186,7 +186,7 @@ begin
 												flag_IQEmpty);
 	--barramento da ula
 	--IQtoECSandADB talvez cause um bug por causa do jeito que foi implementado a fila
-	ADB:	DataBus 					port map(
+	ADB:	BRtoBSL 					port map(
 												control_InADB,
 												RTtoADB1, RTtoADB2,
 												RG1toADB&RG2toADB, BRtoADB,
@@ -197,12 +197,18 @@ begin
 																							
 	--barramento I/O
 	BSL:	BusControlLogic 		port map(
-													DATABUS,
-													ADDRESBUS,
+													BRtoBSL,
+													ABtoBSL,
 													clock, control_wMEM, control_dMEM,
 													BSLtoIQ,
-													BSLtoBr,
+													BSLtoBR,
 													);
+	--barramento de endereco.
+	AB: AddressBus 				port map(
+										);
+	--registrador de segmento e pc.
+	BR: BIURegisters				port map(
+										);
 	--ULA.											
 	ALU:	ULA 						port map(
 												clock, control_ADDSUBULA,
