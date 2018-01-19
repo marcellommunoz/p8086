@@ -4,21 +4,27 @@ USE ieee.std_logic_signed.all ;
 
 entity ADD86 is
 	port(
-		clk, Controle: in std_logic;
-		A, B: in std_logic_vector(15 downto 0);
+		clk, Controle, ControleByte: in std_logic;
+		A, B : in std_logic_vector(15 downto 0);
+		AByte, BByte: in std_logic_vector(7 downto 0);
 		AF, CF, overflow, PF, SF, ZF: out std_logic;
 		Saida:  out std_logic_vector(15 downto 0)
 	);
 	end ADD86;
 	
 architecture comportamento of ADD86 is
+
 	signal S :std_logic_vector(15 downto 0);
-	signal X1, X2 , Y :std_logic_vector(7 downto 0);
+	signal X1, X2 , Y, SByte :std_logic_vector(7 downto 0);
+	signal half1, half2, half3: std_logic_vector(4 downto 0);
 	signal temp, temp2 :std_logic;
 
 	begin
 		process(clk)
 		begin
+		
+		if ControleByte = '0' then
+			
 			if (controle = '1') then
 				S <= A - B;
 			else 
@@ -44,15 +50,66 @@ architecture comportamento of ADD86 is
 						SF <= '1';
 					end if;
 			end if;
-			X1 <= A(7 downto 0);
-			X2 <= B(7 downto 0);
-			Y <= X1 + X2;
-			if (Y > 127) then
-				AF <='1';
-			end if;
+			half1(4) <= '0';
+				half2(4) <= '0';
+				half1(3 downto 0) <= A(3 downto 0);
+				half2(3 downto 0) <= B(3 downto 0);
+				half3 <= half1 + half2;
+				if (half3(4) = '1') then
+					AF <='1';
+				end if;
 			temp2 <=(A(15)and B(15)) and (not(S(15)));
 			if (temp2 = '1') then
 				CF <= '1';
+			end if;
+			
+			else 
+			
+			if Controle = '1' then
+					SByte <= AByte - BByte;
+				else
+					SByte <= AByte + BByte;
+				end if;
+
+				ZF <= '0';
+				SF <= '0';
+				Overflow <= '0';
+				AF <= '0';
+				CF <='0';
+
+				Saida(7 downto 0) <= SByte;
+				if(SByte(7) = '1') then
+					Saida(15 downto 8) <= "11111111";
+				else
+					Saida(15 downto 8) <= "00000000";
+				end if;
+				PF <= not(SByte(0) xor SByte(1) xor SByte(2) xor SByte(3) xor SByte(4) xor SByte(5) xor SByte(6) xor SByte(7));
+				if(S = 0) then
+					ZF <= '1';
+				end if;
+				temp <=(A(7)and B(7)) and (not(S(7)));
+				if(temp = '1') then
+					Overflow <= '1';
+					else
+						if S(7) = '1' then
+							SF <= '1';
+						end if;
+				end if;
+				--X1 <= A(7 downto 0);
+				--X2 <= B(7 downto 0);
+				--Y <= X1 + X2 ;
+				half1(4) <= '0';
+				half2(4) <= '0';
+				half1(3 downto 0) <= AByte(3 downto 0);
+				half2(3 downto 0) <= BByte(3 downto 0);
+				half3 <= half1 + half2; 
+				if (half3(4) = '1') then
+					AF <='1';
+				end if;
+				temp2 <=(AByte(7)and BByte(7)) and (not(SByte(7)));
+				if (temp2 = '1') then
+					CF <= '1';
+				end if;
 			end if;
 		end process;
 end comportamento;

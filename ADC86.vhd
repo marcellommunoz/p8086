@@ -15,7 +15,7 @@ entity ADC86 is
 architecture comportamento of ADC86 is
 	signal S :std_logic_vector(15 downto 0);
 	signal X1, X2 , Y, SByte :std_logic_vector(7 downto 0);
-	signal half1, half2: std_logic_vector(4 downto 0);
+	signal half1, half2, half3: std_logic_vector(4 downto 0);
 	signal temp, temp2 :std_logic;
 
 	begin
@@ -48,12 +48,20 @@ architecture comportamento of ADC86 is
 							SF <= '1';
 						end if;
 				end if;
-				X1 <= A(7 downto 0);
-				X2 <= B(7 downto 0);
-				Y <= X1 + X2+ carry;
-				if (Y > 127) then
+				--X1 <= A(7 downto 0);
+				--X2 <= B(7 downto 0);
+				--Y <= X1 + X2+ carry;
+				half1(4) <= '0';
+				half2(4) <= '0';
+				half1(3 downto 0) <= A(3 downto 0);
+				half2(3 downto 0) <= B(3 downto 0);
+				half3 <= half1 + half2 + 1;
+				if (half3(4) = '1') then
 					AF <='1';
 				end if;
+				--if (Y > 127) then
+				--	AF <='1';
+				--end if;
 				temp2 <=(A(15)and B(15)) and (not(S(15)));
 				if (temp2 = '1') then
 					CF <= '1';
@@ -71,7 +79,12 @@ architecture comportamento of ADC86 is
 				AF <= '0';
 				CF <='0';
 
-				Saida <= S;
+				Saida(7 downto 0) <= SByte;
+				if(SByte(7) = '1') then
+					Saida(15 downto 8) <= "11111111";
+				else
+					Saida(15 downto 8) <= "00000000";
+				end if;
 				PF <= not(SByte(0) xor SByte(1) xor SByte(2) xor SByte(3) xor SByte(4) xor SByte(5) xor SByte(6) xor SByte(7));
 				if(S = 0) then
 					ZF <= '1';
@@ -84,13 +97,15 @@ architecture comportamento of ADC86 is
 							SF <= '1';
 						end if;
 				end if;
-				X1 <= A(7 downto 0);
-				X2 <= B(7 downto 0);
-				Y <= X1 + X2 + carry;
+				--X1 <= A(7 downto 0);
+				--X2 <= B(7 downto 0);
+				--Y <= X1 + X2 + carry;
 				half1(4) <= '0';
 				half2(4) <= '0';
-				half1(3 downto 0) = AByte
-				if (Y > 127) then
+				half1(3 downto 0) <= AByte(3 downto 0);
+				half2(3 downto 0) <= BByte(3 downto 0);
+				half3 <= half1 + half2 + 1;
+				if (half3(4) = '1') then
 					AF <='1';
 				end if;
 				temp2 <=(AByte(7)and BByte(7)) and (not(SByte(7)));
