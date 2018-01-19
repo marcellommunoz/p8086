@@ -113,6 +113,8 @@ end component;
 component NOT86 is 
 port(
 	A : in std_logic_vector(15 downto 0);
+	AByte 		: in std_logic_vector(7 downto 0);
+	ByteControl			: in std_logic; 
 	S: out std_logic_vector(15 downto 0)
 );
 
@@ -148,6 +150,8 @@ component AND86 is
    port
    (
       A, B 					: in std_logic_vector(15 downto 0);
+		AByte, BByte 		: in std_logic_vector(7 downto 0);
+		ByteControl			: in std_logic; 
 		C						: out std_logic_vector(15 downto 0);
       Zout, Sout, Pout 	: out std_logic
    );
@@ -308,13 +312,13 @@ mulb1: MULB86 port map (clk, Operando1(15 downto 8), Operando1(7 downto 0), Fmul
 																	--0 11
 neg1: NEG86 port map (clk, Operando1, FNeg(0), FNeg(1), FNeg(2), FNeg(3), FNeg(4), FNeg(5), SNeg);								
 													--6 7 11 2 4 0
-not1: NOT86 port map (Operando1, SNot);
+not1: NOT86 port map (Operando1,SubOperando1, Controle(6), SNot);
 
 sahf1: SAHF86 port map (FSahf(7), FSahf(6), FSahf(4), FSahf(2), FSahf(0), Operando1(15 downto 8));
 
 xor1: XOR86 port map (Operando1, Operando2, SXOR);
 
-and1 : AND86 port map (Operando1, Operando2, SAnd, FAnd(0), FAnd(1), FAnd(2));
+and1 : AND86 port map (Operando1, Operando2, SubOperando1, SubOperando2, Controle(6), SAnd, FAnd(0), FAnd(1), FAnd(2));
 																		--6 7 2
 or1 : OR86 port map (Operando1, Operando2, SOr);
 
@@ -443,7 +447,7 @@ process (clk)
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
 				Word2 <= '0';
-			elsif Controle = "00011010" then
+			elsif Controle = "00011010" or Controle = "01011010" then
 				SOperando1 <= SNot;
 
 			elsif Controle = "00011011" then
@@ -460,7 +464,7 @@ process (clk)
 			elsif Controle = "00011100" then
 				SOperando1 <= SXOR;
 			
-			elsif Controle = "00011101" then
+			elsif Controle = "00011101" or Controle = "01011101" then
 				SOperando1 <= SAnd;
 				SFlags(6) <= FAnd(0);
 				SFlags(7) <= FAnd(1);
