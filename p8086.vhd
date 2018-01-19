@@ -12,6 +12,7 @@ entity p8086 is
 end p8086;
  --controle = sinais de escrita e leitura; selecao = escolher entre varias entradas ou saidas; entrada e saida = sinal que liga dois componente; flags = sinais que sai dos componentes.
 architecture description of p8086 is
+
 --saida IQ para a entrada do ECS
 signal IQtoECSandADB																												: std_logic_vector(7 downto 0);
 --selecao para as estradas do RG, de saida para o RG e de saida para a ADB.
@@ -47,7 +48,7 @@ signal ADBtoBR 																													: std_logic_vector(15 downto 0);
 --controle de sub ou add ULA.
 signal control_ADDSUBULA																										: std_logic;
 --controle da operacao da ULA.
-signal control_OPULA																												: std_logic_vector;
+signal control_OPULA																												: std_logic_vector(7 downto 0);
 --saida da ULA para o ADB e o FR.
 signal ULAtoADB, ULAtoFR																										: std_logic_vector(15 downto 0);
 --saida de dados da BR.
@@ -58,6 +59,16 @@ signal ABtoBSL 																													: std_logic_vector(19 downto 0);
 signal control_wMEM, control_dMEM 																							: std_logic;
 --saida do BSL para o BR
 signal BSLtoBR 																													: std_logic_vector(15 downto 0);
+--entrada do AddressBus
+signal BRtoAB : std_logic_vector(15 downto 0);
+--selecao operacao do AddressBus
+signal control_OPAB : std_logic_vector(1 downto 0);
+--controle de concatenacao do AddressBUS
+signal control_edAB : std_logic;
+--selecao de entrada e saida do BR.
+signal control_InBR1, control_InBR2, control_OutBRtoAB, control_OutBRtoBSL, control_OutBRtoADB : std_logic_vector(2 downto 0);
+--controle de escrita da BR.
+signal control_wBR1, control_wBR2 : std_logic;
 component EU_Control_System 	IS PORT(
     reset 						: in std_logic;
     clk     					: in std_logic;
@@ -118,7 +129,7 @@ end component;
 
 component AddressBus 			IS PORT(
     A, B : in std_logic_vector(15 downto 0);
-	 Flag, clk: in std_logic;
+	 ConcBED, clk: in std_logic;
 	 controle : in std_logic_vector(1 downto 0);
 	 Saida : out std_logic_vector(19 downto 0)
 );
@@ -205,10 +216,18 @@ begin
 													);
 	--barramento de endereco.
 	AB: AddressBus 				port map(
-										);
+													BRtoAB, BRtoBSL,
+													control_edAB, clock,
+													control_OPAB,
+													ABtoBSL
+													);
 	--registrador de segmento e pc.
 	BR: BIURegisters				port map(
-										);
+													ADBtoBR, BSLtoBR,
+													control_InBR1, control_InBR2, control_OutBRtoAB, control_OutBRtoBSL, control_OutBRtoADB
+													clock, reset, control_wBR1, control_wBR2,
+													BRtoAB, BRtoBSL, BRtoADB
+													);
 	--ULA.											
 	ALU:	ULA 						port map(
 												clock, control_ADDSUBULA,
