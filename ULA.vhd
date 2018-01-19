@@ -7,7 +7,7 @@ entity ULA is
 		clk, ADDSUB: in std_logic;
 		Controle : in std_logic_vector(7 downto 0);
 		Operando1, Operando2, Flags: in std_logic_vector(15 downto 0);
-		SOperando1, SOperando2, SFlags, SExtra: out std_logic_vector(15 downto 0)
+		SExtra, SFlags: out std_logic_vector(15 downto 0)
 		--Flags -    -    -    -    O    D    I    T    S    Z    -    A    -    P    -    C    Flags
 		--									 11   10   9    8    7    6         4         2         0
 	);
@@ -17,8 +17,9 @@ architecture comportamento of ULA is
 
 component ADC86 IS
 port(
-		clk, carry, Controle: in std_logic;
+		clk, carry, Controle, ControleByte: in std_logic;
 		A, B: in std_logic_vector(15 downto 0);
+		Abyte, Bbyte: in std_logic_vector(7 downto 0);
 		AF, CF, overflow, PF, SF, ZF: out std_logic;
 		Saida:  out std_logic_vector(15 downto 0)
 	);
@@ -26,8 +27,9 @@ port(
 
 component	ADD86 is
 	port(
-		clk, Controle: in std_logic;
-		A, B: in std_logic_vector(15 downto 0);
+		clk, Controle, ControleByte: in std_logic;
+		A, B : in std_logic_vector(15 downto 0);
+		AByte, BByte: in std_logic_vector(7 downto 0);
 		AF, CF, overflow, PF, SF, ZF: out std_logic;
 		Saida:  out std_logic_vector(15 downto 0)
 	);
@@ -276,12 +278,19 @@ Signal SRol , SRor, SSar, SShlsal, SShr: std_logic_vector(15 downto 0); --ROL RO
 Signal FRol, FRor, FSar, FShlsal, FShr: std_logic;-- Flag ROL ROR
 Signal SAaa,  SAas, SAam, SAad : std_logic_vector(15 downto 0);
 Signal SDaa : std_logic_vector(7 downto 0);
-
+Signal SubOperando1, SubOperando2 : std_logic_vector(7 downto 0);
+Signal SOperando1, SOperando2, Saida: std_logic_vector(15 downto 0);
+Signal Word2 : std_logic;
 Begin
 	
-add1: ADD86 port map(clk, ADDSUB, Operando1, Operando2, Fadd(0), Fadd(1), Fadd(2), Fadd(3), Fadd(4), Fadd(5), SaidaAdd);
+SubOperando1 <= Operando1(15 downto 8);
+SubOperando2 <= Operando1(7 downto 0);
 
-adc1: ADC86 port map(clk, Flags(0), ADDSUB, Operando1, Operando2, Fadc(0), Fadc(1), Fadc(2), Fadc(3), Fadc(4), Fadc(5), SaidaAdc);
+
+
+add1: ADD86 port map(clk, Controle(7),Controle(6), Operando1, Operando2,SubOperando1, SubOperando2, Fadd(0), Fadd(1), Fadd(2), Fadd(3), Fadd(4), Fadd(5), SaidaAdd);
+
+adc1: ADC86 port map(clk, Flags(0), Controle(7),Controle(6), Operando1, Operando2,SubOperando1, SubOperando2, Fadc(0), Fadc(1), Fadc(2), Fadc(3), Fadc(4), Fadc(5), SaidaAdc);
 
 dec1: DEC86 port map(clk, Operando1, Fdec(0), Fdec(1), Fdec(2), Fdec(3), Fdec(4), SaidaDec);
 												--	6 7 11 2 4
@@ -335,7 +344,7 @@ aad1: AAD86 port map (clk, Operando1(7 downto 0), Operando1(15 downto 8), FAad(0
 		
 process (clk)
 	begin
-		if controle = "00010000" then --ADD
+		if controle = "10010000" or controle = "11010000" or controle = "00010000" or controle = "01010000"then --ADD
 			SOperando1 <= SaidaAdd;
 			SFlags(4) <= FAdd(0);
 			SFlags(0) <= FAdd(1);
@@ -348,8 +357,9 @@ process (clk)
 			SFlags(5) <= '0';
 			SFlags(10 downto 8) <= "000";
 			SFlags(15 downto 12) <= "0000";
+			Word2 <= '0';
 			
-			elsif Controle = "00010001" then --ADC
+			elsif Controle = "10010001" or Controle = "11010001" or Controle = "00010001" or Controle = "01010001" then --ADC
 				SOperando1 <= SaidaAdc;
 				SFlags(4) <= FAdc(0);
 				SFlags(0) <= FAdc(1);
@@ -362,7 +372,7 @@ process (clk)
 				SFlags(5) <= '0';
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
-				
+				Word2 <= '0';
 			elsif Controle = "00010010" then --DEC
 				SOperando1 <= SaidaDec;
 				SFlags(6) <= FDec(0);
@@ -379,11 +389,13 @@ process (clk)
 			
 			elsif Controle = "00010011" then --DIV
 				SOperando1 <= SDiv1;
-				SOperando2 <= SDiv2;			
+				SOperando2 <= SDiv2;
+				Word2 <= '1';		
 			
 			elsif Controle = "00010100" then --IDIV
 				SOperando1 <= SIdiv1;
-				SOperando2 <= SIdiv2;	
+				SOperando2 <= SIdiv2;
+				Word2 <= '1';	
 			
 			elsif Controle = "00010101" then --INC
 				SFlags(6) <= FInc(0);
@@ -397,7 +409,7 @@ process (clk)
 				SFlags(5) <= '0';
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
-				
+				Word2 <= '0';
 			elsif Controle = "00010110" then --LAHF
 				SOperando1 <= Slahf;
 			
@@ -408,6 +420,7 @@ process (clk)
 				SFlags(11) <= Fmul(1);
 				SFlags(15 downto 12) <= "0000";
 				SFlags(10 downto 1) <= "0000000000";
+				Word2 <= '1';
 				
 			elsif Controle = "00011000" then
 				SOperando1 <= SMulb;
@@ -415,7 +428,7 @@ process (clk)
 				SFlags(11) <= Fmul(1);
 				SFlags(15 downto 12) <= "0000";
 				SFlags(10 downto 1) <= "0000000000";
-			
+				Word2 <= '0';
 			elsif Controle = "00011001" then
 				SOperando1 <= SNeg;
 				SFlags(6) <= FNeg(0);
@@ -429,7 +442,7 @@ process (clk)
 				SFlags(5) <= '0';
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
-			
+				Word2 <= '0';
 			elsif Controle = "00011010" then
 				SOperando1 <= SNot;
 
@@ -443,7 +456,7 @@ process (clk)
 				SFlags(4) <= FSahf(4);
 				SFlags(2) <= FSahf(2);
 				SFlags(0) <= FSahf(0);
-			
+				Word2 <= '0';
 			elsif Controle = "00011100" then
 				SOperando1 <= SXOR;
 			
@@ -459,40 +472,40 @@ process (clk)
 				SFlags(5) <= '0';
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
-			
+				Word2 <= '0';
 			elsif Controle = "00011110" then
 				SOperando1 <= SOr;
-				
+				Word2 <= '0';
 			elsif Controle = "00011111" then
 				SOperando1 <= SRol;
 				SFlags(11) <= FRol;
 				SFlags(10 downto 0) <= "00000000000";
 				SFlags(15 downto 12) <= "0000";
-				
+				Word2 <= '0';
 			elsif Controle = "00100000" then
 				SOperando1 <= SRor;
 				SFlags(11) <= FRor;
 				SFlags(10 downto 0) <= "00000000000";
 				SFlags(15 downto 12) <= "0000";
-			
+				Word2 <= '0';
 			elsif Controle = "00100001" then
 				SOperando1 <= SSar;
 				SFlags(11) <= FSar;
 				SFlags(10 downto 0) <= "00000000000";
 				SFlags(15 downto 12) <= "0000";
-			
+				Word2 <= '0';
 			elsif Controle = "00100010" then
 				SOperando1 <= SShlsal;
 				SFlags(11) <= FShlsal;
 				SFlags(10 downto 0) <= "00000000000";
 				SFlags(15 downto 12) <= "0000";
-				
+				Word2 <= '0';
 			elsif Controle = "00100011" then
 				SOperando1 <= SShr;
 				SFlags(11) <= FShr;
 				SFlags(10 downto 0) <= "00000000000";
 				SFlags(15 downto 12) <= "0000";
-			
+				Word2 <= '0';
 			elsif Controle = "00100100" then
 				SFlags(6) <= FTest(0);
 				SFlags(7) <= FTest(1);
@@ -504,14 +517,14 @@ process (clk)
 				SFlags(5) <= '0';
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
-			
+				Word2 <= '0';
 			elsif Controle = "00000001" then --aaa
 				SOperando1 <= SAaa;
 				SFlags(4) <= FAaa(0);
 				SFlags(0) <= FAaa(1);
 				SFlags(3 downto 1) <= "000";
 				SFlags(15 downto 5) <= "00000000000";
-
+				Word2 <= '0';
 			
 			elsif Controle = "00100111" then
 				SOperando1(7 downto 0) <= SDaa;
@@ -525,14 +538,14 @@ process (clk)
 				SFlags(3) <= '0';
 				SFlags(5) <= '0';
 				SFlags(15 downto 8) <= "00000000";
-				
+				Word2 <= '0';
 			elsif Controle = "00101000" then
 				SOperando1 <= SAas;
 				SFlags(4) <= FAas(0);
 				SFlags(0) <= FAas(1);
 				SFlags(3 downto 1) <= "000";
 				SFlags(15 downto 5) <= "00000000000";
-	
+				Word2 <= '0';
 			elsif Controle = "00101001" then
 				SOperando1 <= SAam;
 				SFlags(6) <= FAam(0);
@@ -545,7 +558,7 @@ process (clk)
 				SFlags(5) <= '0';
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
-			
+				Word2 <= '0';
 			elsif Controle = "00101010" then
 				SOperando1 <= SAad;
 				SFlags(6) <= FAad(0);
@@ -558,10 +571,13 @@ process (clk)
 				SFlags(5) <= '0';
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
-			
-		
+				Word2 <= '0';
 		end if;
+		Saida <= SOperando1;
+		if Word2 = '1' then 
+			Saida <= SOperando2;
+		end if;	
 end process;
-
+SExtra <= Saida;
 
 end comportamento;
