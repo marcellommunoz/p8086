@@ -39,7 +39,9 @@ component DEC86 IS
 	port(
 		clk: in std_logic;
 		A :in std_logic_vector(15 downto 0);
-		zero, SF, Overflow, Parity, auxiliary: out std_logic;
+		AByte : in std_logic_vector(7 downto 0);
+		ByteControl : in std_logic;
+		zero, SF, Overflow, Parity, AF: out std_logic;
 		Saida:  out std_logic_vector(15 downto 0)
 	);
 end component;
@@ -65,7 +67,9 @@ component INC86 is
 	port(
 		clk: in std_logic;
 		A :in std_logic_vector(15 downto 0);
-		zero, SF, Overflow, Parity, auxiliary: out std_logic;
+		AByte : in std_logic_vector(7 downto 0);
+		ByteControl : in std_logic;
+		zero, SF, Overflow, Parity, AF: out std_logic;
 		Saida:  out std_logic_vector(15 downto 0)
 	);
 
@@ -296,13 +300,13 @@ add1: ADD86 port map(clk, Controle(7),Controle(6), Operando1, Operando2,SubOpera
 
 adc1: ADC86 port map(clk, Flags(0), Controle(7),Controle(6), Operando1, Operando2,SubOperando1, SubOperando2, Fadc(0), Fadc(1), Fadc(2), Fadc(3), Fadc(4), Fadc(5), SaidaAdc);
 
-dec1: DEC86 port map(clk, Operando1, Fdec(0), Fdec(1), Fdec(2), Fdec(3), Fdec(4), SaidaDec);
+dec1: DEC86 port map(clk, Operando1,SubOperando1, Controle(6), Fdec(0), Fdec(1), Fdec(2), Fdec(3), Fdec(4), SaidaDec);
 												--	6 7 11 2 4
 div1: DIV86 port map(Operando1, Operando2, SDiv1, SDiv2);
 
 idiv1: IDIV86 port map (clk, Operando1, Operando2, SIdiv1, SIdiv2);
 
-inc1: INC86 port map (clk, Operando1, FInc(0), FInc(1), FInc(2), FInc(3), FInc(4), SInc);
+inc1: INC86 port map (clk, Operando1,SubOperando1, Controle(6), FInc(0), FInc(1), FInc(2), FInc(3), FInc(4), SInc);
 													--6 7 11 2 4
 lahf1: LAHF86 port map(Flags(0), Flags(1), Flags(2), Flags(3), Flags(4), Operando1(15 downto 8), Slahf(15 downto 8));
 								--7 6 4 2 0
@@ -377,7 +381,7 @@ process (clk)
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
 				Word2 <= '0';
-			elsif Controle = "00010010" then --DEC
+			elsif Controle = "00010010" or Controle = "01010010"then --DEC
 				SOperando1 <= SaidaDec;
 				SFlags(6) <= FDec(0);
 				SFlags(7) <= FDec(1);
@@ -401,7 +405,7 @@ process (clk)
 				SOperando2 <= SIdiv2;
 				Word2 <= '1';	
 			
-			elsif Controle = "00010101" then --INC
+			elsif Controle = "00010101" or Controle = "01010101"then --INC
 				SFlags(6) <= FInc(0);
 				SFlags(7) <= FInc(1);
 				SFlags(11) <= FInc(2);
