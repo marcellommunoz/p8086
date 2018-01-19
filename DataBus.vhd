@@ -7,7 +7,7 @@ ENTITY DataBus IS PORT(
     TemporalReg1, TemporalReg2 : in std_LOGIC_VECTOR(15 downto 0);
 	 GeneralReg, BIURegs: in std_LOGIC_VECTOR(15 downto 0);
 	 ULA, Flags: in std_LOGIC_VECTOR(15 downto 0);
-	 InstructionQueue: in std_LOGIC_VECTOR(15 downto 0);
+	 InstructionQueue: in std_LOGIC_VECTOR(7 downto 0);
 	 SGeneral, SBIURegs: out std_LOGIC_VECTOR(15 downto 0);
 	 STemp1, STemp2: out std_LOGIC_VECTOR(15 downto 0)
 );
@@ -26,7 +26,7 @@ begin
 					  BIURegs when "011",
 					  ULA when "100",
 					  Flags when "101",
-					  InstructionQueue when "110",
+					  "00000000"&InstructionQueue when "110",
 					  "0000000000000000" when "111";
 	
 	SGeneral <= Entrada;

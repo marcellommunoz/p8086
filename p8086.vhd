@@ -16,7 +16,8 @@ architecture description of p8086 is
 --saida IQ para a entrada do ECS
 signal IQtoECSandADB																												: std_logic_vector(7 downto 0);
 --selecao para as estradas do RG, de saida para o RG e de saida para a ADB.
-signal control_InRG1, control_InRG2, control_OutRG1, control_OutRG2, control_OutADB							: std_logic_vector(3 downto 0);
+signal control_InRG1, control_InRG2, control_OutRG1, control_OutRG2												: std_logic_vector(3 downto 0);
+signal control_OutADB : std_logic_vector(2 downto 0);
 --controle para escrita no RG.
 signal control_wRG1, control_wRG2																							: std_logic;
 --saida da ADB para as entradas do RG.
@@ -40,7 +41,7 @@ signal flag_IQFull, flag_IQEmpty																								: std_logic;
 --selecao para as entradas do ADB.
 signal control_InADB 																											: std_logic_vector(2 downto 0);
 --saida BR para a entrada ADB.
-signal BRtoADB, ULAtoADB																										: std_logic_vector(15 downto 0);
+signal BRtoADB																														: std_logic_vector(15 downto 0);
 --saida da FR para entrada ADB.
 signal FRtoADBandULA 																											: std_logic_vector(15 downto 0);
 --saida da ADB to BR.
@@ -60,21 +61,24 @@ signal control_wMEM, control_dMEM 																							: std_logic;
 --saida do BSL para o BR
 signal BSLtoBR 																													: std_logic_vector(15 downto 0);
 --entrada do AddressBus
-signal BRtoAB : std_logic_vector(15 downto 0);
+signal BRtoAB 																														: std_logic_vector(15 downto 0);
 --selecao operacao do AddressBus
-signal control_OPAB : std_logic_vector(1 downto 0);
+signal control_OPAB 																												: std_logic_vector(1 downto 0);
 --controle de concatenacao do AddressBUS
-signal control_edAB : std_logic;
+signal control_edAB 																												: std_logic;
 --selecao de entrada e saida do BR.
-signal control_InBR1, control_InBR2, control_OutBRtoAB, control_OutBRtoBSL, control_OutBRtoADB : std_logic_vector(2 downto 0);
+signal control_InBR1, control_InBR2, control_OutBRtoAB, control_OutBRtoBSL, control_OutBRtoADB 			: std_logic_vector(2 downto 0);
 --controle de escrita da BR.
-signal control_wBR1, control_wBR2 : std_logic;
+signal control_wBR1, control_wBR2 																							: std_logic;
+--controle de escrita no FR.
+signal control_wFR 																												: std_logic;
 component EU_Control_System 	IS PORT(
     reset 						: in std_logic;
     clk     					: in std_logic;
     entradaInstrucao 		: in  std_logic_vector(7 downto 0);
 	 entradaRG1, entradaRG2, saidaRG1, saidaRG2	: out std_logic_vector(3 downto 0);
-	 saidaBRtoBSL				: out std_logic_vector(2 downto 0)
+	 sinalEscritaRG1, sinalEscritaRG2 : std_logic;
+	 saidaDataBUS				: out std_logic_vector(2 downto 0)
     );
 end component;
 
@@ -107,12 +111,12 @@ component InstructionQueue 	IS PORT(
     );
 end component;
 
-component BRtoBSL 				IS PORT(
+component DataBus 				IS PORT(
 	 InControl : in std_LOGIC_VECTOR(2 downto 0);
     TemporalReg1, TemporalReg2 : in std_LOGIC_VECTOR(15 downto 0);
 	 GeneralReg, BIURegs: in std_LOGIC_VECTOR(15 downto 0);
 	 ULA, Flags: in std_LOGIC_VECTOR(15 downto 0);
-	 InstructionQueue: in std_LOGIC_VECTOR(15 downto 0);
+	 InstructionQueue: in std_LOGIC_VECTOR(7 downto 0);
 	 SGeneral, SBIURegs: out std_LOGIC_VECTOR(15 downto 0);
 	 STemp1, STemp2: out std_LOGIC_VECTOR(15 downto 0)
 );
@@ -151,7 +155,7 @@ component ULA 						IS PORT(
 		clk, ADDSUB: in std_logic;
 		Controle : in std_logic_vector(7 downto 0);
 		Operando1, Operando2, Flags: in std_logic_vector(15 downto 0);
-		SOperando1, SOperando2, SFlags, SExtra: out std_logic_vector(15 downto 0)
+		SExtra, SFlags: out std_logic_vector(15 downto 0)
 	);
 end component;
 
@@ -170,6 +174,7 @@ begin
 												clock,
 												IQtoECSandADB,
 												control_InRG1, control_InRG2, control_OutRG1, control_OutRG2,
+												control_wRG1, control_wRG2,
 												control_OutADB);
 	--Registradores da maquina
 	RG:	RegistradorGeral 		port map(
@@ -197,11 +202,11 @@ begin
 												flag_IQEmpty);
 	--barramento da ula
 	--IQtoECSandADB talvez cause um bug por causa do jeito que foi implementado a fila
-	ADB:	BRtoBSL 					port map(
+	ADB:	DataBus 					port map(
 												control_InADB,
 												RTtoADB1, RTtoADB2,
 												RG1toADB&RG2toADB, BRtoADB,
-												ULAtoADB, FRtoADBandULA
+												ULAtoADB, FRtoADBandULA,
 												IQtoECSandADB,
 												ADBtoRG, ADBtoBR,
 												ADBtoRT1, ADBtoRT2);
@@ -222,7 +227,7 @@ begin
 	--registrador de segmento e pc.
 	BR: BIURegisters				port map(
 													ADBtoBR, BSLtoBR,
-													control_InBR1, control_InBR2, control_OutBRtoAB, control_OutBRtoBSL, control_OutBRtoADB
+													control_InBR1, control_InBR2, control_OutBRtoAB, control_OutBRtoBSL, control_OutBRtoADB,
 													clock, reset, control_wBR1, control_wBR2,
 													BRtoAB, BRtoBSL, BRtoADB
 													);

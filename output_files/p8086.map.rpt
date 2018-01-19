@@ -1,5 +1,5 @@
 Analysis & Synthesis report for p8086
-Fri Jan 19 15:40:21 2018
+Fri Jan 19 16:14:36 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -10,7 +10,23 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis IP Cores Summary
+  9. State Machine - |p8086|EU_Control_System:ECS|state
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Source assignments for BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated
+ 13. Parameter Settings for User Entity Instance: BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component
+ 14. altsyncram Parameter Settings by Entity Instance
+ 15. Port Connectivity Checks: "ULA:ALU|NEG86:neg1"
+ 16. Port Connectivity Checks: "ULA:ALU|MULB86:mulb1"
+ 17. Port Connectivity Checks: "ULA:ALU|INC86:inc1"
+ 18. Port Connectivity Checks: "InstructionQueue:IQ"
+ 19. Port Connectivity Checks: "EU_Control_System:ECS"
+ 20. Elapsed Time Per Partition
+ 21. Analysis & Synthesis Messages
 
 
 
@@ -36,20 +52,20 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Fri Jan 19 15:40:21 2018               ;
+; Analysis & Synthesis Status        ; Successful - Fri Jan 19 16:14:36 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; p8086                                           ;
 ; Top-level Entity Name              ; p8086                                           ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; N/A until Partition Merge                       ;
-;     Total combinational functions  ; N/A until Partition Merge                       ;
-;     Dedicated logic registers      ; N/A until Partition Merge                       ;
-; Total registers                    ; N/A until Partition Merge                       ;
-; Total pins                         ; N/A until Partition Merge                       ;
-; Total virtual pins                 ; N/A until Partition Merge                       ;
-; Total memory bits                  ; N/A until Partition Merge                       ;
-; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                       ;
-; Total PLLs                         ; N/A until Partition Merge                       ;
+; Total logic elements               ; 0                                               ;
+;     Total combinational functions  ; 0                                               ;
+;     Dedicated logic registers      ; 0                                               ;
+; Total registers                    ; 0                                               ;
+; Total pins                         ; 34                                              ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
 +------------------------------------+-------------------------------------------------+
 
 
@@ -148,13 +164,387 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                            ; Library ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+; EU_Control_System.vhd            ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/EU_Control_System.vhd             ;         ;
+; XOR86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/XOR86.vhd                         ;         ;
+; TEST86.vhd                       ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/TEST86.vhd                        ;         ;
+; SHR86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/SHR86.vhd                         ;         ;
+; SHLSAL86.vhd                     ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/SHLSAL86.vhd                      ;         ;
+; SAR86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/SAR86.vhd                         ;         ;
+; SAHF86.vhd                       ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/SAHF86.vhd                        ;         ;
+; ROR86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/ROR86.vhd                         ;         ;
+; ROL86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/ROL86.vhd                         ;         ;
+; OR86.vhd                         ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/OR86.vhd                          ;         ;
+; NOT86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/NOT86.vhd                         ;         ;
+; NEG86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/NEG86.vhd                         ;         ;
+; MULB86.vhd                       ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/MULB86.vhd                        ;         ;
+; MUL86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/MUL86.vhd                         ;         ;
+; LAHF86.vhd                       ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/LAHF86.vhd                        ;         ;
+; INC86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/INC86.vhd                         ;         ;
+; IDIV86.vhd                       ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/IDIV86.vhd                        ;         ;
+; DIV86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/DIV86.vhd                         ;         ;
+; DEC86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/DEC86.vhd                         ;         ;
+; DAA86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/DAA86.vhd                         ;         ;
+; AND86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/AND86.vhd                         ;         ;
+; ADD86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/ADD86.vhd                         ;         ;
+; ADC86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/ADC86.vhd                         ;         ;
+; AAS86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/AAS86.vhd                         ;         ;
+; AAM86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/AAM86.vhd                         ;         ;
+; AAD86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/AAD86.vhd                         ;         ;
+; AAA86.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/AAA86.vhd                         ;         ;
+; RegistradorGeral.vhd             ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/RegistradorGeral.vhd              ;         ;
+; RegisterTemp.vhd                 ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/RegisterTemp.vhd                  ;         ;
+; Memory.vhd                       ; yes             ; User Wizard-Generated File   ; C:/Users/Marcello/Desktop/p8086/p8086/Memory.vhd                        ;         ;
+; InstructionQueue.vhd             ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/InstructionQueue.vhd              ;         ;
+; DataBus.vhd                      ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/DataBus.vhd                       ;         ;
+; BusControlLogic.vhd              ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/BusControlLogic.vhd               ;         ;
+; AddressBus.vhd                   ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/AddressBus.vhd                    ;         ;
+; Registrador8.vhd                 ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/Registrador8.vhd                  ;         ;
+; Registrador16.vhd                ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/Registrador16.vhd                 ;         ;
+; BIURegisters.vhd                 ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/BIURegisters.vhd                  ;         ;
+; p8086.vhd                        ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/p8086.vhd                         ;         ;
+; ULA.vhd                          ; yes             ; User VHDL File               ; C:/Users/Marcello/Desktop/p8086/p8086/ULA.vhd                           ;         ;
+; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
+; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_decode.inc        ;         ;
+; aglobal130.inc                   ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/aglobal130.inc        ;         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/a_rdenreg.inc         ;         ;
+; altrom.inc                       ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altrom.inc            ;         ;
+; altram.inc                       ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altram.inc            ;         ;
+; altdpram.inc                     ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altdpram.inc          ;         ;
+; db/altsyncram_5ba1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Users/Marcello/Desktop/p8086/p8086/db/altsyncram_5ba1.tdf            ;         ;
+; db/decode_9oa.tdf                ; yes             ; Auto-Generated Megafunction  ; C:/Users/Marcello/Desktop/p8086/p8086/db/decode_9oa.tdf                 ;         ;
+; db/mux_8kb.tdf                   ; yes             ; Auto-Generated Megafunction  ; C:/Users/Marcello/Desktop/p8086/p8086/db/mux_8kb.tdf                    ;         ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+;                                             ;       ;
+; Total combinational functions               ; 0     ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 0     ;
+;     -- 3 input functions                    ; 0     ;
+;     -- <=2 input functions                  ; 0     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 0     ;
+;     -- arithmetic mode                      ; 0     ;
+;                                             ;       ;
+; Total registers                             ; 0     ;
+;     -- Dedicated logic registers            ; 0     ;
+;     -- I/O registers                        ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 34    ;
+; Embedded Multiplier 9-bit elements          ; 0     ;
++---------------------------------------------+-------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
+; |p8086                     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 34   ; 0            ; |p8086              ; work         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis IP Cores Summary                                                                                                                        ;
++--------+--------------+---------+--------------+--------------+-------------------------------------------+--------------------------------------------------+
+; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                           ; IP Include File                                  ;
++--------+--------------+---------+--------------+--------------+-------------------------------------------+--------------------------------------------------+
+; Altera ; RAM: 1-PORT  ; N/A     ; N/A          ; N/A          ; |p8086|BusControlLogic:BSL|Memory:memoria ; C:/Users/Marcello/Desktop/p8086/p8086/Memory.vhd ;
++--------+--------------+---------+--------------+--------------+-------------------------------------------+--------------------------------------------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------+
+; State Machine - |p8086|EU_Control_System:ECS|state                        ;
++-----------------+----------+-----------------+--------------+-------------+
+; Name            ; state.op ; state.writeback ; state.readin ; state.fetch ;
++-----------------+----------+-----------------+--------------+-------------+
+; state.fetch     ; 0        ; 0               ; 0            ; 0           ;
+; state.readin    ; 0        ; 0               ; 1            ; 1           ;
+; state.writeback ; 0        ; 1               ; 0            ; 1           ;
+; state.op        ; 1        ; 0               ; 0            ; 1           ;
++-----------------+----------+-----------------+--------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                             ;
++---------------------------------------------------------------------------------------------------------------------------+--------------------+
+; Register name                                                                                                             ; Reason for Removal ;
++---------------------------------------------------------------------------------------------------------------------------+--------------------+
+; Registrador16:FR|q[0..15]                                                                                                 ; Lost fanout        ;
+; BIURegisters:BR|Registrador16:RegInternal3|q[0..15]                                                                       ; Lost fanout        ;
+; BIURegisters:BR|Registrador16:RegInternal2|q[0..15]                                                                       ; Lost fanout        ;
+; BIURegisters:BR|Registrador16:RegInternal1|q[0..15]                                                                       ; Lost fanout        ;
+; BIURegisters:BR|Registrador16:RegIP|q[0..15]                                                                              ; Lost fanout        ;
+; BIURegisters:BR|Registrador16:RegES|q[0..15]                                                                              ; Lost fanout        ;
+; BIURegisters:BR|Registrador16:RegSS|q[0..15]                                                                              ; Lost fanout        ;
+; BIURegisters:BR|Registrador16:RegDS|q[0..15]                                                                              ; Lost fanout        ;
+; BIURegisters:BR|Registrador16:RegCS|q[0..15]                                                                              ; Lost fanout        ;
+; BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|address_reg_a[0..2]     ; Lost fanout        ;
+; BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|out_address_reg_a[0..2] ; Lost fanout        ;
+; InstructionQueue:IQ|saida_parcial[0]                                                                                      ; Lost fanout        ;
+; InstructionQueue:IQ|\p_CONTROL:contador[0..3]                                                                             ; Lost fanout        ;
+; InstructionQueue:IQ|index_leitura[0..2]                                                                                   ; Lost fanout        ;
+; InstructionQueue:IQ|index_escrita[0..2]                                                                                   ; Lost fanout        ;
+; InstructionQueue:IQ|w_cheio                                                                                               ; Lost fanout        ;
+; InstructionQueue:IQ|w_vazio                                                                                               ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[0][7]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[0][6]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[0][5]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[0][4]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[0][3]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[0][2]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[0][1]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[0][0]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[1][7]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[1][6]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[1][5]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[1][4]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[1][3]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[1][2]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[1][1]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[1][0]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[2][7]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[2][6]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[2][5]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[2][4]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[2][3]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[2][2]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[2][1]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[2][0]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[3][7]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[3][6]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[3][5]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[3][4]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[3][3]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[3][2]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[3][1]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[3][0]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[4][7]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[4][6]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[4][5]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[4][4]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[4][3]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[4][2]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[4][1]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[4][0]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[5][7]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[5][6]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[5][5]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[5][4]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[5][3]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[5][2]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[5][1]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|vetor_queue[5][0]                                                                                     ; Lost fanout        ;
+; InstructionQueue:IQ|saida_parcial[1..7]                                                                                   ; Lost fanout        ;
+; RegisterTemp:RT|Registrador16:RegR3|q[0..15]                                                                              ; Lost fanout        ;
+; RegisterTemp:RT|Registrador16:RegR2|q[0..15]                                                                              ; Lost fanout        ;
+; RegisterTemp:RT|Registrador16:RegR1|q[0..15]                                                                              ; Lost fanout        ;
+; RegistradorGeral:RG|Registrador16:DI|q[0..15]                                                                             ; Lost fanout        ;
+; RegistradorGeral:RG|Registrador16:SI|q[0..15]                                                                             ; Lost fanout        ;
+; RegistradorGeral:RG|Registrador16:BP|q[0..15]                                                                             ; Lost fanout        ;
+; RegistradorGeral:RG|Registrador16:SP|q[0..15]                                                                             ; Lost fanout        ;
+; RegistradorGeral:RG|Registrador8:DL|q[0..7]                                                                               ; Lost fanout        ;
+; RegistradorGeral:RG|Registrador8:DH|q[0..7]                                                                               ; Lost fanout        ;
+; RegistradorGeral:RG|Registrador8:CL|q[0..7]                                                                               ; Lost fanout        ;
+; RegistradorGeral:RG|Registrador8:CH|q[0..7]                                                                               ; Lost fanout        ;
+; RegistradorGeral:RG|Registrador8:BL|q[0..7]                                                                               ; Lost fanout        ;
+; RegistradorGeral:RG|Registrador8:BH|q[0..7]                                                                               ; Lost fanout        ;
+; RegistradorGeral:RG|Registrador8:AL|q[0..7]                                                                               ; Lost fanout        ;
+; RegistradorGeral:RG|Registrador8:AH|q[0..7]                                                                               ; Lost fanout        ;
+; EU_Control_System:ECS|\EU_CONTROL:instrucaoAtual[0..7]                                                                    ; Lost fanout        ;
+; EU_Control_System:ECS|saidaRG1[0..3]                                                                                      ; Lost fanout        ;
+; EU_Control_System:ECS|saidaRG2[0..3]                                                                                      ; Lost fanout        ;
+; EU_Control_System:ECS|state.fetch                                                                                         ; Lost fanout        ;
+; EU_Control_System:ECS|state.readin                                                                                        ; Lost fanout        ;
+; EU_Control_System:ECS|state.writeback                                                                                     ; Lost fanout        ;
+; EU_Control_System:ECS|state.op                                                                                            ; Lost fanout        ;
+; Total Number of Removed Registers = 414                                                                                   ;                    ;
++---------------------------------------------------------------------------------------------------------------------------+--------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 0     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated ;
++---------------------------------+--------------------+------+------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                         ;
++---------------------------------+--------------------+------+------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                          ;
++---------------------------------+--------------------+------+------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+-----------------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                                ;
++------------------------------------+----------------------+-----------------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                             ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                      ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                             ;
+; OPERATION_MODE                     ; SINGLE_PORT          ; Untyped                                             ;
+; WIDTH_A                            ; 16                   ; Signed Integer                                      ;
+; WIDTHAD_A                          ; 15                   ; Signed Integer                                      ;
+; NUMWORDS_A                         ; 32768                ; Signed Integer                                      ;
+; OUTDATA_REG_A                      ; CLOCK0               ; Untyped                                             ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                             ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                             ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                             ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                             ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                             ;
+; WIDTH_B                            ; 1                    ; Untyped                                             ;
+; WIDTHAD_B                          ; 1                    ; Untyped                                             ;
+; NUMWORDS_B                         ; 1                    ; Untyped                                             ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                             ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                             ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                             ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                             ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                             ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                             ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                             ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                             ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                             ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                             ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                             ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                             ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                                      ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                             ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                             ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                             ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                             ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                             ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                             ;
+; INIT_FILE                          ; UNUSED               ; Untyped                                             ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                             ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                             ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                                             ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                             ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                                             ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                             ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                             ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                             ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                             ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                             ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                             ;
+; DEVICE_FAMILY                      ; Cyclone II           ; Untyped                                             ;
+; CBXI_PARAMETER                     ; altsyncram_5ba1      ; Untyped                                             ;
++------------------------------------+----------------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                                               ;
++-------------------------------------------+--------------------------------------------------------------------+
+; Name                                      ; Value                                                              ;
++-------------------------------------------+--------------------------------------------------------------------+
+; Number of entity instances                ; 1                                                                  ;
+; Entity Instance                           ; BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component ;
+;     -- OPERATION_MODE                     ; SINGLE_PORT                                                        ;
+;     -- WIDTH_A                            ; 16                                                                 ;
+;     -- NUMWORDS_A                         ; 32768                                                              ;
+;     -- OUTDATA_REG_A                      ; CLOCK0                                                             ;
+;     -- WIDTH_B                            ; 1                                                                  ;
+;     -- NUMWORDS_B                         ; 1                                                                  ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                             ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                       ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                               ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                          ;
++-------------------------------------------+--------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "ULA:ALU|NEG86:neg1"                                                                 ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; cf   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "ULA:ALU|MULB86:mulb1"                                                                   ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; carrys   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; overflow ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "ULA:ALU|INC86:inc1"                                                                  ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; saida ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "InstructionQueue:IQ"                                                                 ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; cheio ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; vazio ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "EU_Control_System:ECS"                                                                      ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; saidadatabus ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Fri Jan 19 15:40:20 2018
+    Info: Processing started: Fri Jan 19 16:14:33 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off p8086 -c p8086
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file eu_control_system.vhd
@@ -235,8 +625,9 @@ Info (12021): Found 2 design units, including 1 entities, in source file and86.v
 Info (12021): Found 2 design units, including 1 entities, in source file add86.vhd
     Info (12022): Found design unit 1: ADD86-comportamento
     Info (12023): Found entity 1: ADD86
-Error (10500): VHDL syntax error at ADC86.vhd(92) near text "=";  expecting "(", or "'", or "." File: C:/Users/Marcello/Desktop/p8086/p8086/ADC86.vhd Line: 92
-Info (12021): Found 0 design units, including 0 entities, in source file adc86.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file adc86.vhd
+    Info (12022): Found design unit 1: ADC86-comportamento
+    Info (12023): Found entity 1: ADC86
 Info (12021): Found 2 design units, including 1 entities, in source file aas86.vhd
     Info (12022): Found design unit 1: AAS86-comportamento
     Info (12023): Found entity 1: AAS86
@@ -285,10 +676,801 @@ Info (12021): Found 2 design units, including 1 entities, in source file p8086.v
 Info (12021): Found 2 design units, including 1 entities, in source file ula.vhd
     Info (12022): Found design unit 1: ULA-comportamento
     Info (12023): Found entity 1: ULA
-Error: Quartus II 64-Bit Analysis & Synthesis was unsuccessful. 1 error, 1 warning
-    Error: Peak virtual memory: 479 megabytes
-    Error: Processing ended: Fri Jan 19 15:40:21 2018
-    Error: Elapsed time: 00:00:01
-    Error: Total CPU time (on all processors): 00:00:01
+Info (12127): Elaborating entity "p8086" for the top level hierarchy
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(10): used implicit default value for signal "saida" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10036): Verilog HDL or VHDL warning at p8086.vhd(20): object "control_OutADB" assigned a value but never read
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(22): used implicit default value for signal "control_wRG1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(22): used implicit default value for signal "control_wRG2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(30): used implicit default value for signal "control_InRT1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(30): used implicit default value for signal "control_InRT2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(30): used implicit default value for signal "control_OutRT1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(30): used implicit default value for signal "control_OutRT2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(30): used implicit default value for signal "control_OutRT3" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(30): used implicit default value for signal "control_OutRT4" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(32): used implicit default value for signal "control_wRT1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(32): used implicit default value for signal "control_wRT2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(36): used implicit default value for signal "control_wIQ" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(36): used implicit default value for signal "control_rIQ" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10036): Verilog HDL or VHDL warning at p8086.vhd(40): object "flag_IQFull" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at p8086.vhd(40): object "flag_IQEmpty" assigned a value but never read
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(42): used implicit default value for signal "control_InADB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(50): used implicit default value for signal "control_ADDSUBULA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(52): used implicit default value for signal "control_OPULA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(60): used implicit default value for signal "control_wMEM" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(60): used implicit default value for signal "control_dMEM" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(66): used implicit default value for signal "control_OPAB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(68): used implicit default value for signal "control_edAB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(70): used implicit default value for signal "control_InBR1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(70): used implicit default value for signal "control_InBR2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(70): used implicit default value for signal "control_OutBRtoAB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(70): used implicit default value for signal "control_OutBRtoBSL" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(70): used implicit default value for signal "control_OutBRtoADB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(72): used implicit default value for signal "control_wBR1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(72): used implicit default value for signal "control_wBR2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(74): used implicit default value for signal "control_wFR" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Info (12128): Elaborating entity "EU_Control_System" for hierarchy "EU_Control_System:ECS"
+Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(10): used implicit default value for signal "entradaRG1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(10): used implicit default value for signal "entradaRG2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Info (12128): Elaborating entity "RegistradorGeral" for hierarchy "RegistradorGeral:RG"
+Info (12128): Elaborating entity "Registrador8" for hierarchy "RegistradorGeral:RG|Registrador8:AH"
+Info (12128): Elaborating entity "Registrador16" for hierarchy "RegistradorGeral:RG|Registrador16:SP"
+Info (12128): Elaborating entity "RegisterTemp" for hierarchy "RegisterTemp:RT"
+Info (12128): Elaborating entity "InstructionQueue" for hierarchy "InstructionQueue:IQ"
+Warning (10492): VHDL Process Statement warning at InstructionQueue.vhd(88): signal "saida_parcial" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at InstructionQueue.vhd(89): signal "w_cheio" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at InstructionQueue.vhd(90): signal "w_vazio" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "DataBus" for hierarchy "DataBus:ADB"
+Info (12128): Elaborating entity "BusControlLogic" for hierarchy "BusControlLogic:BSL"
+Warning (10492): VHDL Process Statement warning at BusControlLogic.vhd(34): signal "ControleDadIns" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at BusControlLogic.vhd(34): signal "escrita" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at BusControlLogic.vhd(35): signal "Smemoria" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at BusControlLogic.vhd(36): signal "ControleDadIns" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at BusControlLogic.vhd(37): signal "Smemoria" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at BusControlLogic.vhd(32): inferring latch(es) for signal or variable "SaidaRegs", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at BusControlLogic.vhd(32): inferring latch(es) for signal or variable "SaidaQueue", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "SaidaQueue[0]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaQueue[1]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaQueue[2]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaQueue[3]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaQueue[4]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaQueue[5]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaQueue[6]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaQueue[7]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[0]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[1]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[2]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[3]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[4]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[5]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[6]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[7]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[8]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[9]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[10]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[11]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[12]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[13]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[14]" at BusControlLogic.vhd(32)
+Info (10041): Inferred latch for "SaidaRegs[15]" at BusControlLogic.vhd(32)
+Info (12128): Elaborating entity "Memory" for hierarchy "BusControlLogic:BSL|Memory:memoria"
+Info (12128): Elaborating entity "altsyncram" for hierarchy "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component"
+Info (12130): Elaborated megafunction instantiation "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component"
+Info (12133): Instantiated megafunction "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component" with the following parameter:
+    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "intended_device_family" = "Cyclone II"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "altsyncram"
+    Info (12134): Parameter "numwords_a" = "32768"
+    Info (12134): Parameter "operation_mode" = "SINGLE_PORT"
+    Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_reg_a" = "CLOCK0"
+    Info (12134): Parameter "power_up_uninitialized" = "FALSE"
+    Info (12134): Parameter "widthad_a" = "15"
+    Info (12134): Parameter "width_a" = "16"
+    Info (12134): Parameter "width_byteena_a" = "1"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_5ba1.tdf
+    Info (12023): Found entity 1: altsyncram_5ba1
+Info (12128): Elaborating entity "altsyncram_5ba1" for hierarchy "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated"
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_9oa.tdf
+    Info (12023): Found entity 1: decode_9oa
+Info (12128): Elaborating entity "decode_9oa" for hierarchy "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|decode_9oa:decode3"
+Info (12128): Elaborating entity "decode_9oa" for hierarchy "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|decode_9oa:deep_decode"
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_8kb.tdf
+    Info (12023): Found entity 1: mux_8kb
+Info (12128): Elaborating entity "mux_8kb" for hierarchy "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|mux_8kb:mux2"
+Info (12128): Elaborating entity "AddressBus" for hierarchy "AddressBus:AB"
+Warning (10492): VHDL Process Statement warning at AddressBus.vhd(27): signal "controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AddressBus.vhd(28): signal "S1A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AddressBus.vhd(28): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AddressBus.vhd(29): signal "controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AddressBus.vhd(30): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AddressBus.vhd(31): signal "controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AddressBus.vhd(32): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at AddressBus.vhd(25): inferring latch(es) for signal or variable "Soma", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "Soma[0]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[1]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[2]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[3]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[4]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[5]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[6]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[7]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[8]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[9]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[10]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[11]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[12]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[13]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[14]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[15]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[16]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[17]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[18]" at AddressBus.vhd(25)
+Info (10041): Inferred latch for "Soma[19]" at AddressBus.vhd(25)
+Info (12128): Elaborating entity "BIURegisters" for hierarchy "BIURegisters:BR"
+Info (12128): Elaborating entity "ULA" for hierarchy "ULA:ALU"
+Warning (10036): Verilog HDL or VHDL warning at ULA.vhd(267): object "SInc" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at ULA.vhd(269): object "FMulb" assigned a value but never read
+Warning (10492): VHDL Process Statement warning at ULA.vhd(347): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(348): signal "SaidaAdd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(349): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(350): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(351): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(352): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(353): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(354): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(362): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(363): signal "SaidaAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(364): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(365): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(366): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(367): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(368): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(369): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(376): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(377): signal "SaidaDec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(378): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(379): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(380): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(381): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(382): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(390): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(391): signal "SDiv1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(392): signal "SDiv2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(395): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(396): signal "SIdiv1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(397): signal "SIdiv2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(400): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(401): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(402): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(403): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(404): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(405): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(413): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(414): signal "Slahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(416): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(417): signal "SMul1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(418): signal "SMul2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(419): signal "FMul" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(420): signal "FMul" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(425): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(426): signal "SMulb" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(427): signal "FMul" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(428): signal "FMul" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(432): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(433): signal "SNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(434): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(435): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(436): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(437): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(438): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(446): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(447): signal "SNot" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(449): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(450): signal "Flags" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(451): signal "Flags" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(452): signal "Flags" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(453): signal "Flags" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(454): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(455): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(456): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(457): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(458): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(460): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(461): signal "SXOR" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(463): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(464): signal "SAnd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(465): signal "FAnd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(466): signal "FAnd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(467): signal "FAnd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(476): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(477): signal "SOr" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(479): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(480): signal "SRol" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(481): signal "FRol" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(485): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(486): signal "SRor" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(487): signal "FRor" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(491): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(492): signal "SSar" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(493): signal "FSar" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(497): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(498): signal "SShlsal" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(499): signal "FShlsal" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(503): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(504): signal "SShr" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(505): signal "FShr" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(509): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(510): signal "FTest" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(511): signal "FTest" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(512): signal "FTest" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(521): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(522): signal "SAaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(523): signal "FAaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(524): signal "FAaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(529): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(530): signal "SDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(532): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(533): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(534): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(535): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(536): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(542): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(543): signal "SAas" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(544): signal "FAas" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(545): signal "FAas" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(549): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(550): signal "SAam" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(551): signal "FAam" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(552): signal "FAam" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(553): signal "FAam" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(562): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(563): signal "SAad" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(564): signal "FAad" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(565): signal "FAad" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(566): signal "FAad" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(576): signal "SOperando1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(577): signal "Word2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(578): signal "SOperando2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at ULA.vhd(345): inferring latch(es) for signal or variable "SOperando1", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ULA.vhd(345): inferring latch(es) for signal or variable "SFlags", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ULA.vhd(345): inferring latch(es) for signal or variable "Word2", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ULA.vhd(345): inferring latch(es) for signal or variable "SOperando2", which holds its previous value in one or more paths through the process
+Warning (10873): Using initial value X (don't care) for net "Slahf[7..0]" at ULA.vhd(272)
+Info (10041): Inferred latch for "SOperando2[0]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[1]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[2]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[3]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[4]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[5]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[6]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[7]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[8]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[9]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[10]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[11]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[12]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[13]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[14]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando2[15]" at ULA.vhd(345)
+Info (10041): Inferred latch for "Word2" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[0]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[1]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[2]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[3]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[4]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[5]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[6]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[7]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[8]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[9]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[10]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[11]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[12]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[13]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[14]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SFlags[15]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[0]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[1]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[2]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[3]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[4]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[5]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[6]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[7]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[8]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[9]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[10]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[11]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[12]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[13]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[14]" at ULA.vhd(345)
+Info (10041): Inferred latch for "SOperando1[15]" at ULA.vhd(345)
+Info (12128): Elaborating entity "ADD86" for hierarchy "ULA:ALU|ADD86:add1"
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(26): signal "ControleByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(28): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(29): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(29): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(31): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(31): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(40): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(41): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(42): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(45): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(45): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(45): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(46): signal "temp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(49): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(55): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(56): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(57): signal "half1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(57): signal "half2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(58): signal "half3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(61): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(61): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(61): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(62): signal "temp2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(68): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(69): signal "AByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(69): signal "BByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(71): signal "AByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(71): signal "BByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(80): signal "SByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(81): signal "SByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(86): signal "SByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(87): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(90): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(90): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(90): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(91): signal "temp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(94): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(103): signal "AByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(104): signal "BByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(105): signal "half1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(105): signal "half2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(106): signal "half3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(109): signal "AByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(109): signal "BByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(109): signal "SByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADD86.vhd(110): signal "temp2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at ADD86.vhd(23): inferring latch(es) for signal or variable "S", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ADD86.vhd(23): inferring latch(es) for signal or variable "SByte", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "SByte[0]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "SByte[1]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "SByte[2]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "SByte[3]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "SByte[4]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "SByte[5]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "SByte[6]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "SByte[7]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[0]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[1]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[2]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[3]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[4]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[5]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[6]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[7]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[8]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[9]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[10]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[11]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[12]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[13]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[14]" at ADD86.vhd(23)
+Info (10041): Inferred latch for "S[15]" at ADD86.vhd(23)
+Info (12128): Elaborating entity "ADC86" for hierarchy "ULA:ALU|ADC86:adc1"
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(24): signal "ControleByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(26): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(27): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(27): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(27): signal "carry" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(29): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(29): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(29): signal "carry" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(38): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(39): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(40): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(43): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(43): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(43): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(44): signal "temp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(47): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(56): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(57): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(58): signal "half1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(58): signal "half2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(59): signal "half3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(65): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(65): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(65): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(66): signal "temp2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(70): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(71): signal "Abyte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(71): signal "Bbyte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(71): signal "carry" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(73): signal "Abyte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(73): signal "Bbyte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(73): signal "carry" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(82): signal "SByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(83): signal "SByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(88): signal "SByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(89): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(92): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(92): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(92): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(93): signal "temp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(96): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(105): signal "Abyte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(106): signal "Bbyte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(107): signal "half1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(107): signal "half2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(108): signal "half3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(111): signal "Abyte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(111): signal "Bbyte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(111): signal "SByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ADC86.vhd(112): signal "temp2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at ADC86.vhd(22): inferring latch(es) for signal or variable "S", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ADC86.vhd(22): inferring latch(es) for signal or variable "SByte", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "SByte[0]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "SByte[1]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "SByte[2]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "SByte[3]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "SByte[4]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "SByte[5]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "SByte[6]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "SByte[7]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[0]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[1]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[2]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[3]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[4]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[5]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[6]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[7]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[8]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[9]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[10]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[11]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[12]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[13]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[14]" at ADC86.vhd(22)
+Info (10041): Inferred latch for "S[15]" at ADC86.vhd(22)
+Info (12128): Elaborating entity "DEC86" for hierarchy "ULA:ALU|DEC86:dec1"
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(21): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(26): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(27): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(30): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(33): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(37): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(38): signal "Y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "DIV86" for hierarchy "ULA:ALU|DIV86:div1"
+Info (12128): Elaborating entity "IDIV86" for hierarchy "ULA:ALU|IDIV86:idiv1"
+Warning (10492): VHDL Process Statement warning at IDIV86.vhd(23): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at IDIV86.vhd(24): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at IDIV86.vhd(25): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at IDIV86.vhd(30): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "INC86" for hierarchy "ULA:ALU|INC86:inc1"
+Warning (10492): VHDL Process Statement warning at INC86.vhd(21): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(27): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(28): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(31): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(34): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(38): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(39): signal "Y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "LAHF86" for hierarchy "ULA:ALU|LAHF86:lahf1"
+Info (12128): Elaborating entity "MUL86" for hierarchy "ULA:ALU|MUL86:mul1"
+Warning (10492): VHDL Process Statement warning at MUL86.vhd(21): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at MUL86.vhd(21): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at MUL86.vhd(24): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "MULB86" for hierarchy "ULA:ALU|MULB86:mulb1"
+Warning (10492): VHDL Process Statement warning at MULB86.vhd(21): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at MULB86.vhd(21): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at MULB86.vhd(24): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "NEG86" for hierarchy "ULA:ALU|NEG86:neg1"
+Warning (10492): VHDL Process Statement warning at NEG86.vhd(21): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at NEG86.vhd(27): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at NEG86.vhd(28): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at NEG86.vhd(33): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at NEG86.vhd(36): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at NEG86.vhd(40): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at NEG86.vhd(41): signal "Y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "NOT86" for hierarchy "ULA:ALU|NOT86:not1"
+Info (12128): Elaborating entity "SAHF86" for hierarchy "ULA:ALU|SAHF86:sahf1"
+Info (12128): Elaborating entity "XOR86" for hierarchy "ULA:ALU|XOR86:xor1"
+Info (12128): Elaborating entity "AND86" for hierarchy "ULA:ALU|AND86:and1"
+Info (12128): Elaborating entity "OR86" for hierarchy "ULA:ALU|OR86:or1"
+Info (12128): Elaborating entity "ROL86" for hierarchy "ULA:ALU|ROL86:rol1"
+Warning (10492): VHDL Process Statement warning at ROL86.vhd(40): signal "Source" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ROL86.vhd(43): signal "tmpOF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ROL86.vhd(45): signal "tmpOF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at ROL86.vhd(38): inferring latch(es) for signal or variable "tmpOF", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "tmpOF" at ROL86.vhd(38)
+Info (12128): Elaborating entity "ROR86" for hierarchy "ULA:ALU|ROR86:ror1"
+Warning (10492): VHDL Process Statement warning at ROR86.vhd(40): signal "Source" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ROR86.vhd(43): signal "tmpOF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ROR86.vhd(45): signal "tmpOF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at ROR86.vhd(38): inferring latch(es) for signal or variable "tmpOF", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "tmpOF" at ROR86.vhd(38)
+Info (12128): Elaborating entity "SAR86" for hierarchy "ULA:ALU|SAR86:sar1"
+Warning (10492): VHDL Process Statement warning at SAR86.vhd(56): signal "Source" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at SAR86.vhd(57): signal "tmp1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at SAR86.vhd(59): signal "tmp2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at SAR86.vhd(61): signal "Source" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at SAR86.vhd(64): signal "tmpOF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at SAR86.vhd(66): signal "tmpOF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at SAR86.vhd(54): inferring latch(es) for signal or variable "tmpOF", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "tmpOF" at SAR86.vhd(54)
+Info (12128): Elaborating entity "SHLSAL86" for hierarchy "ULA:ALU|SHLSAL86:shlsal1"
+Warning (10492): VHDL Process Statement warning at SHLSAL86.vhd(38): signal "Source" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at SHLSAL86.vhd(41): signal "tmpOF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at SHLSAL86.vhd(43): signal "tmpOF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at SHLSAL86.vhd(36): inferring latch(es) for signal or variable "tmpOF", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "tmpOF" at SHLSAL86.vhd(36)
+Info (12128): Elaborating entity "SHR86" for hierarchy "ULA:ALU|SHR86:shr1"
+Warning (10492): VHDL Process Statement warning at SHR86.vhd(38): signal "Source" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at SHR86.vhd(41): signal "tmpOF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at SHR86.vhd(43): signal "tmpOF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at SHR86.vhd(36): inferring latch(es) for signal or variable "tmpOF", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "tmpOF" at SHR86.vhd(36)
+Info (12128): Elaborating entity "TEST86" for hierarchy "ULA:ALU|TEST86:test1"
+Info (12128): Elaborating entity "AAA86" for hierarchy "ULA:ALU|AAA86:aaa1"
+Warning (10492): VHDL Process Statement warning at AAA86.vhd(20): signal "numero" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAA86.vhd(20): signal "AF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAA86.vhd(21): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAA86.vhd(22): signal "AH" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAA86.vhd(29): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAA86.vhd(30): signal "AH" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "DAA86" for hierarchy "ULA:ALU|DAA86:daa1"
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(22): signal "numero" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(22): signal "AF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(23): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(25): signal "ALow" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(26): signal "S1Temp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(33): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(34): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(39): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(39): signal "CF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(40): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(42): signal "AHigh" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(45): signal "S2Temp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(50): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(50): signal "S1Temp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(51): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(51): signal "S1Temp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(56): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(57): signal "SaidaTemp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DAA86.vhd(61): signal "SaidaTemp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at DAA86.vhd(20): inferring latch(es) for signal or variable "ALow", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at DAA86.vhd(20): inferring latch(es) for signal or variable "S1Temp", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at DAA86.vhd(20): inferring latch(es) for signal or variable "SaidaTemp", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at DAA86.vhd(20): inferring latch(es) for signal or variable "AHigh", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at DAA86.vhd(20): inferring latch(es) for signal or variable "S2Temp", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "S2Temp[0]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "S2Temp[1]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "S2Temp[2]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "S2Temp[3]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "AHigh[0]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "AHigh[1]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "AHigh[2]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "AHigh[3]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "AHigh[4]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "SaidaTemp[0]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "SaidaTemp[1]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "SaidaTemp[2]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "SaidaTemp[3]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "SaidaTemp[4]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "SaidaTemp[5]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "SaidaTemp[6]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "SaidaTemp[7]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "S1Temp[0]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "S1Temp[1]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "S1Temp[2]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "S1Temp[3]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "ALow[0]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "ALow[1]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "ALow[2]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "ALow[3]" at DAA86.vhd(20)
+Info (10041): Inferred latch for "ALow[4]" at DAA86.vhd(20)
+Info (12128): Elaborating entity "AAS86" for hierarchy "ULA:ALU|AAS86:aas1"
+Warning (10492): VHDL Process Statement warning at AAS86.vhd(20): signal "numero" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAS86.vhd(20): signal "AF" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAS86.vhd(21): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAS86.vhd(22): signal "AH" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAS86.vhd(29): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAS86.vhd(30): signal "AH" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "AAM86" for hierarchy "ULA:ALU|AAM86:aam1"
+Warning (10492): VHDL Process Statement warning at AAM86.vhd(31): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAM86.vhd(32): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAM86.vhd(36): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (12128): Elaborating entity "AAD86" for hierarchy "ULA:ALU|AAD86:aad1"
+Warning (10492): VHDL Process Statement warning at AAD86.vhd(27): signal "AH" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAD86.vhd(27): signal "AL" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAD86.vhd(28): signal "Saida16" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAD86.vhd(29): signal "Saida1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAD86.vhd(30): signal "Saida2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAD86.vhd(32): signal "Saida1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAD86.vhd(33): signal "Saida2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAD86.vhd(36): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAD86.vhd(38): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at AAD86.vhd(42): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (14284): Synthesized away the following node(s):
+    Warning (14285): Synthesized away the following RAM node(s):
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a0"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a1"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a2"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a3"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a4"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a5"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a6"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a7"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a8"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a9"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a10"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a11"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a12"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a13"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a14"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a15"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a16"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a17"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a18"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a19"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a20"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a21"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a22"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a23"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a24"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a25"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a26"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a27"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a28"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a29"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a30"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a31"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a32"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a33"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a34"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a35"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a36"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a37"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a38"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a39"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a40"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a41"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a42"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a43"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a44"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a45"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a46"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a47"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a48"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a49"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a50"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a51"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a52"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a53"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a54"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a55"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a56"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a57"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a58"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a59"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a60"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a61"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a62"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a63"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a64"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a65"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a66"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a67"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a68"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a69"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a70"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a71"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a72"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a73"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a74"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a75"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a76"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a77"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a78"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a79"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a80"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a81"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a82"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a83"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a84"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a85"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a86"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a87"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a88"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a89"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a90"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a91"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a92"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a93"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a94"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a95"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a96"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a97"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a98"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a99"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a100"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a101"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a102"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a103"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a104"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a105"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a106"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a107"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a108"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a109"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a110"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a111"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a112"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a113"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a114"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a115"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a116"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a117"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a118"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a119"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a120"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a121"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a122"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a123"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a124"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a125"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a126"
+        Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a127"
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "saida[0]" is stuck at GND
+    Warning (13410): Pin "saida[1]" is stuck at GND
+    Warning (13410): Pin "saida[2]" is stuck at GND
+    Warning (13410): Pin "saida[3]" is stuck at GND
+    Warning (13410): Pin "saida[4]" is stuck at GND
+    Warning (13410): Pin "saida[5]" is stuck at GND
+    Warning (13410): Pin "saida[6]" is stuck at GND
+    Warning (13410): Pin "saida[7]" is stuck at GND
+    Warning (13410): Pin "saida[8]" is stuck at GND
+    Warning (13410): Pin "saida[9]" is stuck at GND
+    Warning (13410): Pin "saida[10]" is stuck at GND
+    Warning (13410): Pin "saida[11]" is stuck at GND
+    Warning (13410): Pin "saida[12]" is stuck at GND
+    Warning (13410): Pin "saida[13]" is stuck at GND
+    Warning (13410): Pin "saida[14]" is stuck at GND
+    Warning (13410): Pin "saida[15]" is stuck at GND
+Info (17049): 414 registers lost all their fanouts during netlist optimizations.
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 18 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "entrada[0]"
+    Warning (15610): No output dependent on input pin "entrada[1]"
+    Warning (15610): No output dependent on input pin "entrada[2]"
+    Warning (15610): No output dependent on input pin "entrada[3]"
+    Warning (15610): No output dependent on input pin "entrada[4]"
+    Warning (15610): No output dependent on input pin "entrada[5]"
+    Warning (15610): No output dependent on input pin "entrada[6]"
+    Warning (15610): No output dependent on input pin "entrada[7]"
+    Warning (15610): No output dependent on input pin "entrada[8]"
+    Warning (15610): No output dependent on input pin "entrada[9]"
+    Warning (15610): No output dependent on input pin "entrada[10]"
+    Warning (15610): No output dependent on input pin "entrada[11]"
+    Warning (15610): No output dependent on input pin "entrada[12]"
+    Warning (15610): No output dependent on input pin "entrada[13]"
+    Warning (15610): No output dependent on input pin "entrada[14]"
+    Warning (15610): No output dependent on input pin "entrada[15]"
+    Warning (15610): No output dependent on input pin "clock"
+    Warning (15610): No output dependent on input pin "reset"
+Info (21057): Implemented 34 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 18 input pins
+    Info (21059): Implemented 16 output pins
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 549 warnings
+    Info: Peak virtual memory: 499 megabytes
+    Info: Processing ended: Fri Jan 19 16:14:36 2018
+    Info: Elapsed time: 00:00:03
+    Info: Total CPU time (on all processors): 00:00:02
 
 

@@ -8,6 +8,8 @@ entity EU_Control_System is
     clk     					: in std_logic;
     entradaInstrucao 		: in  std_logic_vector(7 downto 0);
 	 entradaRG1, entradaRG2, saidaRG1, saidaRG2	: out std_logic_vector(3 downto 0);
+	 sinalEscritaRG1, sinalEscritaRG2 : out std_logic;
+	 sinalEscritaRT1, sinalEscritaRT2 : out std_logic;
 	 saidaDataBUS				: out std_logic_vector(2 downto 0)
     );
 end EU_Control_System;
@@ -48,6 +50,8 @@ begin
 					if(instrucaoAtual = "00000001") then
 						
 					end if;
+				when writeback =>
+				
 			end case;
 		end if;
 	end process EU_CONTROL;

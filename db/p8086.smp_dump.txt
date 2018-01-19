@@ -1,0 +1,7 @@
+
+State Machine - |p8086|EU_Control_System:ECS|state
+Name state.op state.writeback state.readin state.fetch 
+state.fetch 0 0 0 0 
+state.readin 0 0 1 1 
+state.writeback 0 1 0 1 
+state.op 1 0 0 1 

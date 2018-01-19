@@ -4,7 +4,7 @@ USE ieee.std_logic_signed.all ;
 
 ENTITY AddressBus IS PORT(
     A, B : in std_logic_vector(15 downto 0);
-	 Flag, clk: in std_logic;
+	 ConcBED, clk: in std_logic;
 	 controle : in std_logic_vector(1 downto 0);
 	 Saida : out std_logic_vector(19 downto 0)
 );
@@ -19,7 +19,7 @@ begin
 	S1B(3 downto 0) <= "0000";
 	S2B(19 downto 16) <= "0000";
 	S2B(15 downto 0) <= B;
-	with flag select
+	with ConcBED select
 		S <= S1B when '0',
 			  S2B when '1';
 	process(clk)

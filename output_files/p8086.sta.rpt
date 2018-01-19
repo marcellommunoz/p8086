@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for p8086
-Wed Jan 17 16:46:09 2018
+Fri Jan 19 16:14:46 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -207,7 +207,7 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Wed Jan 17 16:46:08 2018
+    Info: Processing started: Fri Jan 19 16:14:45 2018
 Info: Command: quartus_sta p8086 -c p8086
 Info (P0): qsta_default_script.tcl version: #1
 Warning (20028): Parallel compilation is not licensed and has been disabled
@@ -238,9 +238,9 @@ Info (332001): The selected device family is not supported by the report_metasta
 Info (332101): Design is fully constrained for setup requirements
 Info (332101): Design is fully constrained for hold requirements
 Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 385 megabytes
-    Info: Processing ended: Wed Jan 17 16:46:08 2018
-    Info: Elapsed time: 00:00:00
-    Info: Total CPU time (on all processors): 00:00:00
+    Info: Peak virtual memory: 384 megabytes
+    Info: Processing ended: Fri Jan 19 16:14:46 2018
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
 
 
