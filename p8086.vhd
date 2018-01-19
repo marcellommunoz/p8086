@@ -103,7 +103,7 @@ component InstructionQueue 	IS PORT(
     cheio   	: out std_logic;
     r   : in  std_logic;
     saida : out std_logic_vector(7 downto 0);
-    vazio   : out std_logic;
+    vazio   : out std_logic
     );
 end component;
 
@@ -212,15 +212,13 @@ begin
 													ABtoBSL,
 													clock, control_wMEM, control_dMEM,
 													BSLtoIQ,
-													BSLtoBR,
-													);
+													BSLtoBR);
 	--barramento de endereco.
 	AB: AddressBus 				port map(
 													BRtoAB, BRtoBSL,
 													control_edAB, clock,
 													control_OPAB,
-													ABtoBSL
-													);
+													ABtoBSL);
 	--registrador de segmento e pc.
 	BR: BIURegisters				port map(
 													ADBtoBR, BSLtoBR,

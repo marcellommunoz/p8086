@@ -1,5 +1,5 @@
 Analysis & Synthesis report for p8086
-Wed Jan 17 16:46:03 2018
+Fri Jan 19 15:40:21 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -10,12 +10,7 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Source Files Read
-  6. Analysis & Synthesis Resource Usage Summary
-  7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Elapsed Time Per Partition
- 10. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Messages
 
 
 
@@ -41,20 +36,20 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Jan 17 16:46:03 2018           ;
+; Analysis & Synthesis Status        ; Failed - Fri Jan 19 15:40:21 2018               ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; p8086                                           ;
 ; Top-level Entity Name              ; p8086                                           ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 0                                               ;
-;     Total combinational functions  ; 0                                               ;
-;     Dedicated logic registers      ; 0                                               ;
-; Total registers                    ; 0                                               ;
-; Total pins                         ; 18                                              ;
-; Total virtual pins                 ; 0                                               ;
-; Total memory bits                  ; 0                                               ;
-; Embedded Multiplier 9-bit elements ; 0                                               ;
-; Total PLLs                         ; 0                                               ;
+; Total logic elements               ; N/A until Partition Merge                       ;
+;     Total combinational functions  ; N/A until Partition Merge                       ;
+;     Dedicated logic registers      ; N/A until Partition Merge                       ;
+; Total registers                    ; N/A until Partition Merge                       ;
+; Total pins                         ; N/A until Partition Merge                       ;
+; Total virtual pins                 ; N/A until Partition Merge                       ;
+; Total memory bits                  ; N/A until Partition Merge                       ;
+; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                       ;
+; Total PLLs                         ; N/A until Partition Merge                       ;
 +------------------------------------+-------------------------------------------------+
 
 
@@ -153,83 +148,18 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                     ;
-+----------------------------------+-----------------+-----------------+-------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path              ; Library ;
-+----------------------------------+-----------------+-----------------+-------------------------------------------+---------+
-; p8086.vhd                        ; yes             ; User VHDL File  ; C:/Users/Marcello/Desktop/p8086/p8086.vhd ;         ;
-+----------------------------------+-----------------+-----------------+-------------------------------------------+---------+
-
-
-+-----------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary         ;
-+---------------------------------------------+-------+
-; Resource                                    ; Usage ;
-+---------------------------------------------+-------+
-;                                             ;       ;
-; Total combinational functions               ; 0     ;
-; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 0     ;
-;     -- 3 input functions                    ; 0     ;
-;     -- <=2 input functions                  ; 0     ;
-;                                             ;       ;
-; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 0     ;
-;     -- arithmetic mode                      ; 0     ;
-;                                             ;       ;
-; Total registers                             ; 0     ;
-;     -- Dedicated logic registers            ; 0     ;
-;     -- I/O registers                        ; 0     ;
-;                                             ;       ;
-; I/O pins                                    ; 18    ;
-; Embedded Multiplier 9-bit elements          ; 0     ;
-+---------------------------------------------+-------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; |p8086                     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 18   ; 0            ; |p8086              ; work         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+------------------------------------------------------+
-; General Register Statistics                          ;
-+----------------------------------------------+-------+
-; Statistic                                    ; Value ;
-+----------------------------------------------+-------+
-; Total registers                              ; 0     ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 0     ;
-; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
-; Number of registers using Preset             ; 0     ;
-+----------------------------------------------+-------+
-
-
-+-------------------------------+
-; Elapsed Time Per Partition    ;
-+----------------+--------------+
-; Partition Name ; Elapsed Time ;
-+----------------+--------------+
-; Top            ; 00:00:00     ;
-+----------------+--------------+
-
-
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Wed Jan 17 16:46:01 2018
+    Info: Processing started: Fri Jan 19 15:40:20 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off p8086 -c p8086
 Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 2 design units, including 1 entities, in source file eu_control_system.vhd
+    Info (12022): Found design unit 1: EU_Control_System-description
+    Info (12023): Found entity 1: EU_Control_System
 Info (12021): Found 2 design units, including 1 entities, in source file xor86.vhd
     Info (12022): Found design unit 1: XOR86-comportamento
     Info (12023): Found entity 1: XOR86
@@ -281,9 +211,6 @@ Info (12021): Found 2 design units, including 1 entities, in source file inc86.v
 Info (12021): Found 2 design units, including 1 entities, in source file idiv86.vhd
     Info (12022): Found design unit 1: IDIV86-comportamento
     Info (12023): Found entity 1: IDIV86
-Info (12021): Found 2 design units, including 1 entities, in source file eu_control_system.vhd
-    Info (12022): Found design unit 1: EU_Control_System-description
-    Info (12023): Found entity 1: EU_Control_System
 Info (12021): Found 2 design units, including 1 entities, in source file div86.vhd
     Info (12022): Found design unit 1: DIV86-comportamento
     Info (12023): Found entity 1: DIV86
@@ -308,9 +235,8 @@ Info (12021): Found 2 design units, including 1 entities, in source file and86.v
 Info (12021): Found 2 design units, including 1 entities, in source file add86.vhd
     Info (12022): Found design unit 1: ADD86-comportamento
     Info (12023): Found entity 1: ADD86
-Info (12021): Found 2 design units, including 1 entities, in source file adc86.vhd
-    Info (12022): Found design unit 1: ADC86-comportamento
-    Info (12023): Found entity 1: ADC86
+Error (10500): VHDL syntax error at ADC86.vhd(92) near text "=";  expecting "(", or "'", or "." File: C:/Users/Marcello/Desktop/p8086/p8086/ADC86.vhd Line: 92
+Info (12021): Found 0 design units, including 0 entities, in source file adc86.vhd
 Info (12021): Found 2 design units, including 1 entities, in source file aas86.vhd
     Info (12022): Found design unit 1: AAS86-comportamento
     Info (12023): Found entity 1: AAS86
@@ -359,37 +285,10 @@ Info (12021): Found 2 design units, including 1 entities, in source file p8086.v
 Info (12021): Found 2 design units, including 1 entities, in source file ula.vhd
     Info (12022): Found design unit 1: ULA-comportamento
     Info (12023): Found entity 1: ULA
-Info (12127): Elaborating entity "p8086" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(10): used implicit default value for signal "saida" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "saida[0]" is stuck at GND
-    Warning (13410): Pin "saida[1]" is stuck at GND
-    Warning (13410): Pin "saida[2]" is stuck at GND
-    Warning (13410): Pin "saida[3]" is stuck at GND
-    Warning (13410): Pin "saida[4]" is stuck at GND
-    Warning (13410): Pin "saida[5]" is stuck at GND
-    Warning (13410): Pin "saida[6]" is stuck at GND
-    Warning (13410): Pin "saida[7]" is stuck at GND
-Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 10 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "clock"
-    Warning (15610): No output dependent on input pin "reset"
-    Warning (15610): No output dependent on input pin "entrada[0]"
-    Warning (15610): No output dependent on input pin "entrada[1]"
-    Warning (15610): No output dependent on input pin "entrada[2]"
-    Warning (15610): No output dependent on input pin "entrada[3]"
-    Warning (15610): No output dependent on input pin "entrada[4]"
-    Warning (15610): No output dependent on input pin "entrada[5]"
-    Warning (15610): No output dependent on input pin "entrada[6]"
-    Warning (15610): No output dependent on input pin "entrada[7]"
-Info (21057): Implemented 18 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 10 input pins
-    Info (21059): Implemented 8 output pins
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 22 warnings
-    Info: Peak virtual memory: 488 megabytes
-    Info: Processing ended: Wed Jan 17 16:46:03 2018
-    Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:01
+Error: Quartus II 64-Bit Analysis & Synthesis was unsuccessful. 1 error, 1 warning
+    Error: Peak virtual memory: 479 megabytes
+    Error: Processing ended: Fri Jan 19 15:40:21 2018
+    Error: Elapsed time: 00:00:01
+    Error: Total CPU time (on all processors): 00:00:01
 
 
