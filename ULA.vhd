@@ -151,6 +151,8 @@ end component;
 component XOR86 is 
 port(
 	A, B : in std_logic_vector(15 downto 0);
+	ByteControl : in std_logic;
+	Abyte, BByte: in std_logic_vector(7 downto 0);
 	S: out std_logic_vector(15 downto 0)
 );
 
@@ -170,6 +172,8 @@ end component;
 component OR86 is
 port (
 		A, B : in std_logic_vector(15 downto 0);
+		ByteControl : in std_logic;
+		Abyte, BByte: in std_logic_vector(7 downto 0);
 		S: out std_logic_vector(15 downto 0)
 
 );
@@ -336,11 +340,11 @@ not1: NOT86 port map (Operando1,SubOperando1, Controle(6), SNot);
 
 sahf1: SAHF86 port map (FSahf(7), FSahf(6), FSahf(4), FSahf(2), FSahf(0), Operando1(15 downto 8));
 
-xor1: XOR86 port map (Operando1, Operando2, SXOR);
+xor1: XOR86 port map (Operando1, Operando2,Controle(6), SubOperando1, SubOperando2, SXOR);
 
 and1 : AND86 port map (Operando1, Operando2, SubOperando1, SubOperando2, Controle(6), SAnd, FAnd(0), FAnd(1), FAnd(2));
 																		--6 7 2
-or1 : OR86 port map (Operando1, Operando2, SOr);
+or1 : OR86 port map (Operando1, Operando2,Controle(6), SubOperando1, SubOperando2, SOr);
 
 rol1 : ROL86 port map (Operando1, Operando2, SRol, FRol);
 
@@ -498,7 +502,7 @@ process (clk)
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
 				Word2 <= '0';
-			elsif Controle = "00011110" then
+			elsif Controle = "00011110" or Controle = "01011110" then
 				SOperando1 <= SOr;
 				Word2 <= '0';
 			elsif Controle = "00011111" then
