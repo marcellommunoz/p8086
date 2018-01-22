@@ -4,7 +4,7 @@ USE ieee.std_logic_signed.all ;
 
 entity ULA is
 	port(
-		clk, ADDSUB: in std_logic;
+		clk: in std_logic;
 		Controle : in std_logic_vector(7 downto 0);
 		Operando1, Operando2, Flags: in std_logic_vector(15 downto 0);
 		SExtra, SFlags: out std_logic_vector(15 downto 0)
@@ -12,7 +12,7 @@ entity ULA is
 		--									 11   10   9    8    7    6         4         2         0
 	);
 	end ULA;
-	
+
 architecture comportamento of ULA is
 
 component ADC86 IS
@@ -109,6 +109,8 @@ component NEG86 is
 	port(
 		clk: in std_logic;
 		A :in std_logic_vector(15 downto 0);
+		ByteControl : in std_logic;
+		Abyte: in std_logic_vector(7 downto 0);
 		zero, SF, Overflow, Parity, auxiliary, CF: out std_logic;
 		Saida : out std_logic_vector(15 downto 0)
 	);
@@ -267,8 +269,18 @@ component AAD86 is
 	);
 end component;
 
+component CMP86 is
+port(
+		clk: in std_logic;
+		A , B:in std_logic_vector(15 downto 0);
+		ByteControl : in std_logic;
+		Abyte, BByte: in std_logic_vector(7 downto 0);
+		zero, SF, Overflow, Parity, auxiliary, CF: out std_logic
+	);
+end component;
+
 Signal SaidaAdd,SaidaAdc : std_logic_vector(15 downto 0); --ADD ADC
-Signal Fadd, FAdc,FNeg: std_logic_vector(5 downto 0); --ADC ADD FLAGS
+Signal Fadd, FAdc,FNeg, FCmp: std_logic_vector(5 downto 0); --ADC ADD FLAGS
 Signal SaidaDec: std_logic_vector(15 downto 0); --DEC
 Signal Fdec, FInc, FLahf, FDaa: std_logic_vector(4 downto 0); --DEC FLAgs
 Signal SDiv1,SDiv2, SIdiv1, SIdiv2: std_logic_vector(15 downto 0); --DIV IDIV
@@ -314,7 +326,7 @@ mul1: MUL86 port map (clk, Operando1, Operando2, Fmul(0), Fmul(1), SMul1, SMul2)
 																	--0 11
 mulb1: MULB86 port map (clk, Operando1(15 downto 8), Operando1(7 downto 0), Fmulb(0), Fmulb(1), SMulb);
 																	--0 11
-neg1: NEG86 port map (clk, Operando1, FNeg(0), FNeg(1), FNeg(2), FNeg(3), FNeg(4), FNeg(5), SNeg);								
+neg1: NEG86 port map (clk, Operando1,Controle(6), SubOperando1, FNeg(0), FNeg(1), FNeg(2), FNeg(3), FNeg(4), FNeg(5), SNeg);								
 													--6 7 11 2 4 0
 not1: NOT86 port map (Operando1,SubOperando1, Controle(6), SNot);
 
@@ -348,8 +360,9 @@ aam1: AAM86 port map (clk, Operando1(7 downto 0), Operando1(15 downto 8), FAam(0
 
 aad1: AAD86 port map (clk, Operando1(7 downto 0), Operando1(15 downto 8), FAad(0), FAad(1), FAad(2), SAad(7 downto 0), SAad(15 downto 8));
 
+cmp1: CMP86 port map (clk, Operando1, Operando2, Controle(6), SubOperando1, SubOperando2, FCmp(0), FCmp(1), FCmp(2), FCmp(3), FCmp(4), FCmp(5));
 
-		
+
 process (clk)
 	begin
 		if controle = "10010000" or controle = "11010000" or controle = "00010000" or controle = "01010000"then --ADD
@@ -437,14 +450,14 @@ process (clk)
 				SFlags(15 downto 12) <= "0000";
 				SFlags(10 downto 1) <= "0000000000";
 				Word2 <= '0';
-			elsif Controle = "00011001" then
+			elsif Controle = "00011001" or Controle = "01011001" then
 				SOperando1 <= SNeg;
 				SFlags(6) <= FNeg(0);
 				SFlags(7) <= FNeg(1);
 				SFlags(11) <= FNeg(2);
 				SFlags(2) <= FNeg(3);
 				SFlags(4) <= FNeg(4);
-				SFlags(0) <= '0';
+				SFlags(0) <= FNeg(5);
 				SFlags(1) <= '0';
 				SFlags(3) <= '0';
 				SFlags(5) <= '0';
@@ -580,6 +593,21 @@ process (clk)
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
 				Word2 <= '0';
+				
+			elsif Controle = "00101011" then
+				Word2 <= '0';
+				SFlags(6) <= FCmp(0);
+				SFlags(7) <= FCmp(1);
+				SFlags(11) <= FCmp(2);
+				SFlags(2) <= FCmp(3);
+				SFlags(4) <= FCmp(4);
+				SFlags(0) <= FCmp(5);
+				SFlags(1) <= '0';
+				SFlags(3) <= '0';
+				SFlags(5) <= '0';
+				SFlags(10 downto 8) <= "000";
+				SFlags(15 downto 12) <= "0000";
+
 		end if;
 		Saida <= SOperando1;
 		if Word2 = '1' then 
