@@ -66,9 +66,11 @@ signal control_OPAB 																												: std_logic_vector(1 downto 0);
 --controle de concatenacao do AddressBUS
 signal control_edAB 																												: std_logic;
 --selecao de entrada e saida do BR.
-signal control_InBR1, control_InBR2, control_OutBRtoAB, control_OutBRtoBSL, control_OutBRtoADB 			: std_logic_vector(2 downto 0);
+signal control_InBR_ADB, control_InBR_Mem									 														: std_logic_vector(2 downto 0);
+signal control_BRtoADB																											: std_logic_vector(1 downto 0);
+signal control_LogicalAddress																									: std_logic_vector(3 downto 0);
 --controle de escrita da BR.
-signal control_wBR1, control_wBR2 																							: std_logic;
+signal control_wBR_ADB, control_wBR_Mem 																							: std_logic;
 --controle de escrita no FR.
 signal control_wFR 																												: std_logic;
 component EU_Control_System 	IS PORT(
@@ -138,18 +140,20 @@ end component;
 
 component BIURegisters 			IS PORT(
 	--entrada de 16 bits nos registradores de memoria.
-    Entrada1, Entrada2 															: IN STD_LOGIC_VECTOR(15 downto 0);
+    entradaADB, entradaMemoria 															: IN STD_LOGIC_VECTOR(15 downto 0);
 	 --wsel seleciona qual registrador escrever. ControleSaida seleciona qual registrador vai sair em qual saida.
-    wsel1, wsel2, ControleSaida1, ControleSaida2, ControleSaida3	: IN STD_LOGIC_vector(2 downto 0);
+    wselADB, wselMem																			: IN std_logic_vector(2 downto 0);
+	 ControlesaidaADB																			: IN std_logic_vector(1 downto 0);
+	 ControleLogicalAddress																	: IN STD_LOGIC_vector(3 downto 0);
 	 --clock, clear assincrono e sinais de escrita.
-    clk,clr, w1, w2																: IN STD_LOGIC;
+    clk,clr, wADB, wMem																		: IN STD_LOGIC;
 	 --tres saidas de 16 bits
-    Saida1, Saida2 , Saida3													: OUT STD_LOGIC_VECTOR(15 downto 0)
+    SegmentBase, Offset , saidaADB														: OUT STD_LOGIC_VECTOR(15 downto 0)
 );
 end component;
 
 component ULA 						IS PORT(
-		clk, ADDSUB: in std_logic;
+		clk: in std_logic;
 		Controle : in std_logic_vector(7 downto 0);
 		Operando1, Operando2, Flags: in std_logic_vector(15 downto 0);
 		SExtra, SFlags: out std_logic_vector(15 downto 0)
@@ -222,13 +226,15 @@ begin
 	--registrador de segmento e pc.
 	BR: BIURegisters				port map(
 													ADBtoBR, BSLtoBR,
-													control_InBR1, control_InBR2, control_OutBRtoAB, control_OutBRtoBSL, control_OutBRtoADB,
-													clock, reset, control_wBR1, control_wBR2,
+													control_InBR_ADB, control_InBR_Mem, 
+													control_BRtoADB,
+													control_LogicalAddress,
+													clock, reset, control_wBR_ADB, control_wBR_Mem,
 													BRtoAB, BRtoBSL, BRtoADB
 													);
 	--ULA.											
 	ALU:	ULA 						port map(
-												clock, control_ADDSUBULA,
+												clock,
 												control_OPULA,
 												RTtoULA1, RTtoULA2, FRtoADBandULA,
 												ULAtoADB, ULAtoFR
@@ -241,5 +247,5 @@ begin
 												reset,
 												clock,
 												FRtoADBandULA);
-	
+	saida <= ULAtoADB;
 end description;

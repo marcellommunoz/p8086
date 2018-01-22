@@ -24,7 +24,7 @@ entity EU_Control_System is
 end EU_Control_System;
  
 architecture description of EU_Control_System is
-	TYPE State_type IS (fetch, readin, writeback, op);
+	TYPE State_type IS (fetch, readin, writeback, op, boot);
 	SIGNAL state : State_Type;
 --controle sub add
 --instrucao 8 bits
@@ -36,9 +36,11 @@ begin
 	variable instrucaoAtual : std_logic_vector(7 downto 0);
 		begin
 		if (reset = '1') then
-			state <= fetch;
+			state <= boot;
 		elsif clk'event and clk = '1' then
 			case state is
+				when boot =>
+					
 				when fetch =>
 					--AAA
 					if(entradaInstrucao = "00000001") then
