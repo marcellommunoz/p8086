@@ -1,5 +1,5 @@
 Analysis & Synthesis report for p8086
-Fri Jan 19 16:14:36 2018
+Mon Jan 22 15:36:34 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -16,17 +16,19 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   8. Analysis & Synthesis IP Cores Summary
   9. State Machine - |p8086|EU_Control_System:ECS|state
  10. Registers Removed During Synthesis
- 11. General Register Statistics
- 12. Source assignments for BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated
- 13. Parameter Settings for User Entity Instance: BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component
- 14. altsyncram Parameter Settings by Entity Instance
- 15. Port Connectivity Checks: "ULA:ALU|NEG86:neg1"
- 16. Port Connectivity Checks: "ULA:ALU|MULB86:mulb1"
- 17. Port Connectivity Checks: "ULA:ALU|INC86:inc1"
- 18. Port Connectivity Checks: "InstructionQueue:IQ"
- 19. Port Connectivity Checks: "EU_Control_System:ECS"
- 20. Elapsed Time Per Partition
- 21. Analysis & Synthesis Messages
+ 11. Removed Registers Triggering Further Register Optimizations
+ 12. General Register Statistics
+ 13. Source assignments for BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated
+ 14. Parameter Settings for User Entity Instance: BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component
+ 15. altsyncram Parameter Settings by Entity Instance
+ 16. Port Connectivity Checks: "ULA:ALU|NEG86:neg1"
+ 17. Port Connectivity Checks: "ULA:ALU|MULB86:mulb1"
+ 18. Port Connectivity Checks: "ULA:ALU|INC86:inc1"
+ 19. Port Connectivity Checks: "AddressBus:AB"
+ 20. Port Connectivity Checks: "InstructionQueue:IQ"
+ 21. Port Connectivity Checks: "EU_Control_System:ECS"
+ 22. Elapsed Time Per Partition
+ 23. Analysis & Synthesis Messages
 
 
 
@@ -52,7 +54,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Jan 19 16:14:36 2018           ;
+; Analysis & Synthesis Status        ; Successful - Mon Jan 22 15:36:34 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; p8086                                           ;
 ; Top-level Entity Name              ; p8086                                           ;
@@ -351,7 +353,6 @@ Encoding Type:  One-Hot
 ; InstructionQueue:IQ|vetor_queue[5][1]                                                                                     ; Lost fanout        ;
 ; InstructionQueue:IQ|vetor_queue[5][0]                                                                                     ; Lost fanout        ;
 ; InstructionQueue:IQ|saida_parcial[1..7]                                                                                   ; Lost fanout        ;
-; RegisterTemp:RT|Registrador16:RegR3|q[0..15]                                                                              ; Lost fanout        ;
 ; RegisterTemp:RT|Registrador16:RegR2|q[0..15]                                                                              ; Lost fanout        ;
 ; RegisterTemp:RT|Registrador16:RegR1|q[0..15]                                                                              ; Lost fanout        ;
 ; RegistradorGeral:RG|Registrador16:DI|q[0..15]                                                                             ; Lost fanout        ;
@@ -373,8 +374,23 @@ Encoding Type:  One-Hot
 ; EU_Control_System:ECS|state.readin                                                                                        ; Lost fanout        ;
 ; EU_Control_System:ECS|state.writeback                                                                                     ; Lost fanout        ;
 ; EU_Control_System:ECS|state.op                                                                                            ; Lost fanout        ;
-; Total Number of Removed Registers = 414                                                                                   ;                    ;
+; Total Number of Removed Registers = 398                                                                                   ;                    ;
 +---------------------------------------------------------------------------------------------------------------------------+--------------------+
+
+
++------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                              ;
++------------------------+--------------------+--------------------------------------------+
+; Register name          ; Reason for Removal ; Registers Removed due to This Register     ;
++------------------------+--------------------+--------------------------------------------+
+; Registrador16:FR|q[11] ; Lost Fanouts       ; RegisterTemp:RT|Registrador16:RegR2|q[15], ;
+;                        ;                    ; RegisterTemp:RT|Registrador16:RegR2|q[7],  ;
+;                        ;                    ; RegisterTemp:RT|Registrador16:RegR1|q[15], ;
+;                        ;                    ; RegisterTemp:RT|Registrador16:RegR1|q[7]   ;
+; Registrador16:FR|q[4]  ; Lost Fanouts       ; RegisterTemp:RT|Registrador16:RegR1|q[11], ;
+;                        ;                    ; RegisterTemp:RT|Registrador16:RegR1|q[10], ;
+;                        ;                    ; RegisterTemp:RT|Registrador16:RegR1|q[3]   ;
++------------------------+--------------------+--------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -510,6 +526,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------+--------+----------+-------------------------------------------------------------------------------------+
 
 
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "AddressBus:AB"                                                                                                                               ;
++-------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port  ; Type  ; Severity ; Details                                                                                                                                      ;
++-------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; clock ; Input ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
++-------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 +-----------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "InstructionQueue:IQ"                                                                 ;
 +-------+--------+----------+-------------------------------------------------------------------------------------+
@@ -520,13 +545,17 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "EU_Control_System:ECS"                                                                      ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port         ; Type   ; Severity ; Details                                                                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; saidadatabus ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "EU_Control_System:ECS"                                                                                           ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                                                  ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; saidadatabus ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                      ;
+; opula        ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
+; saidabr1     ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
+; saidabr2     ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
+; saidabr3     ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
 
 
 +-------------------------------+
@@ -544,7 +573,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Fri Jan 19 16:14:33 2018
+    Info: Processing started: Mon Jan 22 15:36:32 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off p8086 -c p8086
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file eu_control_system.vhd
@@ -678,39 +707,35 @@ Info (12021): Found 2 design units, including 1 entities, in source file ula.vhd
     Info (12023): Found entity 1: ULA
 Info (12127): Elaborating entity "p8086" for the top level hierarchy
 Warning (10541): VHDL Signal Declaration warning at p8086.vhd(10): used implicit default value for signal "saida" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10036): Verilog HDL or VHDL warning at p8086.vhd(20): object "control_OutADB" assigned a value but never read
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(22): used implicit default value for signal "control_wRG1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(22): used implicit default value for signal "control_wRG2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(30): used implicit default value for signal "control_InRT1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(30): used implicit default value for signal "control_InRT2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(30): used implicit default value for signal "control_OutRT1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(30): used implicit default value for signal "control_OutRT2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(30): used implicit default value for signal "control_OutRT3" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(30): used implicit default value for signal "control_OutRT4" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(32): used implicit default value for signal "control_wRT1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(32): used implicit default value for signal "control_wRT2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(36): used implicit default value for signal "control_wIQ" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(36): used implicit default value for signal "control_rIQ" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10036): Verilog HDL or VHDL warning at p8086.vhd(40): object "flag_IQFull" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at p8086.vhd(40): object "flag_IQEmpty" assigned a value but never read
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(42): used implicit default value for signal "control_InADB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(50): used implicit default value for signal "control_ADDSUBULA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(52): used implicit default value for signal "control_OPULA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(60): used implicit default value for signal "control_wMEM" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(60): used implicit default value for signal "control_dMEM" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(66): used implicit default value for signal "control_OPAB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(68): used implicit default value for signal "control_edAB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(70): used implicit default value for signal "control_InBR1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(70): used implicit default value for signal "control_InBR2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(70): used implicit default value for signal "control_OutBRtoAB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(70): used implicit default value for signal "control_OutBRtoBSL" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(70): used implicit default value for signal "control_OutBRtoADB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(72): used implicit default value for signal "control_wBR1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(72): used implicit default value for signal "control_wBR2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(74): used implicit default value for signal "control_wFR" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10036): Verilog HDL or VHDL warning at p8086.vhd(21): object "control_OutADB" assigned a value but never read
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(35): used implicit default value for signal "control_wIQ" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(35): used implicit default value for signal "control_rIQ" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10036): Verilog HDL or VHDL warning at p8086.vhd(39): object "flag_IQFull" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at p8086.vhd(39): object "flag_IQEmpty" assigned a value but never read
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(41): used implicit default value for signal "control_InADB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(49): used implicit default value for signal "control_ADDSUBULA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(51): used implicit default value for signal "control_OPULA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(59): used implicit default value for signal "control_wMEM" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(59): used implicit default value for signal "control_dMEM" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(69): used implicit default value for signal "control_InBR1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(69): used implicit default value for signal "control_InBR2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(69): used implicit default value for signal "control_OutBRtoAB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(69): used implicit default value for signal "control_OutBRtoBSL" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(69): used implicit default value for signal "control_OutBRtoADB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(71): used implicit default value for signal "control_wBR1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(71): used implicit default value for signal "control_wBR2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(73): used implicit default value for signal "control_wFR" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Info (12128): Elaborating entity "EU_Control_System" for hierarchy "EU_Control_System:ECS"
-Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(10): used implicit default value for signal "entradaRG1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(10): used implicit default value for signal "entradaRG2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(12): used implicit default value for signal "entradaRG1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(12): used implicit default value for signal "entradaRG2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(14): used implicit default value for signal "sinalEscritaRG1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(14): used implicit default value for signal "sinalEscritaRG2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(18): used implicit default value for signal "sinalEscritaRT1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(18): used implicit default value for signal "sinalEscritaRT2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(20): used implicit default value for signal "OPULA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(22): used implicit default value for signal "saidaBR1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(22): used implicit default value for signal "saidaBR2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at EU_Control_System.vhd(22): used implicit default value for signal "saidaBR3" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Info (12128): Elaborating entity "RegistradorGeral" for hierarchy "RegistradorGeral:RG"
 Info (12128): Elaborating entity "Registrador8" for hierarchy "RegistradorGeral:RG|Registrador8:AH"
 Info (12128): Elaborating entity "Registrador16" for hierarchy "RegistradorGeral:RG|Registrador16:SP"
@@ -780,213 +805,185 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/mux_
     Info (12023): Found entity 1: mux_8kb
 Info (12128): Elaborating entity "mux_8kb" for hierarchy "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|mux_8kb:mux2"
 Info (12128): Elaborating entity "AddressBus" for hierarchy "AddressBus:AB"
-Warning (10492): VHDL Process Statement warning at AddressBus.vhd(27): signal "controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at AddressBus.vhd(28): signal "S1A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at AddressBus.vhd(28): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at AddressBus.vhd(29): signal "controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at AddressBus.vhd(30): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at AddressBus.vhd(31): signal "controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at AddressBus.vhd(32): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10631): VHDL Process Statement warning at AddressBus.vhd(25): inferring latch(es) for signal or variable "Soma", which holds its previous value in one or more paths through the process
-Info (10041): Inferred latch for "Soma[0]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[1]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[2]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[3]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[4]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[5]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[6]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[7]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[8]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[9]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[10]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[11]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[12]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[13]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[14]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[15]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[16]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[17]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[18]" at AddressBus.vhd(25)
-Info (10041): Inferred latch for "Soma[19]" at AddressBus.vhd(25)
 Info (12128): Elaborating entity "BIURegisters" for hierarchy "BIURegisters:BR"
 Info (12128): Elaborating entity "ULA" for hierarchy "ULA:ALU"
-Warning (10036): Verilog HDL or VHDL warning at ULA.vhd(267): object "SInc" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at ULA.vhd(269): object "FMulb" assigned a value but never read
-Warning (10492): VHDL Process Statement warning at ULA.vhd(347): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(348): signal "SaidaAdd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(349): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(350): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(351): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(352): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(353): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(354): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(362): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(363): signal "SaidaAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(364): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(365): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(366): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(367): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(368): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(369): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(376): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(377): signal "SaidaDec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(378): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(379): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(380): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(381): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(382): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(390): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(391): signal "SDiv1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(392): signal "SDiv2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(395): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(396): signal "SIdiv1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(397): signal "SIdiv2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(400): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(401): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(402): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(403): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(404): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(405): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(413): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(414): signal "Slahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(416): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(417): signal "SMul1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(418): signal "SMul2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(419): signal "FMul" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(420): signal "FMul" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(425): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(426): signal "SMulb" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10036): Verilog HDL or VHDL warning at ULA.vhd(275): object "SInc" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at ULA.vhd(277): object "FMulb" assigned a value but never read
+Warning (10492): VHDL Process Statement warning at ULA.vhd(355): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(356): signal "SaidaAdd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(357): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(358): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(359): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(360): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(361): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(362): signal "Fadd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(370): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(371): signal "SaidaAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(372): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(373): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(374): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(375): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(376): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(377): signal "FAdc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(384): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(385): signal "SaidaDec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(386): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(387): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(388): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(389): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(390): signal "Fdec" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(398): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(399): signal "SDiv1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(400): signal "SDiv2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(403): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(404): signal "SIdiv1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(405): signal "SIdiv2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(408): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(409): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(410): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(411): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(412): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(413): signal "FInc" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(421): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(422): signal "Slahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(424): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(425): signal "SMul1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(426): signal "SMul2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at ULA.vhd(427): signal "FMul" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at ULA.vhd(428): signal "FMul" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(432): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(433): signal "SNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(434): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(435): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(436): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(437): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(438): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(446): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(447): signal "SNot" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(449): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(450): signal "Flags" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(451): signal "Flags" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(452): signal "Flags" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(453): signal "Flags" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(454): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(455): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(456): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(457): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(458): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(460): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(461): signal "SXOR" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(463): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(464): signal "SAnd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(465): signal "FAnd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(466): signal "FAnd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(467): signal "FAnd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(476): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(477): signal "SOr" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(479): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(480): signal "SRol" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(481): signal "FRol" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(485): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(486): signal "SRor" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(487): signal "FRor" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(491): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(492): signal "SSar" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(493): signal "FSar" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(497): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(498): signal "SShlsal" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(499): signal "FShlsal" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(503): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(504): signal "SShr" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(505): signal "FShr" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(509): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(510): signal "FTest" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(511): signal "FTest" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(512): signal "FTest" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(521): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(522): signal "SAaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(523): signal "FAaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(524): signal "FAaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(433): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(434): signal "SMulb" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(435): signal "FMul" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(436): signal "FMul" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(440): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(441): signal "SNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(442): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(443): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(444): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(445): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(446): signal "FNeg" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(454): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(455): signal "SNot" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(457): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(458): signal "Flags" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(459): signal "Flags" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(460): signal "Flags" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(461): signal "Flags" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(462): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(463): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(464): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(465): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(466): signal "FSahf" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(468): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(469): signal "SXOR" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(471): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(472): signal "SAnd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(473): signal "FAnd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(474): signal "FAnd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(475): signal "FAnd" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(484): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(485): signal "SOr" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(487): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(488): signal "SRol" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(489): signal "FRol" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(493): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(494): signal "SRor" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(495): signal "FRor" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(499): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(500): signal "SSar" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(501): signal "FSar" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(505): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(506): signal "SShlsal" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(507): signal "FShlsal" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(511): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(512): signal "SShr" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(513): signal "FShr" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(517): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(518): signal "FTest" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(519): signal "FTest" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(520): signal "FTest" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at ULA.vhd(529): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(530): signal "SDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(532): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(533): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(534): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(535): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(536): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(542): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(543): signal "SAas" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(544): signal "FAas" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(545): signal "FAas" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(549): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(550): signal "SAam" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(551): signal "FAam" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(552): signal "FAam" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(553): signal "FAam" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(562): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(563): signal "SAad" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(564): signal "FAad" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(565): signal "FAad" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(566): signal "FAad" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(576): signal "SOperando1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(577): signal "Word2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at ULA.vhd(578): signal "SOperando2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10631): VHDL Process Statement warning at ULA.vhd(345): inferring latch(es) for signal or variable "SOperando1", which holds its previous value in one or more paths through the process
-Warning (10631): VHDL Process Statement warning at ULA.vhd(345): inferring latch(es) for signal or variable "SFlags", which holds its previous value in one or more paths through the process
-Warning (10631): VHDL Process Statement warning at ULA.vhd(345): inferring latch(es) for signal or variable "Word2", which holds its previous value in one or more paths through the process
-Warning (10631): VHDL Process Statement warning at ULA.vhd(345): inferring latch(es) for signal or variable "SOperando2", which holds its previous value in one or more paths through the process
-Warning (10873): Using initial value X (don't care) for net "Slahf[7..0]" at ULA.vhd(272)
-Info (10041): Inferred latch for "SOperando2[0]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[1]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[2]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[3]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[4]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[5]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[6]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[7]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[8]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[9]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[10]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[11]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[12]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[13]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[14]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando2[15]" at ULA.vhd(345)
-Info (10041): Inferred latch for "Word2" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[0]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[1]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[2]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[3]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[4]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[5]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[6]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[7]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[8]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[9]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[10]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[11]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[12]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[13]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[14]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SFlags[15]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[0]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[1]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[2]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[3]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[4]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[5]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[6]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[7]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[8]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[9]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[10]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[11]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[12]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[13]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[14]" at ULA.vhd(345)
-Info (10041): Inferred latch for "SOperando1[15]" at ULA.vhd(345)
+Warning (10492): VHDL Process Statement warning at ULA.vhd(530): signal "SAaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(531): signal "FAaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(532): signal "FAaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(537): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(538): signal "SDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(540): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(541): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(542): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(543): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(544): signal "FDaa" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(550): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(551): signal "SAas" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(552): signal "FAas" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(553): signal "FAas" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(557): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(558): signal "SAam" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(559): signal "FAam" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(560): signal "FAam" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(561): signal "FAam" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(570): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(571): signal "SAad" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(572): signal "FAad" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(573): signal "FAad" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(574): signal "FAad" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(584): signal "SOperando1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(585): signal "Word2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ULA.vhd(586): signal "SOperando2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at ULA.vhd(353): inferring latch(es) for signal or variable "SOperando1", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ULA.vhd(353): inferring latch(es) for signal or variable "SFlags", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ULA.vhd(353): inferring latch(es) for signal or variable "Word2", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ULA.vhd(353): inferring latch(es) for signal or variable "SOperando2", which holds its previous value in one or more paths through the process
+Warning (10873): Using initial value X (don't care) for net "Slahf[7..0]" at ULA.vhd(280)
+Info (10041): Inferred latch for "SOperando2[0]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[1]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[2]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[3]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[4]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[5]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[6]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[7]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[8]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[9]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[10]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[11]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[12]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[13]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[14]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando2[15]" at ULA.vhd(353)
+Info (10041): Inferred latch for "Word2" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[0]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[1]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[2]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[3]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[4]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[5]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[6]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[7]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[8]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[9]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[10]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[11]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[12]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[13]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[14]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SFlags[15]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[0]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[1]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[2]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[3]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[4]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[5]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[6]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[7]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[8]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[9]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[10]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[11]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[12]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[13]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[14]" at ULA.vhd(353)
+Info (10041): Inferred latch for "SOperando1[15]" at ULA.vhd(353)
 Info (12128): Elaborating entity "ADD86" for hierarchy "ULA:ALU|ADD86:add1"
 Warning (10492): VHDL Process Statement warning at ADD86.vhd(26): signal "ControleByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at ADD86.vhd(28): signal "Controle" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
@@ -1138,13 +1135,23 @@ Info (10041): Inferred latch for "S[13]" at ADC86.vhd(22)
 Info (10041): Inferred latch for "S[14]" at ADC86.vhd(22)
 Info (10041): Inferred latch for "S[15]" at ADC86.vhd(22)
 Info (12128): Elaborating entity "DEC86" for hierarchy "ULA:ALU|DEC86:dec1"
-Warning (10492): VHDL Process Statement warning at DEC86.vhd(21): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at DEC86.vhd(26): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at DEC86.vhd(27): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at DEC86.vhd(30): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at DEC86.vhd(33): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at DEC86.vhd(37): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at DEC86.vhd(38): signal "Y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(24): signal "ByteControl" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(25): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(30): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(31): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(34): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(37): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(42): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(43): signal "half1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(44): signal "half2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(49): signal "AByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(55): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(56): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(59): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(62): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(67): signal "AByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(68): signal "half1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at DEC86.vhd(69): signal "half2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Info (12128): Elaborating entity "DIV86" for hierarchy "ULA:ALU|DIV86:div1"
 Info (12128): Elaborating entity "IDIV86" for hierarchy "ULA:ALU|IDIV86:idiv1"
 Warning (10492): VHDL Process Statement warning at IDIV86.vhd(23): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
@@ -1152,13 +1159,23 @@ Warning (10492): VHDL Process Statement warning at IDIV86.vhd(24): signal "B" is
 Warning (10492): VHDL Process Statement warning at IDIV86.vhd(25): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at IDIV86.vhd(30): signal "B" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Info (12128): Elaborating entity "INC86" for hierarchy "ULA:ALU|INC86:inc1"
-Warning (10492): VHDL Process Statement warning at INC86.vhd(21): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at INC86.vhd(27): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at INC86.vhd(28): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at INC86.vhd(31): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at INC86.vhd(34): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at INC86.vhd(38): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at INC86.vhd(39): signal "Y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(24): signal "ByteControl" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(25): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(31): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(32): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(35): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(38): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(43): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(44): signal "half1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(45): signal "half2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(50): signal "AByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(57): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(58): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(61): signal "AByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(64): signal "S" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(69): signal "AByte" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(70): signal "half1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at INC86.vhd(71): signal "half2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Info (12128): Elaborating entity "LAHF86" for hierarchy "ULA:ALU|LAHF86:lahf1"
 Info (12128): Elaborating entity "MUL86" for hierarchy "ULA:ALU|MUL86:mul1"
 Warning (10492): VHDL Process Statement warning at MUL86.vhd(21): signal "A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
@@ -1425,6 +1442,7 @@ Warning (14284): Synthesized away the following node(s):
         Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a125"
         Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a126"
         Warning (14320): Synthesized away node "BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_5ba1:auto_generated|ram_block1a127"
+Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "saida[0]" is stuck at GND
     Warning (13410): Pin "saida[1]" is stuck at GND
@@ -1442,7 +1460,7 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "saida[13]" is stuck at GND
     Warning (13410): Pin "saida[14]" is stuck at GND
     Warning (13410): Pin "saida[15]" is stuck at GND
-Info (17049): 414 registers lost all their fanouts during netlist optimizations.
+Info (17049): 398 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 18 input pin(s) that do not drive logic
@@ -1467,10 +1485,10 @@ Warning (21074): Design contains 18 input pin(s) that do not drive logic
 Info (21057): Implemented 34 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 18 input pins
     Info (21059): Implemented 16 output pins
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 549 warnings
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 558 warnings
     Info: Peak virtual memory: 499 megabytes
-    Info: Processing ended: Fri Jan 19 16:14:36 2018
-    Info: Elapsed time: 00:00:03
+    Info: Processing ended: Mon Jan 22 15:36:34 2018
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 
 

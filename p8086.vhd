@@ -17,7 +17,8 @@ architecture description of p8086 is
 signal IQtoECSandADB																												: std_logic_vector(7 downto 0);
 --selecao para as estradas do RG, de saida para o RG e de saida para a ADB.
 signal control_InRG1, control_InRG2, control_OutRG1, control_OutRG2												: std_logic_vector(3 downto 0);
-signal control_OutADB : std_logic_vector(2 downto 0);
+--
+signal control_OutADB 																											: std_logic_vector(2 downto 0);
 --controle para escrita no RG.
 signal control_wRG1, control_wRG2																							: std_logic;
 --saida da ADB para as entradas do RG.
@@ -26,8 +27,6 @@ signal ADBtoRG																														: std_logic_vector(15 downto 0);
 signal RG1toADB, RG2toADB																										: std_logic_vector(7 downto 0);
 --saida do ADB para a entrada do RT.
 signal ADBtoRT1, ADBtoRT2																										: std_logic_vector(15 downto 0);
---selecao da entrada de RT e saida
-signal control_InRT1, control_InRT2, control_OutRT1, control_OutRT2, control_OutRT3, control_OutRT4	: std_logic_vector(1 downto 0);
 --controle para escrita no RT.
 signal control_wRT1, control_wRT2																							: std_logic;
 --saida do RT para entrada da ULA e da ADB.
@@ -73,12 +72,13 @@ signal control_wBR1, control_wBR2 																							: std_logic;
 --controle de escrita no FR.
 signal control_wFR 																												: std_logic;
 component EU_Control_System 	IS PORT(
-    reset 						: in std_logic;
-    clk     					: in std_logic;
-    entradaInstrucao 		: in  std_logic_vector(7 downto 0);
-	 entradaRG1, entradaRG2, saidaRG1, saidaRG2	: out std_logic_vector(3 downto 0);
-	 sinalEscritaRG1, sinalEscritaRG2 : std_logic;
-	 saidaDataBUS				: out std_logic_vector(2 downto 0)
+		reset 													: in std_logic;
+		clk     													: in std_logic;
+		entradaInstrucao 										: in  std_logic_vector(7 downto 0);
+		entradaRG1, entradaRG2, saidaRG1, saidaRG2	: out std_logic_vector(3 downto 0);
+		sinalEscritaRG1, sinalEscritaRG2 				: out std_logic;
+		sinalEscritaRT1, sinalEscritaRT2 				: out std_logic;
+		saidaDataBUS											: out std_logic_vector(2 downto 0)
     );
 end component;
 
@@ -92,10 +92,9 @@ end component;
 
 component RegisterTemp 			IS PORT(
     Entrada1, Entrada2 : in std_LOGIC_VECTOR(15 downto 0);
-    wsel1, wsel2, ControleSaida1, ControleSaida2, ControleSaida3, ControleSaida4: IN STD_LOGIC_vector(1 downto 0);
     clr, w1, w2: IN STD_LOGIC;
     clk : IN STD_LOGIC;
-    S1, S2 , S3, S4: out std_LOGIC_VECTOR(15 downto 0)
+    Saida1, Saida2 , Saida3, Saida4: out std_LOGIC_VECTOR(15 downto 0)
 );
 end component;
    
@@ -132,10 +131,8 @@ component BusControlLogic 		IS PORT(
 end component;
 
 component AddressBus 			IS PORT(
-    A, B : in std_logic_vector(15 downto 0);
-	 ConcBED, clk: in std_logic;
-	 controle : in std_logic_vector(1 downto 0);
-	 Saida : out std_logic_vector(19 downto 0)
+    SegmentBase, Offset : in std_logic_vector(15 downto 0);
+	 Address : out std_logic_vector(19 downto 0)
 );
 end component;
 
@@ -175,6 +172,7 @@ begin
 												IQtoECSandADB,
 												control_InRG1, control_InRG2, control_OutRG1, control_OutRG2,
 												control_wRG1, control_wRG2,
+												control_wRT1, control_wRT2,
 												control_OutADB);
 	--Registradores da maquina
 	RG:	RegistradorGeral 		port map(
@@ -185,7 +183,6 @@ begin
 	--Registradores dos operandos
 	RT:	RegisterTemp 			port map(
 												ADBtoRT1, ADBtoRT2,
-												control_InRT1, control_InRT2, control_OutRT1, control_OutRT2, control_OutRT3, control_OutRT4,
 												reset, control_wRT1, control_wRT2,
 												clock, 
 												RTtoADB1, RTtoADB2, RTtoULA1, RTtoULA2);
@@ -221,8 +218,6 @@ begin
 	--barramento de endereco.
 	AB: AddressBus 				port map(
 													BRtoAB, BRtoBSL,
-													control_edAB, clock,
-													control_OPAB,
 													ABtoBSL);
 	--registrador de segmento e pc.
 	BR: BIURegisters				port map(

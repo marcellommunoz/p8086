@@ -11,7 +11,7 @@ ENTITY RegisterTemp IS PORT(
 END RegisterTemp;
 
 ARCHITECTURE comportamento OF RegisterTemp IS
-signal R1,R2: STD_LOGIC_VECTOR(15 DOWNTO 0);
+signal EntradaR1, EntradaR2, EntradaR3, R1,R2,R3: STD_LOGIC_VECTOR(15 DOWNTO 0);
 	
 component Registrador16 IS PORT(
     d   : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
