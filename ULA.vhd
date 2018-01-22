@@ -486,7 +486,7 @@ process (clk)
 				SFlags(2) <= FSahf(2);
 				SFlags(0) <= FSahf(0);
 				Word2 <= '0';
-			elsif Controle = "00011100" then
+			elsif Controle = "00011100" or Controle = "01011100" then
 				SOperando1 <= SXOR;
 			
 			elsif Controle = "00011101" or Controle = "01011101" then
