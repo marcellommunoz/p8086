@@ -50,6 +50,8 @@ component DIV86 IS
 	port(
 		A: in std_logic_vector(15 downto 0);
 		B: in std_logic_vector(15 downto 0);
+		ByteControl : in std_logic;
+		Abyte, BByte: in std_logic_vector(7 downto 0);
 		Saida1, Saida2:  out std_logic_vector(15 downto 0)
 	);
 end component;
@@ -59,6 +61,8 @@ component IDIV86 IS
 		clk: in std_logic;
 		A: in std_logic_vector(15 downto 0);
 		B: in std_logic_vector(15 downto 0);
+		ByteControl : in std_logic;
+		Abyte, BByte: in std_logic_vector(7 downto 0);
 		Saida1, Saida2:  out std_logic_vector(15 downto 0)
 	);
 end component;
@@ -147,6 +151,8 @@ end component;
 component XOR86 is 
 port(
 	A, B : in std_logic_vector(15 downto 0);
+	ByteControl : in std_logic;
+	Abyte, BByte: in std_logic_vector(7 downto 0);
 	S: out std_logic_vector(15 downto 0)
 );
 
@@ -166,6 +172,8 @@ end component;
 component OR86 is
 port (
 		A, B : in std_logic_vector(15 downto 0);
+		ByteControl : in std_logic;
+		Abyte, BByte: in std_logic_vector(7 downto 0);
 		S: out std_logic_vector(15 downto 0)
 
 );
@@ -314,9 +322,9 @@ adc1: ADC86 port map(clk, Flags(0), Controle(7),Controle(6), Operando1, Operando
 
 dec1: DEC86 port map(clk, Operando1,SubOperando1, Controle(6), Fdec(0), Fdec(1), Fdec(2), Fdec(3), Fdec(4), SaidaDec);
 												--	6 7 11 2 4
-div1: DIV86 port map(Operando1, Operando2, SDiv1, SDiv2);
+div1: DIV86 port map(Operando1, Operando2, Controle(6), SubOperando1, SubOperando2, SDiv1, SDiv2);
 
-idiv1: IDIV86 port map (clk, Operando1, Operando2, SIdiv1, SIdiv2);
+idiv1: IDIV86 port map (clk, Operando1, Operando2, Controle(6), SubOperando1, SubOperando2, SIdiv1, SIdiv2);
 
 inc1: INC86 port map (clk, Operando1,SubOperando1, Controle(6), FInc(0), FInc(1), FInc(2), FInc(3), FInc(4), SInc);
 													--6 7 11 2 4
@@ -332,11 +340,11 @@ not1: NOT86 port map (Operando1,SubOperando1, Controle(6), SNot);
 
 sahf1: SAHF86 port map (FSahf(7), FSahf(6), FSahf(4), FSahf(2), FSahf(0), Operando1(15 downto 8));
 
-xor1: XOR86 port map (Operando1, Operando2, SXOR);
+xor1: XOR86 port map (Operando1, Operando2,Controle(6), SubOperando1, SubOperando2, SXOR);
 
 and1 : AND86 port map (Operando1, Operando2, SubOperando1, SubOperando2, Controle(6), SAnd, FAnd(0), FAnd(1), FAnd(2));
 																		--6 7 2
-or1 : OR86 port map (Operando1, Operando2, SOr);
+or1 : OR86 port map (Operando1, Operando2,Controle(6), SubOperando1, SubOperando2, SOr);
 
 rol1 : ROL86 port map (Operando1, Operando2, SRol, FRol);
 
@@ -408,12 +416,12 @@ process (clk)
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
 			
-			elsif Controle = "00010011" then --DIV
+			elsif Controle = "00010011" or Controle = "01010011" then --DIV
 				SOperando1 <= SDiv1;
 				SOperando2 <= SDiv2;
 				Word2 <= '1';		
 			
-			elsif Controle = "00010100" then --IDIV
+			elsif Controle = "00010100" or Controle = "01010100" then --IDIV
 				SOperando1 <= SIdiv1;
 				SOperando2 <= SIdiv2;
 				Word2 <= '1';	
@@ -478,7 +486,7 @@ process (clk)
 				SFlags(2) <= FSahf(2);
 				SFlags(0) <= FSahf(0);
 				Word2 <= '0';
-			elsif Controle = "00011100" then
+			elsif Controle = "00011100" or Controle = "01011100" then
 				SOperando1 <= SXOR;
 			
 			elsif Controle = "00011101" or Controle = "01011101" then
@@ -494,7 +502,7 @@ process (clk)
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
 				Word2 <= '0';
-			elsif Controle = "00011110" then
+			elsif Controle = "00011110" or Controle = "01011110" then
 				SOperando1 <= SOr;
 				Word2 <= '0';
 			elsif Controle = "00011111" then
