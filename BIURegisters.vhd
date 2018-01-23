@@ -140,6 +140,10 @@ begin
 					--Other Address Calculations
 					Internal1 	when others;
 			
+	if ControleLogicalAddress = "0001" then
+		IP <= IP+1;
+	end if;
+	
 	with ControlesaidaADB select
 		saidaADB <= 
 						Internal1 when "00",
