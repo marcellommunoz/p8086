@@ -33,8 +33,8 @@ signal control_wRT1, control_wRT2																							: std_logic;
 signal RTtoADB1, RTtoADB2, RTtoULA1, RTtoULA2																			: std_logic_vector(15 downto 0);
 --controle escrita e leitura na IQ.
 signal control_wIQ, control_rIQ 																								: std_logic;
---instrucao BSL para o IQ.
-signal BSLtoIQ																														: std_logic_vector(7 downto 0);
+--instrucao BCL para o IQ.
+signal BCLtoIQ																														: std_logic_vector(7 downto 0);
 --flags IQ.
 signal flag_IQFull, flag_IQEmpty																								: std_logic;
 --selecao para as entradas do ADB.
@@ -52,13 +52,13 @@ signal control_OPULA																												: std_logic_vector(7 downto 0);
 --saida da ULA para o ADB e o FR.
 signal ULAtoADB, ULAtoFR																										: std_logic_vector(15 downto 0);
 --saida de dados da BR.
-signal BRtoBSL 																													: std_logic_vector(15 downto 0);
---saida do endereco da ABtoBSL.
-signal ABtoBSL 																													: std_logic_vector(19 downto 0);
+signal BRtoBCL 																													: std_logic_vector(15 downto 0);
+--saida do endereco da ABtoBCL.
+signal ABtoBCL 																													: std_logic_vector(19 downto 0);
 --controle de escrita na memoria e de se e dados.
 signal control_wMEM, control_dMEM 																							: std_logic;
---saida do BSL para o BR
-signal BSLtoBR 																													: std_logic_vector(15 downto 0);
+--saida do BCL para o BR
+signal BCLtoBR 																													: std_logic_vector(15 downto 0);
 --entrada do AddressBus
 signal BRtoAB 																														: std_logic_vector(15 downto 0);
 --selecao operacao do AddressBus
@@ -196,7 +196,7 @@ begin
 												reset,
 												clock,
 												control_wIQ,
-												BSLtoIQ,
+												BCLtoIQ,
 												flag_IQFull,
 												control_rIQ,
 												IQtoECSandADB,
@@ -213,24 +213,24 @@ begin
 												ADBtoRT1, ADBtoRT2);
 																							
 	--barramento I/O
-	BSL:	BusControlLogic 		port map(
-													BRtoBSL,
-													ABtoBSL,
+	BCL:	BusControlLogic 		port map(
+													BRtoBCL,
+													ABtoBCL,
 													clock, control_wMEM, control_dMEM,
-													BSLtoIQ,
-													BSLtoBR);
+													BCLtoIQ,
+													BCLtoBR);
 	--barramento de endereco.
 	AB: AddressBus 				port map(
-													BRtoAB, BRtoBSL,
-													ABtoBSL);
+													BRtoAB, BRtoBCL,
+													ABtoBCL);
 	--registrador de segmento e pc.
 	BR: BIURegisters				port map(
-													ADBtoBR, BSLtoBR,
+													ADBtoBR, BCLtoBR,
 													control_InBR_ADB, control_InBR_Mem, 
 													control_BRtoADB,
 													control_LogicalAddress,
 													clock, reset, control_wBR_ADB, control_wBR_Mem,
-													BRtoAB, BRtoBSL, BRtoADB
+													BRtoAB, BRtoBCL, BRtoADB
 													);
 	--ULA.											
 	ALU:	ULA 						port map(
