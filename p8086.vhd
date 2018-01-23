@@ -13,239 +13,107 @@ end p8086;
  --controle = sinais de escrita e leitura; selecao = escolher entre varias entradas ou saidas; entrada e saida = sinal que liga dois componente; flags = sinais que sai dos componentes.
 architecture description of p8086 is
 
---saida IQ para a entrada do ECS
-signal IQtoECSandADB																												: std_logic_vector(7 downto 0);
---selecao para as estradas do RG, de saida para o RG e de saida para a ADB.
-signal control_InRG1, control_InRG2, control_OutRG1, control_OutRG2												: std_logic_vector(3 downto 0);
---
-signal control_OutADB 																											: std_logic_vector(2 downto 0);
---controle para escrita no RG.
-signal control_wRG1, control_wRG2																							: std_logic;
---saida da ADB para as entradas do RG.
-signal ADBtoRG																														: std_logic_vector(15 downto 0);
---saida dos RG para entrada do ADB.
-signal RG1toADB, RG2toADB																										: std_logic_vector(7 downto 0);
---saida do ADB para a entrada do RT.
-signal ADBtoRT1, ADBtoRT2																										: std_logic_vector(15 downto 0);
---controle para escrita no RT.
-signal control_wRT1, control_wRT2																							: std_logic;
---saida do RT para entrada da ULA e da ADB.
-signal RTtoADB1, RTtoADB2, RTtoULA1, RTtoULA2																			: std_logic_vector(15 downto 0);
---controle escrita e leitura na IQ.
-signal control_wIQ, control_rIQ 																								: std_logic;
---instrucao BCL para o IQ.
-signal BCLtoIQ																														: std_logic_vector(7 downto 0);
---flags IQ.
-signal flag_IQFull, flag_IQEmpty																								: std_logic;
---selecao para as entradas do ADB.
-signal control_InADB 																											: std_logic_vector(2 downto 0);
---saida BR para a entrada ADB.
-signal BRtoADB																														: std_logic_vector(15 downto 0);
---saida da FR para entrada ADB.
-signal FRtoADBandULA 																											: std_logic_vector(15 downto 0);
---saida da ADB to BR.
-signal ADBtoBR 																													: std_logic_vector(15 downto 0);
---controle de sub ou add ULA.
-signal control_ADDSUBULA																										: std_logic;
---controle da operacao da ULA.
-signal control_OPULA																												: std_logic_vector(7 downto 0);
---saida da ULA para o ADB e o FR.
-signal ULAtoADB, ULAtoFR																										: std_logic_vector(15 downto 0);
---saida de dados da BR.
-signal BRtoBCL 																													: std_logic_vector(15 downto 0);
---saida do endereco da ABtoBCL.
-signal ABtoBCL 																													: std_logic_vector(19 downto 0);
---controle de escrita na memoria e de se e dados.
-signal control_wMEM, control_dMEM 																							: std_logic;
---saida do BCL para o BR
-signal BCLtoBR 																													: std_logic_vector(15 downto 0);
---entrada do AddressBus
-signal BRtoAB 																														: std_logic_vector(15 downto 0);
---selecao operacao do AddressBus
-signal control_OPAB 																												: std_logic_vector(1 downto 0);
---controle de concatenacao do AddressBUS
-signal control_edAB 																												: std_logic;
---selecao de entrada e saida do BR.
-signal control_InBR_ADB, control_InBR_Mem									 														: std_logic_vector(2 downto 0);
-signal control_BRtoADB																											: std_logic_vector(1 downto 0);
-signal control_LogicalAddress																									: std_logic_vector(3 downto 0);
---controle de escrita da BR.
-signal control_wBR_ADB, control_wBR_Mem 																							: std_logic;
---controle de escrita no FR.
-signal control_wFR 																												: std_logic;
-component EU_Control_System 	IS PORT(
-		reset 													: in std_logic;
-		clk     													: in std_logic;
-		entradaInstrucao 										: in  std_logic_vector(7 downto 0);
-		entradaRG1, entradaRG2, saidaRG1, saidaRG2	: out std_logic_vector(3 downto 0);
-		sinalEscritaRG1, sinalEscritaRG2 				: out std_logic;
-		sinalEscritaRT1, sinalEscritaRT2 				: out std_logic;
-		saidaDataBUS											: out std_logic_vector(2 downto 0)
-    );
-end component;
+--entradas e saidas do RG
+signal	ADBtoRG																			:	std_logic_vector(15 downto 0);
+signal	RGtoADB1, RGtoADB2															:	std_logic_vector(7 downto 0);
+--controle de entrada e saida do RG
+signal	control_InRG1, control_InRG2, control_OutRG1, control_OutRG2	:	std_logic_vector(4 downto 0);
+--sinal de escrita do RG
+signal	control_wRG1, control_wRG2													:	std_logic;
+--entradas e saidas do RT
+signal	ADBtoRT1, ADBtoRT2, RTtoADB1, RTtoADB2, RTtoULA1, RTtoULA2		:	std_logic_vector(15 downto 0);
+--sinal de escrita do RG
+signal	control_wRT1, control_wRT2													:	std_logic;
+--sinal de escrita FR
+signal	control_wFR																		:	std_logic;
+--entradas e saidas do FR
+signal	FRout, FRin																		:	std_logic_vector(15 downto 0);
+--controle de operacao ULA
+signal	control_OpULA																	:	std_logic_vector(7 downto 0);
+--saida da ULA
+signal	ULAtoADB																			: std_logic_vector(15 downto 0);
+--controle de entrada no ADB
+signal	control_InADB																	:	std_logic_vector(2 downto 0);
+--entrada e saidas do ADB
 
-component RegistradorGeral 	IS PORT(
-    entrada1, entrada2   : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-	 wsel1, wsel2, rsel1, rsel2 :IN STD_LOGIC_VECTOR(3 downto 0);
-    w1, w2, clk, clr  : IN STD_LOGIC;
-    saida1, saida2   : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+component RegistradoresP86  	IS PORT(
+    entrada1, entrada2   					: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+	 wsel1, wsel2, rsel1, rsel2 			: IN STD_LOGIC_VECTOR(4 downto 0);
+    w1, w2, clk, clr  						: IN STD_LOGIC;
+    saida1, saida2   						: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
 );
 end component;
 
 component RegisterTemp 			IS PORT(
-    Entrada1, Entrada2 : in std_LOGIC_VECTOR(15 downto 0);
-    clr, w1, w2: IN STD_LOGIC;
-    clk : IN STD_LOGIC;
-    Saida1, Saida2 , Saida3, Saida4: out std_LOGIC_VECTOR(15 downto 0)
+		 Entrada1, Entrada2 					: IN std_LOGIC_VECTOR(15 downto 0);
+		 clr, w1, w2							: IN STD_LOGIC;
+		 clk 										: IN STD_LOGIC;
+		 Saida1, Saida2 , Saida3, Saida4	: OUT std_LOGIC_VECTOR(15 downto 0)
 );
-end component;
-   
-component InstructionQueue 	IS PORT(
-    reset 	: in std_logic;
-    clk     : in std_logic;
-    w   			:in  std_logic;
-    entrada 	: in  std_logic_vector(7 downto 0);
-    cheio   	: out std_logic;
-    r   : in  std_logic;
-    saida : out std_logic_vector(7 downto 0);
-    vazio   : out std_logic
-    );
 end component;
 
 component DataBus 				IS PORT(
-	 InControl : in std_LOGIC_VECTOR(2 downto 0);
-    TemporalReg1, TemporalReg2 : in std_LOGIC_VECTOR(15 downto 0);
-	 GeneralReg, BIURegs: in std_LOGIC_VECTOR(15 downto 0);
-	 ULA, Flags: in std_LOGIC_VECTOR(15 downto 0);
-	 InstructionQueue: in std_LOGIC_VECTOR(7 downto 0);
-	 SGeneral, SBIURegs: out std_LOGIC_VECTOR(15 downto 0);
-	 STemp1, STemp2: out std_LOGIC_VECTOR(15 downto 0)
-);
-end component;
-
-component BusControlLogic 		IS PORT(
-	 Dado: in std_LOGIC_VECTOR(15 downto 0);
-	 Ender: in std_LOGIC_VECTOR(19 downto 0);
-    clk, w, ControleDadIns: IN STD_LOGIC;
-	 SaidaQueue: out std_LOGIC_VECTOR(7 downto 0);
-    SaidaRegs: out std_LOGIC_VECTOR(15 downto 0)
-);
-end component;
-
-component AddressBus 			IS PORT(
-    SegmentBase, Offset : in std_logic_vector(15 downto 0);
-	 Address : out std_logic_vector(19 downto 0)
-);
-end component;
-
-component BIURegisters 			IS PORT(
-	--entrada de 16 bits nos registradores de memoria.
-    entradaADB, entradaMemoria 															: IN STD_LOGIC_VECTOR(15 downto 0);
-	 --wsel seleciona qual registrador escrever. ControleSaida seleciona qual registrador vai sair em qual saida.
-    wselADB, wselMem																			: IN std_logic_vector(2 downto 0);
-	 ControlesaidaADB																			: IN std_logic_vector(1 downto 0);
-	 ControleLogicalAddress																	: IN STD_LOGIC_vector(3 downto 0);
-	 --clock, clear assincrono e sinais de escrita.
-    clk,clr, wADB, wMem																		: IN STD_LOGIC;
-	 --tres saidas de 16 bits
-    SegmentBase, Offset , saidaADB														: OUT STD_LOGIC_VECTOR(15 downto 0)
+		InControl 								: in std_LOGIC_VECTOR(2 downto 0);
+		TemporalReg1, TemporalReg2 		: in std_LOGIC_VECTOR(15 downto 0);
+		GeneralReg								: in std_LOGIC_VECTOR(15 downto 0);
+		ULA, Flags								: in std_LOGIC_VECTOR(15 downto 0);
+		SGeneral									: out std_LOGIC_VECTOR(15 downto 0);
+		STemp1, STemp2							: out std_LOGIC_VECTOR(15 downto 0)
 );
 end component;
 
 component ULA 						IS PORT(
-		clk: in std_logic;
-		Controle : in std_logic_vector(7 downto 0);
-		Operando1, Operando2, Flags: in std_logic_vector(15 downto 0);
-		SExtra, SFlags: out std_logic_vector(15 downto 0)
+		 clk										: in std_logic;
+		 Controle 								: in std_logic_vector(7 downto 0);
+		 Operando1, Operando2, Flags		: in std_logic_vector(15 downto 0);
+		 SExtra, SFlags						: out std_logic_vector(15 downto 0)
 	);
 end component;
 
 component Registrador16 		IS PORT(
-			d	: IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-			w  : IN STD_LOGIC;
-			clr: IN STD_LOGIC;
-			clk: IN STD_LOGIC;
-			q  : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+			d										: IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+			w  									: IN STD_LOGIC;
+			clr									: IN STD_LOGIC;
+			clk									: IN STD_LOGIC;
+			q  									: OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
 	 );
 end component;
 begin
-	--falta signals de escrita no RG
-	ECS:	EU_Control_System 	port map(
-												reset,
-												clock,
-												IQtoECSandADB,
-												control_InRG1, control_InRG2, control_OutRG1, control_OutRG2,
-												control_wRG1, control_wRG2,
-												control_wRT1, control_wRT2,
-												control_OutADB);
 	--Registradores da maquina
-	RG:	RegistradorGeral 		port map(
+	RG:	RegistradoresP86 		port map(
 												ADBtoRG(15 downto 8), ADBtoRG(7 downto 0),
 												control_InRG1, control_InRG2, control_OutRG1, control_OutRG2,
 												control_wRG1, control_wRG2, clock, reset,
-												RG1toADB, RG2toADB);
+												RGtoADB1, RGtoADB2);
 	--Registradores dos operandos
 	RT:	RegisterTemp 			port map(
 												ADBtoRT1, ADBtoRT2,
 												reset, control_wRT1, control_wRT2,
 												clock, 
 												RTtoADB1, RTtoADB2, RTtoULA1, RTtoULA2);
-	--Fila de Instrucoes
-	--talvez tenha reescrito algo errado.
-	IQ:	InstructionQueue 		port map(
-												reset,
-												clock,
-												control_wIQ,
-												BCLtoIQ,
-												flag_IQFull,
-												control_rIQ,
-												IQtoECSandADB,
-												flag_IQEmpty);
 	--barramento da ula
 	--IQtoECSandADB talvez cause um bug por causa do jeito que foi implementado a fila
 	ADB:	DataBus 					port map(
 												control_InADB,
 												RTtoADB1, RTtoADB2,
-												RG1toADB&RG2toADB, BRtoADB,
-												ULAtoADB, FRtoADBandULA,
-												IQtoECSandADB,
-												ADBtoRG, ADBtoBR,
-												ADBtoRT1, ADBtoRT2);
-																							
-	--barramento I/O
-	BCL:	BusControlLogic 		port map(
-													BRtoBCL,
-													ABtoBCL,
-													clock, control_wMEM, control_dMEM,
-													BCLtoIQ,
-													BCLtoBR);
-	--barramento de endereco.
-	AB: AddressBus 				port map(
-													BRtoAB, BRtoBCL,
-													ABtoBCL);
-	--registrador de segmento e pc.
-	BR: BIURegisters				port map(
-													ADBtoBR, BCLtoBR,
-													control_InBR_ADB, control_InBR_Mem, 
-													control_BRtoADB,
-													control_LogicalAddress,
-													clock, reset, control_wBR_ADB, control_wBR_Mem,
-													BRtoAB, BRtoBCL, BRtoADB
-													);
+												RGtoADB1 & RGtoADB2,
+												ULAtoADB, FRout,
+												ADBtoRG,
+												ADBtoRT1, ADBtoRT2);											
 	--ULA.											
 	ALU:	ULA 						port map(
 												clock,
-												control_OPULA,
-												RTtoULA1, RTtoULA2, FRtoADBandULA,
-												ULAtoADB, ULAtoFR
+												control_OpULA,
+												RTtoULA1, RTtoULA2, FRout,
+												ULAtoADB, FRin
 												);
 	
 	--Registrador de Flags.
 	FR: Registrador16				port map(
-												ULAtoFR,
+												FRin,
 												control_wFR,
 												reset,
 												clock,
-												FRtoADBandULA);
+												FRout);
 	saida <= ULAtoADB;
 end description;
