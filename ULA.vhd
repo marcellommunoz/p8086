@@ -6,7 +6,7 @@ entity ULA is
 	port(
 		clk: in std_logic;
 		Controle : in std_logic_vector(7 downto 0);
-		Operando1, Operando2, Flags: in std_logic_vector(15 downto 0);
+		Operando1, Operando2, Flags: in std_logic_vector(15 downto 0); --Operando1 é o Source e o Operando2 é o destination
 		SExtra, SFlags: out std_logic_vector(15 downto 0)
 		--Flags -    -    -    -    O    D    I    T    S    Z    -    A    -    P    -    C    Flags
 		--									 11   10   9    8    7    6         4         2         0
@@ -376,7 +376,10 @@ process (clk)
 	begin
 		--Flags -    -    -    -    O    D    I    T    S    Z    -    A    -    P    -    C    Flags
 		--									 11   10   9    8    7    6         4         2         0
-		if Controle = "00000010" then	 --JA
+		if Controle = "00000000" then --JMP
+			SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			Word2 <= '0';
+		elsif Controle = "00000010" then	 --JA
 			if (Flags(0) or Flags(6)) = '0' then
 				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
 				Word2 <= '0';
@@ -750,7 +753,39 @@ process (clk)
 				SFlags(5) <= '0';
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
+			
+			elsif Controle = "00101100" then --CLC
+				SFlags(0) <= '0';
+				SFlags(15 downto 1) <= Flags (15 downto 1);
+			
+			elsif Controle = "00101101" then --CMC
+				SFlags(0) <= not Flags(0);
+				SFlags(15 downto 1) <= Flags(15 downto 1);
 				
+			elsif Controle = "00101110" then --STC
+				SFlags(0) <= '1';
+				SFlags(15 downto 1) <= Flags(15 downto 1);
+
+			elsif Controle = "00101111" then --CLD
+				SFlags(10) <= '0';
+				SFlags(9 downto 0) <= Flags(9 downto 0);
+				SFlags(15 downto 11) <= Flags(15 downto 11);
+				
+			elsif Controle = "00110000" then --STD
+				SFlags(10) <= '1';
+				SFlags(9 downto 0) <= Flags(9 downto 0);
+				SFlags(15 downto 11) <= Flags(15 downto 11);
+				
+			elsif Controle = "00110001" then --CLI
+				SFlags(9) <= '0';
+				SFlags(8 downto 0) <= Flags(8 downto 0);
+				SFlags(15 downto 10) <= Flags(15 downto 10);
+				
+			elsif Controle = "00110010" then --STI
+				SFlags(9) <= '1';
+				SFlags(8 downto 0) <= Flags(8 downto 0);
+				SFlags(15 downto 10) <= Flags(15 downto 10);
+
 
 
 		end if;
