@@ -309,6 +309,7 @@ Signal SDaa : std_logic_vector(7 downto 0);
 Signal SubOperando1, SubOperando2 : std_logic_vector(7 downto 0);
 Signal SOperando1, SOperando2, Saida: std_logic_vector(15 downto 0);
 Signal Word2 : std_logic;
+Signal SJA : std_logic_vector(15 downto 0);
 Begin
 	
 SubOperando1 <= Operando1(15 downto 8);
@@ -373,7 +374,141 @@ cmp1: CMP86 port map (clk, Operando1, Operando2, Controle(6), SubOperando1, SubO
 
 process (clk)
 	begin
-		if controle = "10010000" or controle = "11010000" or controle = "00010000" or controle = "01010000"then --ADD
+		--Flags -    -    -    -    O    D    I    T    S    Z    -    A    -    P    -    C    Flags
+		--									 11   10   9    8    7    6         4         2         0
+		if Controle = "00000010" then	 --JA
+			if (Flags(0) or Flags(6)) = '0' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+				Word2 <= '0';
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+				Word2 <= '0';
+			end if;
+			
+			elsif Controle = "00000011" then -- JAE and JNC
+				if Flags(0) = '0' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+				Word2 <= '0';
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+				Word2 <= '0';
+			end if;
+			
+			elsif Controle = "00000100" then -- JB
+				if Flags(0) = '1' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+				Word2 <= '0';
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+				Word2 <= '0';
+			end if;
+			
+			elsif Controle = "00000101" then -- JBE
+				if (Flags(0) or Flags(6)) = '1' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+				Word2 <= '0';
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+				Word2 <= '0';
+			end if;
+			
+			elsif Controle = "00000111" then -- JC
+			Word2 <= '0';
+				if Flags(0) = '1' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+			end if;
+			
+			elsif Controle = "00001000" then -- JE
+			Word2 <= '0';
+				if Flags(6) = '1' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+			end if;
+			
+			elsif Controle = "00001001" then -- JG
+			Word2 <= '0';
+				if ((Flags(7) xor Flags(11)) or Flags(6)) = '0' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+			end if;
+			
+			elsif Controle = "00001010" then -- JGE
+			Word2 <= '0';
+				if (Flags(7) xor Flags(11)) = '0' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+			end if;
+			
+			elsif Controle = "00001011" then -- JLE
+			Word2 <= '0';
+				if ((Flags(7) xor Flags(11)) or Flags(6)) = '1' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+			end if;
+			
+			elsif Controle = "00001100" then -- JNE
+			Word2 <= '0';
+				if Flags(6)  = '0' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+			end if;
+			
+			elsif Controle = "00001101" then -- JNO
+			Word2 <= '0';
+				if Flags(11)  = '0' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+			end if;
+			
+			elsif Controle = "00001110" then -- JNPP
+			Word2 <= '0';
+				if Flags(2)  = '0' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+			end if;
+			
+			elsif Controle = "00001111" then -- JNS
+			Word2 <= '0';
+				if Flags(7)  = '0' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+			end if;
+			
+			elsif Controle = "10000001" then -- JO
+			Word2 <= '0';
+				if Flags(11)  = '1' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+			end if;
+			
+			elsif Controle = "10000010" then -- JP
+			Word2 <= '0';
+				if Flags(1)  = '1' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+			end if;
+			
+			elsif Controle = "10000001" then -- JS
+			Word2 <= '0';
+				if Flags(7)  = '1' then
+				SOperando1 <= Operando2; -- Operando2 quando utilizado em um desvio é o novo endereço de PC
+			else
+				SOperando1 <= Operando1; -- Operando1 quando utilizado em um desvio é endereço normal de PC
+			end if;
+			
+			elsif Controle = "10010000" or Controle = "11010000" or Controle = "00010000" or Controle = "01010000"then --ADD
 			SOperando1 <= SaidaAdd;
 			SFlags(4) <= FAdd(0);
 			SFlags(0) <= FAdd(1);
@@ -615,6 +750,8 @@ process (clk)
 				SFlags(5) <= '0';
 				SFlags(10 downto 8) <= "000";
 				SFlags(15 downto 12) <= "0000";
+				
+
 
 		end if;
 		Saida <= SOperando1;
