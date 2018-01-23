@@ -1,5 +1,5 @@
 Flow report for p8086
-Mon Jan 22 15:36:40 2018
+Mon Jan 22 18:39:27 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,7 +40,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Mon Jan 22 15:36:38 2018           ;
+; Flow Status                        ; Successful - Mon Jan 22 18:39:25 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; p8086                                           ;
 ; Top-level Entity Name              ; p8086                                           ;
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 01/22/2018 15:36:33 ;
+; Start date & time ; 01/22/2018 18:39:19 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; p8086               ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                           ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+---------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 233360584740538.151664259211424 ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 233360584740538.151665355806684 ; --            ; --          ; --         ;
 ; PARTITION_COLOR                     ; 16764057                        ; --            ; --          ; Top        ;
 ; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING           ; --            ; --          ; Top        ;
 ; PARTITION_NETLIST_TYPE              ; SOURCE                          ; --            ; --          ; Top        ;
@@ -88,9 +88,9 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:02     ; 1.0                     ; 499 MB              ; 00:00:02                           ;
-; Fitter                    ; 00:00:02     ; 1.0                     ; 575 MB              ; 00:00:02                           ;
-; Assembler                 ; 00:00:00     ; 1.0                     ; 402 MB              ; 00:00:01                           ;
+; Analysis & Synthesis      ; 00:00:02     ; 1.0                     ; 515 MB              ; 00:00:02                           ;
+; Fitter                    ; 00:00:01     ; 1.0                     ; 575 MB              ; 00:00:02                           ;
+; Assembler                 ; 00:00:01     ; 1.0                     ; 402 MB              ; 00:00:01                           ;
 ; TimeQuest Timing Analyzer ; 00:00:01     ; 1.0                     ; 384 MB              ; 00:00:01                           ;
 ; Total                     ; 00:00:05     ; --                      ; --                  ; 00:00:06                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+

@@ -1,5 +1,5 @@
 Fitter report for p8086
-Mon Jan 22 15:36:37 2018
+Mon Jan 22 18:39:24 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -54,7 +54,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                       ;
 +------------------------------------+-------------------------------------------------+
-; Fitter Status                      ; Successful - Mon Jan 22 15:36:37 2018           ;
+; Fitter Status                      ; Successful - Mon Jan 22 18:39:23 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; p8086                                           ;
 ; Top-level Entity Name              ; p8086                                           ;
@@ -766,7 +766,7 @@ Warning (169174): The Reserve All Unused Pins setting has not been specified, an
 Info (144001): Generated suppressed messages file C:/Users/Marcello/Desktop/p8086/p8086/output_files/p8086.fit.smsg
 Info: Quartus II 64-Bit Fitter was successful. 0 errors, 7 warnings
     Info: Peak virtual memory: 575 megabytes
-    Info: Processing ended: Mon Jan 22 15:36:37 2018
+    Info: Processing ended: Mon Jan 22 18:39:24 2018
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 
