@@ -6,41 +6,65 @@ entity p8086 is
   port (
 	clock 	: in std_logic;
 	reset 	: in std_logic;
-   entrada 	: in  std_logic_vector(15 downto 0);
-   saida 	: out std_logic_vector(15 downto 0)
+	wDEBUG	: in std_logic;
+   entradaAX, entradaBX, entradaCX, entradaDX, entradaSP, entradaBP, entradaDI, entradaSI	: in  std_logic_vector(15 downto 0);
+	entradaCS, entradaDS, entradaSS, entradaES, entradaIP, entradaI1, entradaI2, entradaI3	: in  std_logic_vector(15 downto 0);
+	saidaAX, saidaBX, saidaCX, saidaDX, saidaSP, saidaBP, saidaDI, saidaSI						: out  std_logic_vector(15 downto 0);
+	saidaCS, saidaDS, saidaSS, saidaES, saidaIP, saidaI1, saidaI2, saidaI3						: out  std_logic_vector(15 downto 0)
     );
 end p8086;
  --controle = sinais de escrita e leitura; selecao = escolher entre varias entradas ou saidas; entrada e saida = sinal que liga dois componente; flags = sinais que sai dos componentes.
 architecture description of p8086 is
 
 --entradas e saidas do RG
-signal	ADBtoRG																			:	std_logic_vector(15 downto 0);
-signal	RGtoADB1, RGtoADB2															:	std_logic_vector(7 downto 0);
+signal	ADBtoRG																								:	std_logic_vector(15 downto 0);
+signal	RGtoADB1, RGtoADB2																				:	std_logic_vector(7 downto 0);
+--entrada RB
+signal	ADBtoRB, BCLtoRB																					:	std_logic_vector(15 downto 0);
+--controle RB
+signal	control_InRB1, control_InRB2, control_OutRB1, control_OutRB2, control_OutRB3	:	std_logic_vector(2 downto 0);
+signal 	control_wRB1, control_wRB2																		: 	std_logic;
+signal	RBtoADB, RBtoAB, RBtoBCL																		: 	std_logic_vector(15 downto 0);
 --controle de entrada e saida do RG
-signal	control_InRG1, control_InRG2, control_OutRG1, control_OutRG2	:	std_logic_vector(4 downto 0);
+signal	control_InRG1, control_InRG2, control_OutRG1, control_OutRG2						:	std_logic_vector(3 downto 0);
 --sinal de escrita do RG
-signal	control_wRG1, control_wRG2													:	std_logic;
+signal	control_wRG1, control_wRG2																		:	std_logic;
 --entradas e saidas do RT
-signal	ADBtoRT1, ADBtoRT2, RTtoADB1, RTtoADB2, RTtoULA1, RTtoULA2		:	std_logic_vector(15 downto 0);
+signal	ADBtoRT1, ADBtoRT2, RTtoADB1, RTtoADB2, RTtoULA1, RTtoULA2							:	std_logic_vector(15 downto 0);
 --sinal de escrita do RG
-signal	control_wRT1, control_wRT2													:	std_logic;
+signal	control_wRT1, control_wRT2																		:	std_logic;
 --sinal de escrita FR
-signal	control_wFR																		:	std_logic;
+signal	control_wFR																							:	std_logic;
 --entradas e saidas do FR
-signal	FRout, FRin																		:	std_logic_vector(15 downto 0);
+signal	FRout, FRin																							:	std_logic_vector(15 downto 0);
 --controle de operacao ULA
-signal	control_OpULA																	:	std_logic_vector(7 downto 0);
+signal	control_OpULA																						:	std_logic_vector(7 downto 0);
 --saida da ULA
-signal	ULAtoADB																			: std_logic_vector(15 downto 0);
+signal	ULAtoADB																								: std_logic_vector(15 downto 0);
 --controle de entrada no ADB
-signal	control_InADB																	:	std_logic_vector(2 downto 0);
+signal	control_InADB																						:	std_logic_vector(2 downto 0);
 --entrada e saidas do ADB
 
-component RegistradoresP86  	IS PORT(
-    entrada1, entrada2   					: IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-	 wsel1, wsel2, rsel1, rsel2 			: IN STD_LOGIC_VECTOR(4 downto 0);
-    w1, w2, clk, clr  						: IN STD_LOGIC;
-    saida1, saida2   						: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+component RegistradorGeral  	IS PORT(
+    entrada1, entrada2   																				: IN 	STD_LOGIC_VECTOR(7 DOWNTO 0);
+	 wsel1, wsel2, rsel1, rsel2 																		: IN 	STD_LOGIC_VECTOR(3 downto 0);
+    w1, w2, clk, clr  																					: IN 	STD_LOGIC;
+    saida1, saida2   																					: OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	 wDEBUG																									: IN 	STD_LOGIC;
+	 eDebugAX, eDebugBX, eDebugCX, eDebugDX, eDebugSP, eDebugBP, eDebugDI, eDebugSI	: IN 	STD_LOGIC_VECTOR(15 downto 0);
+	 sDebugAX, sDebugBX, sDebugCX, sDebugDX, sDebugSP, sDebugBP, sDebugDI, sDebugSI	: OUT STD_LOGIC_VECTOR(15 downto 0)
+);
+end component;
+
+component BIURegisters  		IS PORT(
+   Entrada1, Entrada2 : in std_LOGIC_VECTOR(15 downto 0);
+    wsel1, wsel2, ControleSaida1, ControleSaida2, ControleSaida3: IN STD_LOGIC_vector(2 downto 0);
+    clr, w1, w2: IN STD_LOGIC;
+    clk : IN STD_LOGIC;
+    S1, S2 , S3	: OUT std_LOGIC_VECTOR(15 downto 0);
+	 WriteDebug : IN STD_LOGIC;
+	 EDebugCS, EDebugDS, EDebugSS, EDebugES, EDebugIP, EDebugInternal1, EDebugInternal2, EDebugInternal3 : IN STD_LOGIC_VECTOR(15 downto 0);
+	 SDebugCS, SDebugDS, SDebugSS, SDebugES, SDebugIP, SDebugInternal1, SDebugInternal2, SDebugInternal3 : OUT STD_LOGIC_VECTOR(15 downto 0)
 );
 end component;
 
@@ -80,11 +104,25 @@ component Registrador16 		IS PORT(
 end component;
 begin
 	--Registradores da maquina
-	RG:	RegistradoresP86 		port map(
+	RG:	RegistradorGeral 		port map(
 												ADBtoRG(15 downto 8), ADBtoRG(7 downto 0),
 												control_InRG1, control_InRG2, control_OutRG1, control_OutRG2,
 												control_wRG1, control_wRG2, clock, reset,
-												RGtoADB1, RGtoADB2);
+												RGtoADB1, RGtoADB2,
+												wDEBUG,
+												entradaAX, entradaBX, entradaCX, entradaDX, entradaSP, entradaBP, entradaDI, entradaSI,
+												saidaAX, saidaBX, saidaCX, saidaDX, saidaSP, saidaBP, saidaDI, saidaSI
+												);
+	RB:	BIURegisters 		port map(
+												ADBtoRB, BCLtoRB,
+												control_InRB1, control_InRB2, control_OutRB1, control_OutRB2, control_OutRB3,
+												reset, control_wRB1, control_wRB2,
+												clock,
+												RBtoADB, RBtoAB, RBtoBCL,
+												wDEBUG,
+												entradaCS, entradaDS, entradaSS, entradaES, entradaIP, entradaI1, entradaI2, entradaI3,
+												saidaCS, saidaDS, saidaSS, saidaES, saidaIP, saidaI1, saidaI2, saidaI3
+												);
 	--Registradores dos operandos
 	RT:	RegisterTemp 			port map(
 												ADBtoRT1, ADBtoRT2,
@@ -115,5 +153,4 @@ begin
 												reset,
 												clock,
 												FRout);
-	saida <= ULAtoADB;
 end description;

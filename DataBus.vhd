@@ -7,8 +7,10 @@ ENTITY DataBus IS PORT(
     TemporalReg1, TemporalReg2 	: in std_LOGIC_VECTOR(15 downto 0);
 	 GeneralReg							: in std_LOGIC_VECTOR(15 downto 0);
 	 ULA, Flags							: in std_LOGIC_VECTOR(15 downto 0);
+	 BRegisters							: in std_LOGIC_VECTOR(15 downto 0);
 	 SGeneral							: out std_LOGIC_VECTOR(15 downto 0);
-	 STemp1, STemp2					: out std_LOGIC_VECTOR(15 downto 0)
+	 STemp1, STemp2					: out std_LOGIC_VECTOR(15 downto 0);
+	 SBRegisters						: out std_LOGIC_VECTOR(15 downto 0)
 );
 END DataBus;
 
@@ -23,8 +25,10 @@ begin
 						TemporalReg2 	when "001",
 						ULA 				when "010",
 						Flags 			when "011",
+						BRegisters		when "100",
 						GeneralReg 		when others;
-	SGeneral	<=	entrada;
+	SGeneral		<=	entrada;
+	SBRegisters <= entrada;
 					  
 	with InControl select
 		STemp1	<=	"00000000"&entrada(7 downto 0)	when "100",

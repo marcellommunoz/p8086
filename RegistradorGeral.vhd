@@ -7,8 +7,8 @@ ENTITY RegistradorGeral IS PORT(
     w1, w2, clk, clr  																					: IN 	STD_LOGIC;
     saida1, saida2   																					: OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 	 wDEBUG																									: IN 	STD_LOGIC;
-	 eDebugAX, eDebugBX, eDebugCX, eDebugDX, eDebugSP, eDebugBP, eDebugDI, eDebugSI	: IN 	STD_LOGIC(15 downto 0);
-	 sDebugAX, sDebugBX, sDebugCX, sDebugDX, sDebugSP, sDebugBP, sDebugDI, sDebugSI	: OUT STD_LOGIC(15 downto 0)
+	 eDebugAX, eDebugBX, eDebugCX, eDebugDX, eDebugSP, eDebugBP, eDebugDI, eDebugSI	: IN 	STD_LOGIC_VECTOR(15 downto 0);
+	 sDebugAX, sDebugBX, sDebugCX, sDebugDX, sDebugSP, sDebugBP, sDebugDI, sDebugSI	: OUT STD_LOGIC_VECTOR(15 downto 0)
 );
 END RegistradorGeral;
 
@@ -18,7 +18,7 @@ SIGNAL entradaSP, entradaBP, entradaDI, entradaSI																: std_logic_vec
 SIGNAL saidaAH, saidaAL, saidaBH, saidaBL, saidaCH, saidaCL, saidaDH, saidaDL 						: std_logic_vector(7 downto 0);
 SIGNAL saidaSP, saidaBP, saidaDI, saidaSI																			: std_logic_vector(15 downto 0);
 SIGNAL wAH, wAL, wBH, wBL, wCH, wCL, wDH, wDL, wSP, wBP, wDI, wSI											: std_logic;
-SIGNAL selAH, selAL, selBH, selBL, selCH, selCL, selDH, selDL, selSP, selBP, selDI, selSI			: std_logic(1 downto 0);
+SIGNAL selAH, selAL, selBH, selBL, selCH, selCL, selDH, selDL, selSP, selBP, selDI, selSI			: std_logic_vector(1 downto 0);
 COMPONENT Registrador16
 	PORT(
 	d  	: IN STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -41,73 +41,81 @@ BEGIN
 
 	--AH = 0001
 	wAH	<= wDEBUG or ((	w1 AND NOT(wsel1(3)) AND NOT(wsel1(2)) AND NOT(wsel1(1)) AND wsel1(0)) 	OR (w2 AND NOT(wsel2(3)) AND NOT(wsel2(2)) AND NOT(wsel2(1)) AND wsel2(0)));
-	selAH	<=	(NOT(	w1 AND NOT(wsel1(3)) AND NOT(wsel1(2)) AND NOT(wsel1(1)) AND wsel1(0))) OR (w2 AND NOT(wsel2(3)) AND NOT(wsel2(2)) AND NOT(wsel2(1)) AND wsel2(0));
+	selAH(0)	<=	(NOT(	w1 AND NOT(wsel1(3)) AND NOT(wsel1(2)) AND NOT(wsel1(1)) AND wsel1(0))) OR (w2 AND NOT(wsel2(3)) AND NOT(wsel2(2)) AND NOT(wsel2(1)) AND wsel2(0));
+	selAH(1) <= wDEBUG;
 	with selAH select 
-		entradaAH <= 	entrada1 when '0',
-							entrada2 when '1',
+		entradaAH <= 	entrada1 when "00",
+							entrada2 when "01",
 							eDebugAX(15 downto 8) when others;
     AH: Registrador8 port map(entradaAH, wAH, clr, clk, saidaAH);
 	 
 	--AL = 0000
 	wAL	<= wDEBUG or ((	w1 AND NOT(wsel1(3)) AND NOT(wsel1(2)) AND NOT(wsel1(1)) AND NOT(wsel1(0))) OR (w2 AND NOT(wsel2(3)) AND NOT(wsel2(2)) AND NOT(wsel2(1)) AND NOT(wsel2(0))));
-	selAL	<=	(NOT(	w1 AND NOT(wsel1(3)) AND NOT(wsel1(2)) AND NOT(wsel1(1)) AND NOT(wsel1(0))))OR (w2 AND NOT(wsel2(3)) AND NOT(wsel2(2)) AND NOT(wsel2(1)) AND NOT(wsel2(0)));
+	selAL(0)	<=	(NOT(	w1 AND NOT(wsel1(3)) AND NOT(wsel1(2)) AND NOT(wsel1(1)) AND NOT(wsel1(0))))OR (w2 AND NOT(wsel2(3)) AND NOT(wsel2(2)) AND NOT(wsel2(1)) AND NOT(wsel2(0)));
+	selAL(1) <= wDEBUG;
 	with selAL select 
-		entradaAL <= 	entrada1 when '0',
-							entrada2 when '1',
+		entradaAL <= 	entrada1 when "00",
+							entrada2 when "01",
 							eDebugAX(7 downto 0) when others;
     AL: Registrador8 port map(entradaAL, wAL, clr, clk, saidaAL);
 	 
 	 --BH = 0011
 	 wBH	<= wDEBUG or (( w1 AND NOT(wsel1(3)) AND NOT(wsel1(2)) AND wsel1(1) AND wsel1(0)) 	OR (w2 AND NOT(wsel2(3)) AND NOT(wsel2(2)) AND wsel2(1) AND wsel2(0)));
-	selBH	<=	(NOT(	w1 AND NOT(wsel1(3)) AND NOT(wsel1(2)) AND wsel1(1) AND wsel1(0))) 	OR (w2 AND NOT(wsel2(3)) AND NOT(wsel2(2)) AND wsel2(1) AND wsel2(0));
+	selBH(0)	<=	(NOT(	w1 AND NOT(wsel1(3)) AND NOT(wsel1(2)) AND wsel1(1) AND wsel1(0))) 	OR (w2 AND NOT(wsel2(3)) AND NOT(wsel2(2)) AND wsel2(1) AND wsel2(0));
+	selBH(1) <= wDEBUG;
 	with selBH select 
-		entradaBH <= 	entrada1 when '0',
-							entrada2 when '1',
+		entradaBH <= 	entrada1 when "00",
+							entrada2 when "01",
 							eDebugBX(15 downto 8) when others;
     BH: Registrador8 port map(entradaBH, wBH, clr, clk, saidaBH);
 	 
 	 --BL = 0010
 	 wBL	<= wDEBUG or (( w1 AND NOT(wsel1(3)) AND NOT(wsel1(2)) AND wsel1(1) AND NOT(wsel1(0))) 	OR (w2 AND NOT(wsel2(3)) AND NOT(wsel2(2)) AND wsel2(1) AND NOT(wsel2(0))));
-	selBL	<=	(NOT(	w1 AND NOT(wsel1(3)) AND NOT(wsel1(2)) AND wsel1(1) AND NOT(wsel1(0)))) OR (w2 AND NOT(wsel2(3)) AND NOT(wsel2(2)) AND wsel2(1) AND NOT(wsel2(0)));
+	selBL(0)	<=	(NOT(	w1 AND NOT(wsel1(3)) AND NOT(wsel1(2)) AND wsel1(1) AND NOT(wsel1(0)))) OR (w2 AND NOT(wsel2(3)) AND NOT(wsel2(2)) AND wsel2(1) AND NOT(wsel2(0)));
+	selBL(1)	<=	wDEBUG;
 	with selBL select 
-		entradaBL <= 	entrada1 when '0',
-							entrada2 when '1',
+		entradaBL <= 	entrada1 when "00",
+							entrada2 when "01",
 							eDebugBX(7 downto 0) when others;
     BL: Registrador8 port map(entradaBL, wBL, clr, clk, saidaBL);
 	 
 	 --CH = 0101
 	 wCH	<= wDEBUG or ((	w1 AND NOT(wsel1(3)) AND wsel1(2) AND NOT(wsel1(1)) AND wsel1(0)) 	OR (w2 AND NOT(wsel2(3)) AND wsel2(2) AND NOT(wsel2(1)) AND wsel2(0)));
-	selCH	<=	(NOT(	w1 AND NOT(wsel1(3)) AND wsel1(2) AND NOT(wsel1(1)) AND wsel1(0))) 	OR (w2 AND NOT(wsel2(3)) AND wsel2(2) AND NOT(wsel2(1)) AND wsel2(0));
+	selCH(0)	<=	(NOT(	w1 AND NOT(wsel1(3)) AND wsel1(2) AND NOT(wsel1(1)) AND wsel1(0))) 	OR (w2 AND NOT(wsel2(3)) AND wsel2(2) AND NOT(wsel2(1)) AND wsel2(0));
+	selCH(1) <= wDEBUG;
 	with selCH select 
-		entradaCH <= 	entrada1 when '0',
-							entrada2 when '1',
+		entradaCH <= 	entrada1 when "00",
+							entrada2 when "01",
 							eDebugCX(15 downto 8) when others;
     CH: Registrador8 port map(entradaCH, wCH, clr, clk, saidaCH);
 	 
 	 --CL = 0100
 	 wCL	<= wDEBUG or ((	w1 AND NOT(wsel1(3)) AND wsel1(2) AND NOT(wsel1(1)) AND NOT(wsel1(0))) 	OR (w2 AND NOT(wsel2(3)) AND wsel2(2) AND NOT(wsel2(1)) AND NOT(wsel2(0))));
-	selCL	<=	(NOT(	w1 AND NOT(wsel1(3)) AND wsel1(2) AND NOT(wsel1(1)) AND NOT(wsel1(0)))) OR (w2 AND NOT(wsel2(3)) AND wsel2(2) AND NOT(wsel2(1)) AND NOT(wsel2(0)));
+	selCL(0)	<=	(NOT(	w1 AND NOT(wsel1(3)) AND wsel1(2) AND NOT(wsel1(1)) AND NOT(wsel1(0)))) OR (w2 AND NOT(wsel2(3)) AND wsel2(2) AND NOT(wsel2(1)) AND NOT(wsel2(0)));
+	selCL(1) <= wDEBUG;
 	with selCL select 
-		entradaCL <= 	entrada1 when '0',
-							entrada2 when '1',
+		entradaCL <= 	entrada1 when "00",
+							entrada2 when "01",
 							eDebugCX(7 downto 0) when others;
     CL: Registrador8 port map(entradaCL, wCL, clr, clk, saidaCL);
 	 
 	 --DH = 0111
 	 wDH	<= wDEBUG or ((	w1 AND NOT(wsel1(3)) AND wsel1(2) AND wsel1(1) AND wsel1(0)) 	OR (w2 AND NOT(wsel2(3)) AND wsel2(2) AND wsel2(1) AND wsel2(0)));
-	selDH	<=	(NOT(	w1 AND NOT(wsel1(3)) AND wsel1(2) AND wsel1(1) AND wsel1(0))) 	OR (w2 AND NOT(wsel2(3)) AND wsel2(2) AND wsel2(1) AND wsel2(0));
+	selDH(0)	<=	(NOT(	w1 AND NOT(wsel1(3)) AND wsel1(2) AND wsel1(1) AND wsel1(0))) 	OR (w2 AND NOT(wsel2(3)) AND wsel2(2) AND wsel2(1) AND wsel2(0));
+	selDH(1) <= wDEBUG; 
 	with selDH select 
-		entradaDH <= 	entrada1 when '0',
-							entrada2 when '1',
+		entradaDH <= 	entrada1 when "00",
+							entrada2 when "01",
 							eDebugDX(15 downto 8) when others;
     DH: Registrador8 port map(entradaDH, wDH, clr, clk, saidaDH);
 	 
 	 --DL = 0110
 	 wDL	<= wDEBUG or ((	w1 AND NOT(wsel1(3)) AND wsel1(2) AND wsel1(1) AND NOT(wsel1(0))) 	OR (w2 AND NOT(wsel2(3)) AND wsel2(2) AND wsel2(1) AND NOT(wsel2(0))));
-	selDL	<=	(NOT(	w1 AND NOT(wsel1(3)) AND wsel1(2) AND wsel1(1) AND NOT(wsel1(0)))) 	OR (w2 AND NOT(wsel2(3)) AND wsel2(2) AND wsel2(1) AND NOT(wsel2(0)));
+	selDL(0)	<=	(NOT(	w1 AND NOT(wsel1(3)) AND wsel1(2) AND wsel1(1) AND NOT(wsel1(0)))) 	OR (w2 AND NOT(wsel2(3)) AND wsel2(2) AND wsel2(1) AND NOT(wsel2(0)));
+	selDL(1) <= wDEBUG;
 	with selDL select 
-		entradaDL <= 	entrada1 when '0',
-							entrada2 when '1',
+		entradaDL <= 	entrada1 when "00",
+							entrada2 when "01",
 							eDebugDX(7 downto 0) when others;
     DL: Registrador8 port map(entradaDL, wDL, clr, clk, saidaDL);
 	 
@@ -117,29 +125,29 @@ BEGIN
 	 --DX = 1011
 	 
 	 --SP = 1100
-	wSP			<= wDEBUG or ((w1 AND wsel1(3) AND wsel1(2) AND NOT(wsel1(1)) AND NOT(wsel1(0)))AND (w2 AND wsel2(3) AND wsel2(2) AND NOT(wsel2(1)) AND NOT(wsel2(0))));
-	with selSP select 
+	wSP <= wDEBUG or ((w1 AND wsel1(3) AND wsel1(2) AND NOT(wsel1(1)) AND NOT(wsel1(0)))AND (w2 AND wsel2(3) AND wsel2(2) AND NOT(wsel2(1)) AND NOT(wsel2(0))));
+	with wDEBUG select 
 		entradaSP <= 	entrada2&entrada1 when '0',
 							eDebugSP 			when others;
    SP: Registrador16 port map(entradaSP, wSP, clr, clk, saidaSP);
 	 
 	--BP = 1101
 	wBP			<= wDEBUG or ((w1 AND wsel1(3) AND wsel1(2) AND NOT(wsel1(1)) AND wsel1(0)) 		AND (w2 AND wsel2(3) AND wsel2(2) AND NOT(wsel2(1)) AND wsel2(0)));
-	with selBP select 
+	with wDEBUG select 
 		entradaBP <= 	entrada2&entrada1 when '0',
 							eDebugBP 			when others;
    BP: Registrador16 port map(entradaBP, wBP, clr, clk, saidaBP);
 	 
 	 --SI = 1110
 	wSI			<= wDEBUG or (((w1 AND wsel1(3) AND wsel1(2) AND wsel1(1) AND NOT(wsel1(0))) 		AND (w2 AND wsel2(3) AND wsel2(2) AND wsel2(1) AND NOT(wsel2(0)))));
-	with selSI select 
+	with wDEBUG select 
 		entradaSI <= 	entrada2&entrada1 when '0',
 							eDebugSI 			when others;
    SI: Registrador16 port map(entradaSI, wSI, clr, clk, saidaSI);
 	 
 	 --DI = 1111
 	wDI			<= wDEBUG or ((w1 AND wsel1(3) AND wsel1(2) AND wsel1(1) AND wsel1(0)) 			AND (w2 AND wsel2(3) AND wsel2(2) AND wsel2(1) AND wsel2(0)));
-	with selDI select 
+	with wDEBUG select 
 		entradaDI <= 	entrada2&entrada1 when '0',
 							eDebugDI 			when others;
    DI: Registrador16 port map(entradaDI, wDI, clr, clk, saidaDI);
@@ -181,7 +189,7 @@ BEGIN
 					saidaBP(15 downto 8) when "1101",
 					saidaSI(15 downto 8) when "1110",
 					saidaDI(15 downto 8) when "1111";
-					
+	
 	sDebugAX <= saidaAH&saidaAL;
 	sDebugBX <= saidaBH&saidaBL;
 	sDebugCX <= saidaCH&saidaDL;

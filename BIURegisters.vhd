@@ -3,11 +3,14 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
 ENTITY BIURegisters IS PORT(
-    Entrada1, Entrada2 , EDebugCS, EDebugDS, EDebugSS, EDebugES, EDebugIP, EDebugInternal1, EDebugInternal2, EDebugInternal3: in std_LOGIC_VECTOR(15 downto 0);
+    Entrada1, Entrada2 : in std_LOGIC_VECTOR(15 downto 0);
     wsel1, wsel2, ControleSaida1, ControleSaida2, ControleSaida3: IN STD_LOGIC_vector(2 downto 0);
-    clr, w1, w2, WriteDebug: IN STD_LOGIC;
+    clr, w1, w2: IN STD_LOGIC;
     clk : IN STD_LOGIC;
-    S1, S2 , S3, SDebugCS, SDebugDS, SDebugSS, SDebugES, SDebugIP, SDebugInternal1, SDebugInternal2, SDebugInternal3: out std_LOGIC_VECTOR(15 downto 0)
+    S1, S2 , S3	: OUT std_LOGIC_VECTOR(15 downto 0);
+	 WriteDebug : IN STD_LOGIC;
+	 EDebugCS, EDebugDS, EDebugSS, EDebugES, EDebugIP, EDebugInternal1, EDebugInternal2, EDebugInternal3 : IN STD_LOGIC_VECTOR(15 downto 0);
+	 SDebugCS, SDebugDS, SDebugSS, SDebugES, SDebugIP, SDebugInternal1, SDebugInternal2, SDebugInternal3 : OUT STD_LOGIC_VECTOR(15 downto 0)
 );
 END BIURegisters;
 
