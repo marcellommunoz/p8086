@@ -3,14 +3,16 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
 ENTITY BIURegisters IS PORT(
-    Entrada1, Entrada2 : in std_LOGIC_VECTOR(15 downto 0);
-    wsel1, wsel2, ControleSaida1, ControleSaida2, ControleSaida3: IN STD_LOGIC_vector(2 downto 0);
-    clr, w1, w2: IN STD_LOGIC;
-    clk : IN STD_LOGIC;
-    S1, S2 , S3	: OUT std_LOGIC_VECTOR(15 downto 0);
-	 WriteDebug : IN STD_LOGIC;
-	 EDebugCS, EDebugDS, EDebugSS, EDebugES, EDebugIP, EDebugInternal1, EDebugInternal2, EDebugInternal3 : IN STD_LOGIC_VECTOR(15 downto 0);
-	 SDebugCS, SDebugDS, SDebugSS, SDebugES, SDebugIP, SDebugInternal1, SDebugInternal2, SDebugInternal3 : OUT STD_LOGIC_VECTOR(15 downto 0)
+    Entrada1, Entrada2 																												: IN std_LOGIC_VECTOR(15 downto 0);
+    wsel1, wsel2, ControleSaida1, ControleSaida2, ControleSaida3														: IN STD_LOGIC_vector(2 downto 0);
+    clr, w1, w2																														: IN STD_LOGIC;
+    clk 																																	: IN STD_LOGIC;
+    S1, S2 , S3																														: OUT std_LOGIC_VECTOR(15 downto 0);
+	 WriteDebug 																														: IN STD_LOGIC;
+	 EDebugCS, EDebugDS, EDebugSS, EDebugES, EDebugIP, EDebugInternal1, EDebugInternal2, EDebugInternal3 	: IN STD_LOGIC_VECTOR(15 downto 0);
+	 SDebugCS, SDebugDS, SDebugSS, SDebugES, SDebugIP, SDebugInternal1, SDebugInternal2, SDebugInternal3 	: OUT STD_LOGIC_VECTOR(15 downto 0);
+	 IPppw																																: IN std_logic;
+	 IPpp																																	: IN std_logic_vector(15 downto 0)
 );
 END BIURegisters;
 
@@ -19,7 +21,8 @@ ARCHITECTURE comportamento OF BIURegisters IS
 	signal EntradaCS, EntradaDS, EntradaSS, EntradaES, EntradaIP, EntradaInternal1, EntradaInternal2, EntradaInternal3: STD_LOGIC_VECTOR(15 DOWNTO 0);
 	signal WCS, WDS, WSS, WES, WIP, WInternal1, WInternal2, WInternal3: std_LOGIC;
 	signal WcsOrWAll, WdsOrWAll, WssOrWAll, WesOrWAll, WipOrWAll, Winternal1OrWAll, Winternal2OrWAll, Winternal3OrWAll: std_LOGIC;
-	signal selCS, selDS , selSS , selES , selIP , selInternal1 , selInternal2 , selInternal3 : std_LOGIC_vector(1 downto 0);
+	signal selCS, selDS , selSS , selES, selInternal1 , selInternal2 , selInternal3 : std_LOGIC_vector(1 downto 0);
+	signal selIP	: std_logic_vector(2 downto 0);
 	
 component Registrador16 IS PORT(
     d   : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -81,13 +84,16 @@ begin
 	--011
 	selIP(0) <= (NOT(w1 AND ( wsel1(2)) and not (wsel1(1)) AND NOT(wsel1(0)))) OR (w2 AND ( wsel2(2)) and not(wsel2(1)) AND NOT(wsel2(0)));
 	selIP(1) <= WriteDebug;
+	selIP(2) <= IPppw;
    with selIP select 
-        EntradaIP <=   entrada1 when "00",
-                       entrada2 when "01",
-							  EDebugIP when others;
+        EntradaIP <=   entrada1 when "000",
+                       entrada2 when "001",
+							  EDebugIP when "010",
+							  EDebugIP when "011",
+							  IPpp when others;
 							  
 	WIP<=  (w1 and wsel1(2) and (not Wsel1(1)) and (not Wsel1(0))) or(w2 and wsel2(2) and (not Wsel2(1)) and (not Wsel2(0)));
-	WipOrWAll <= WIP or  WriteDebug;
+	WipOrWAll <= WIP or  WriteDebug or IPppw;
 	RegIP : Registrador16 port map (EntradaIP, WipOrWAll, clr, clk, IP);
 	--100
 	
