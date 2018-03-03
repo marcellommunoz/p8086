@@ -77,7 +77,7 @@ begin
 				when arithmetic161 =>
 
 					if entradaInstrucao(7 downto 4) = "0000" then
-						saidaRG1 <= "1000";
+						saidaRG1 <= "1000"; 
 						elsif entradaInstrucao(7 downto 4) = "0001" then
 						saidaRG1 <= "1001";
 						elsif entradaInstrucao(7 downto 4) = "0010" then
@@ -111,9 +111,7 @@ begin
 						elsif entradaInstrucao(7 downto 4) = "0111" then
 						saidaRG2<= "1111";
 					end if;
-					
-					
-											
+								
 						saidaDataBUS <= "000";
 						LeituraQueue <= '0';
 						destino <= entradaInstrucao(7 downto 4);
@@ -156,13 +154,11 @@ begin
 							elsif entradaInstrucao(3 downto 0) = "0111" then
 							saidaRG2<= "1111";
 						end if;
-						
 											
 						saidaDataBUS <= "001";
 						sinalEscritaRT1 <= '0';
 						sinalEscritaRT2 <= '1'; --sinal para escrever no regitrador temporario 2
-						
-						state <= exe;
+						state <= resposta;
 
 				when resposta =>
 					sinalEscritaRG1 <= '1';
@@ -214,6 +210,7 @@ begin
 					sinalEscritaRT1 <= '0';
 					sinalEscritaRT2 <= '0';
 					IncrementaPC <= '1';
+					state <= boot;
 					
 
 				when exe => --Parte final da instruçao 
