@@ -12,6 +12,8 @@ entity p8086 is
 	saidaAX, saidaBX, saidaCX, saidaDX, saidaSP, saidaBP, saidaDI, saidaSI						: out std_logic_vector(15 downto 0);
 	saidaCS, saidaDS, saidaSS, saidaES, saidaIP, saidaI1, saidaI2, saidaI3						: out std_logic_vector(15 downto 0);
 	saidaIQ, saidaMem							 																	: out std_logic_vector(7 downto 0);
+	SControlInRG1, SControlInRG2,	SControlOutRG1,	SControlOutRG2									: out std_logic_vector(3 downto 0);--debug
+	SControlwRG1, 	SControlwRG2, 	SControlwRT1,	SControlwRT2										: out std_logic;--debug
 	saidaQueueVazia, saidaQueueW, saidaQueueR, saidaQueueFull										: out std_logic
     );
 end p8086;
@@ -224,6 +226,15 @@ begin
 												control_OpULA,
 												control_OutRB1
 												);
+	SControlInRG1 <= Control_InRG1;
+	SControlInRG2 <= Control_InRG2;
+	SControlOutRG1 <= Control_OutRG1;
+	SControlOutRG2 <= Control_OutRG2;
+	SControlwRG1 <= Control_wRG1;
+	SControlwRG2 <= Control_wrG2;
+	SControlwRT1 <= Control_wRT1;
+	SControlwRT2 <= Control_wrT2;
+				 
 	--Registradores de proposito geral
 	RG:	RegistradorGeral 		port map(
 												ADBtoRG(15 downto 8), ADBtoRG(7 downto 0),
