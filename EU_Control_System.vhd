@@ -46,6 +46,7 @@ begin
 		begin
 		if (reset = '0') then
 			state <= boot;
+			LeituraQueue <= '0';
 		elsif clk'event and clk = '1' then
 			case state is
 				when boot =>
@@ -63,6 +64,7 @@ begin
 						--saidaRG1 <= "1000";
 						instrucaoAtual := entradaInstrucao;
 						instrucaoReal <= "00010000";
+						sinalEscritaRT1 <= '1'; --sinal para escrever no regitrador temporario 1 
 						if(QueueVazia = '1') then
 							state <= fetch;
 						else
@@ -120,11 +122,13 @@ begin
 							state <= arithmetic8;
 						end if;
 					 elsif(instrucao = "00000000") then
+						LeituraQueue <= '0';
 						state <= boot;
 					end if;
 					
 				when arithmetic161 =>
-
+				
+					LeituraQueue <= '0';
 					if entradaInstrucao(7 downto 4) = "0000" then
 						saidaRG1 <= "1000"; 
 						elsif entradaInstrucao(7 downto 4) = "0001" then
@@ -144,13 +148,13 @@ begin
 					end if;
 					
 					if entradaInstrucao(7 downto 4) = "0000" then
-						saidaRG2<= "1000";
+						saidaRG2<= "1000";--AX
 						elsif entradaInstrucao(7 downto 4) = "0001" then
-						saidaRG2<= "1001";
+						saidaRG2<= "1001";--BX
 						elsif entradaInstrucao(7 downto 4) = "0010" then
-						saidaRG2<= "1010";
+						saidaRG2<= "1010";--CX
 						elsif entradaInstrucao(7 downto 4) = "0011" then
-						saidaRG2<= "1011";
+						saidaRG2<= "1011";--DX
 						elsif entradaInstrucao(7 downto 4) = "0100" then
 						saidaRG2<= "1100";
 						elsif entradaInstrucao(7 downto 4) = "0101" then
@@ -161,13 +165,14 @@ begin
 						saidaRG2<= "1111";
 					end if;
 								
-						saidaDataBUS <= "000";
-						LeituraQueue <= '0';
+						saidaDataBUS <= "111";
+						
 						destino <= entradaInstrucao(7 downto 4);
 						sinalEscritaRT1 <= '1'; --sinal para escrever no regitrador temporario 1 
 						state <= arithmetic162;
 				
 				when arithmetic162 =>
+						LeituraQueue <= '0';
 						if entradaInstrucao(3 downto 0) = "0000" then
 							saidaRG1 <= "1000";
 							elsif entradaInstrucao(3 downto 0) = "0001" then
@@ -204,56 +209,14 @@ begin
 							saidaRG2<= "1111";
 						end if;
 											
-						saidaDataBUS <= "001";
+						saidaDataBUS <= "111";
 						sinalEscritaRT1 <= '0';
 						sinalEscritaRT2 <= '1'; --sinal para escrever no regitrador temporario 2
-						state <= resposta;
+						state <= exe;
 
-				when resposta =>
-					sinalEscritaRG1 <= '1';
-					sinalEscritaRG2 <= '1';
-					
-					if destino = "0000" then
-							EntradaRG1<= "0000";
-							elsif destino = "0001" then
-							EntradaRG1<= "0010";
-							elsif destino = "0010" then
-							EntradaRG1<= "0100";
-							elsif destino = "0011" then
-							EntradaRG1<= "0110";
-							elsif destino = "0100" then
-							EntradaRG1<= "1000";
-							elsif destino = "0101" then
-							EntradaRG1<= "1101";
-							elsif destino = "0110" then
-							EntradaRG1<= "1110";
-							elsif destino = "0111" then
-							EntradaRG1<= "1111";
-						end if;
-						
-						if destino = "0000" then
-							EntradaRG2<= "0001";
-							elsif destino = "0001" then
-							EntradaRG2<= "0011";
-							elsif destino = "0010" then
-							EntradaRG2<= "0101";
-							elsif destino = "0011" then
-							EntradaRG2<= "0111";
-							elsif destino = "0100" then
-							EntradaRG2<= "1001";
-							elsif destino = "0101" then
-							EntradaRG2<= "1100";
-							elsif destino = "0110" then
-							EntradaRG2<= "1110";
-							elsif destino = "0111" then
-							EntradaRG2<= "1111";
-						end if;
 				
-				
-					SaidaDataBUS <= "010";
-					state <= final;
-					
 				when arithmetic8 =>
+					LeituraQueue <= '0';
 					if entradaInstrucao(7 downto 4) = "0000" then
 						saidaRG1 <= "0000"; 
 						elsif entradaInstrucao(7 downto 4) = "0001" then
@@ -294,23 +257,69 @@ begin
 						LeituraQueue <= '0';
 						destino <= entradaInstrucao(7 downto 4);
 						sinalEscritaRT1 <= '1'; --sinal para escrever no regitrador temporario 1 
-						state <= resposta;
+						state <= exe;
+						
+			when exe => --Parte final da instruçao 
+					LeituraQueue <= '0';
+					OPULA <= instrucaoReal;-- passa a instruçao pra ula
+					WFlag <= '1'; --habilita escrita no registrador de flag
+					--sinalEscritaRT2 <= '0';
+					state <= resposta;
+					
+			when resposta =>
+					sinalEscritaRG1 <= '1';
+					sinalEscritaRG2 <= '1';
+					LeituraQueue <= '0';
+					if destino = "0000" then
+							EntradaRG1<= "0000";
+							elsif destino = "0001" then
+							EntradaRG1<= "0010";
+							elsif destino = "0010" then
+							EntradaRG1<= "0100";
+							elsif destino = "0011" then
+							EntradaRG1<= "0110";
+							elsif destino = "0100" then
+							EntradaRG1<= "1000";
+							elsif destino = "0101" then
+							EntradaRG1<= "1101";
+							elsif destino = "0110" then
+							EntradaRG1<= "1110";
+							elsif destino = "0111" then
+							EntradaRG1<= "1111";
+						end if;
+						
+						if destino = "0000" then
+							EntradaRG2<= "0001";
+							elsif destino = "0001" then
+							EntradaRG2<= "0011";
+							elsif destino = "0010" then
+							EntradaRG2<= "0101";
+							elsif destino = "0011" then
+							EntradaRG2<= "0111";
+							elsif destino = "0100" then
+							EntradaRG2<= "1001";
+							elsif destino = "0101" then
+							EntradaRG2<= "1100";
+							elsif destino = "0110" then
+							EntradaRG2<= "1110";
+							elsif destino = "0111" then
+							EntradaRG2<= "1111";
+						end if;
+				
+				
+					SaidaDataBUS <= "010";
+					state <= final;
 					
 				when final =>
+					LeituraQueue <= '0';
 					sinalEscritaRG1 <= '0'; 
 					sinalEscritaRG2 <= '0';
 					sinalEscritaRT1 <= '0';
 					sinalEscritaRT2 <= '0';
 					state <= boot;
-					
-
-				when exe => --Parte final da instruçao 
 				
-					OPULA <= instrucaoReal;-- passa a instruçao pra ula
-					WFlag <= '1'; --habilita escrita no registrador de flag
-					
-					state <= resposta;
 				when readin =>
+					LeituraQueue <= '0';
 					--AAA
 					if(instrucaoAtual = "00000001") then
 						--AL
@@ -321,10 +330,12 @@ begin
 						saidaDataBUS 	<= "000";
 					end if;
 				when op =>
+					LeituraQueue <= '0';
 					if(instrucaoAtual = "00000001") then
 						
 					end if;
 				when writeback =>
+					LeituraQueue <= '0';
 				
 			end case;
 		end if;
