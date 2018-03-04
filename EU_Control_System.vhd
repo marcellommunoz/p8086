@@ -256,7 +256,7 @@ begin
 						elsif entradaInstrucao(7 downto 4) = "0010" then
 						saidaRG1 <= "0010";
 						elsif entradaInstrucao(7 downto 4) = "0011" then
-						saidaRG1 <= "00011";
+						saidaRG1 <= "0011";
 						elsif entradaInstrucao(7 downto 4) = "0100" then
 						saidaRG1 <= "0100";
 						elsif entradaInstrucao(7 downto 4) = "0101" then

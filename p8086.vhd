@@ -15,7 +15,7 @@ entity p8086 is
 end p8086;
  --controle = sinais de escrita e leitura; selecao = escolher entre varias entradas ou saidas; entrada e saida = sinal que liga dois componente; flags = sinais que sai dos componentes.
 architecture description of p8086 is
-
+signal	IPatual																								:	std_logic_vector(15 downto 0);
 --entradas e saidas do RG
 signal	ADBtoRG																								:	std_logic_vector(15 downto 0);
 signal	RGtoADB1, RGtoADB2																				:	std_logic_vector(7 downto 0);
@@ -24,6 +24,7 @@ signal	ADBtoRB, BCLtoRB																					:	std_logic_vector(15 downto 0);
 signal	control_InRB1, control_InRB2, control_OutRB1, control_OutRB2, control_OutRB3	:	std_logic_vector(2 downto 0);
 signal 	control_wRB1, control_wRB2																		: 	std_logic;
 signal	RBtoADB, RBtoAB, RBtoBCL																		: 	std_logic_vector(15 downto 0);
+signal	control_IPpp																						:	std_logic;
 --sinais AB
 signal 	ABtoBCL																								:	std_logic_vector(19 downto 0);
 signal 	IPpp																									:	std_logic_vector(15 downto 0);
@@ -138,6 +139,7 @@ component EU_Control_System 	IS PORT(
 			 WFlag													: out std_logic;
 			 OPULA													: out std_logic_vector(7 downto 0);
 			 saidaBR1												: out std_logic_vector(2 downto 0)
+			 );
 end component;
 component AddressBus				IS PORT(
 			SegmentBase, Offset 	: IN STD_LOGIC_VECTOR(15 downto 0);
@@ -156,7 +158,7 @@ component MemoriaSimples 		IS PORT(
 			SaidaQueue												: OUT std_LOGIC_VECTOR(7 downto 0);
 			SaidaRegs												: OUT std_LOGIC_VECTOR(15 downto 0)
 		);
-end component
+end component;
 begin
 	--Registradores utilizados para acesso a memoria
 	RB:	BIURegisters 			port map(
@@ -167,13 +169,13 @@ begin
 												RBtoADB, RBtoAB, RBtoBCL,
 												wDEBUG,
 												entradaCS, entradaDS, entradaSS, entradaES, entradaIP, entradaI1, entradaI2, entradaI3,
-												saidaCS, saidaDS, saidaSS, saidaES, saidaIP, saidaI1, saidaI2, saidaI3,
+												saidaCS, saidaDS, saidaSS, saidaES, IPatual, saidaI1, saidaI2, saidaI3,
 												control_IPpp,
 												IPpp);
 	--Gera o endereço para memoria
 	AB:	AddressBus				port map(
 												RBtoAB, RBtoBCL,
-												saidaIP,
+												IPatual,
 												ABtoBCL,
 												IPpp);
 	--Memoria
@@ -186,7 +188,7 @@ begin
 												control_IPpp,
 												Control_OutRB2, Control_OutRB3,
 												BCLtoIQ,
-												BCLtoRB,
+												BCLtoRB
 												);
 	--Fila de instructionQueue
 	IQ:	InstructionQueue		port map(
@@ -197,7 +199,7 @@ begin
 												control_QueueFull,
 												control_rQueue,
 												IQtoECS,
-												control_QueueEmpty,
+												control_QueueEmpty
 												);
 	--Controle do processador
 	ECS:	EU_Control_System		port map(
@@ -212,7 +214,7 @@ begin
 												control_wRT1, control_wRT2,
 												control_wFR,
 												control_OpULA,
-												control_OutRB1,
+												control_OutRB1
 												);
 	--Registradores de proposito geral
 	RG:	RegistradorGeral 		port map(
@@ -253,4 +255,5 @@ begin
 												reset,
 												clock,
 												FRout);
+	saidaIP <= IPAtual;
 end description;
