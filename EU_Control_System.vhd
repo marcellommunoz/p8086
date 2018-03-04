@@ -33,7 +33,7 @@ architecture description of EU_Control_System is
 	TYPE State_type IS (fetch, readin, writeback, op, boot, arithmetic161, arithmetic162, arithmetic8, exe, resposta, final);
 	SIGNAL state : State_Type;
 	signal destino : std_logic_vector(3 downto 0);
-	signal instrucaoReal : std_logic_vector(7 downto 0);
+	signal instrucaoReal , instrucao: std_logic_vector(7 downto 0);
 --controle sub add
 --instrucao 8 bits
 
@@ -53,11 +53,14 @@ begin
 					state <= boot;
 				else
 					LeituraQueue <= '1'; --sinal para ler instruçao da queue
+					instrucao <= entradaInstrucao;
 					state <= fetch;
 				end if;
 				
 				when fetch =>
-					if (entradaInstrucao = "00000010" ) then --ADD registrador registrador 16
+					
+					if (instrucao = "00000010" ) then --ADD registrador registrador 16
+						--saidaRG1 <= "1000";
 						instrucaoAtual := entradaInstrucao;
 						instrucaoReal <= "00010000";
 						if(QueueVazia = '1') then
@@ -67,7 +70,7 @@ begin
 							state <= arithmetic161;
 						end if;
 						
-					elsif(entradaInstrucao = "00000011") then -- AND registrador registrador 16
+					elsif(instrucao = "00000011") then -- AND registrador registrador 16
 						instrucaoAtual := entradaInstrucao;
 						instrucaoReal <= "00011101";
 						if(QueueVazia = '1') then
@@ -77,7 +80,7 @@ begin
 							state <= arithmetic161;
 						end if;
 						
-					elsif(entradaInstrucao = "00000100") then -- OR registrador registrador 16
+					elsif(instrucao = "00000100") then -- OR registrador registrador 16
 						instrucaoAtual := entradaInstrucao;
 						instrucaoReal <= "00011110";
 						if(QueueVazia = '1') then
@@ -87,7 +90,7 @@ begin
 							state <= arithmetic161;
 						end if;
 						
-					elsif(entradaInstrucao = "00000101") then -- SUB registrador registrador 16
+					elsif(instrucao = "00000101") then -- SUB registrador registrador 16
 						instrucaoAtual := entradaInstrucao;
 						instrucaoReal <= "10010000";
 						if(QueueVazia = '1') then
@@ -97,7 +100,7 @@ begin
 							state <= arithmetic161;
 						end if;
 					
-					elsif(entradaInstrucao = "00000110") then -- XOR registrador registrador 16
+					elsif(instrucao = "00000110") then -- XOR registrador registrador 16
 						instrucaoAtual := entradaInstrucao;
 						instrucaoReal <= "00011100";
 						if(QueueVazia = '1') then
@@ -107,7 +110,7 @@ begin
 							state <= arithmetic161;
 						end if;
 						
-					elsif(entradaInstrucao = "00000111") then -- ADD registrador registrador 8
+					elsif(instrucao = "00000111") then -- ADD registrador registrador 8
 						instrucaoAtual := entradaInstrucao;
 						instrucaoReal <= "01010000";
 						if(QueueVazia = '1') then
@@ -116,7 +119,7 @@ begin
 							LeituraQueue <= '1'; --sinal para ler instruçao da queue
 							state <= arithmetic8;
 						end if;
-					 elsif(entradaInstrucao = "00000000") then
+					 elsif(instrucao = "00000000") then
 						state <= boot;
 					end if;
 					
