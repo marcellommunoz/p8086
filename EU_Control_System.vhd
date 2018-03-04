@@ -27,7 +27,6 @@ entity EU_Control_System is
 	 --OP da ULA
 	 --Sinal Escrita Flag
 	 WFlag													: out std_logic;
-	 IncrementaPC											: out std_logic;
 	 OPULA													: out std_logic_vector(7 downto 0);
 	 --Memory
 	 saidaBR1, saidaBR2, saidaBR3						: out std_logic_vector(2 downto 0)
@@ -54,7 +53,6 @@ begin
 		elsif clk'event and clk = '1' then
 			case state is
 				when boot =>
-				IncrementaPC <= '0';
 				if(QueueVazia = '1') then
 					state <= boot;
 				else
@@ -209,7 +207,6 @@ begin
 					sinalEscritaRG2 <= '0';
 					sinalEscritaRT1 <= '0';
 					sinalEscritaRT2 <= '0';
-					IncrementaPC <= '1';
 					state <= boot;
 					
 
