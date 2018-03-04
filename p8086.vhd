@@ -25,8 +25,16 @@ signal	control_InRB1, control_InRB2, control_OutRB1, control_OutRB2, control_Out
 signal 	control_wRB1, control_wRB2																		: 	std_logic;
 signal	RBtoADB, RBtoAB, RBtoBCL																		: 	std_logic_vector(15 downto 0);
 --sinais AB
-signal 	ABtoBCL																								:	std_logic_vector(19 downto 0);.
+signal 	ABtoBCL																								:	std_logic_vector(19 downto 0);
 signal 	IPpp																									:	std_logic_vector(15 downto 0);
+--sinais BCL
+signal	BCLtoIQ																								:	std_logic_vector(7 downto 0);
+--sinais IQ
+signal	control_rQueue																						:	std_logic;
+signal	control_wQueue																						:	std_logic;
+signal	control_QueueFull																					:	std_logic;
+signal	control_QueueEmpty																				:	std_logic;
+signal	IQtoECS																								:	std_logic_vector(7 downto 0);
 --controle de entrada e saida do RG
 signal	control_InRG1, control_InRG2, control_OutRG1, control_OutRG2						:	std_logic_vector(3 downto 0);
 --sinal de escrita do RG
@@ -59,15 +67,17 @@ component RegistradorGeral  	IS PORT(
 end component;
 
 component BIURegisters  		IS PORT(
-   Entrada1, Entrada2 : in std_LOGIC_VECTOR(15 downto 0);
-    wsel1, wsel2, ControleSaida1, ControleSaida2, ControleSaida3: IN STD_LOGIC_vector(2 downto 0);
-    clr, w1, w2: IN STD_LOGIC;
-    clk : IN STD_LOGIC;
-    S1, S2 , S3	: OUT std_LOGIC_VECTOR(15 downto 0);
-	 WriteDebug : IN STD_LOGIC;
-	 EDebugCS, EDebugDS, EDebugSS, EDebugES, EDebugIP, EDebugInternal1, EDebugInternal2, EDebugInternal3 : IN STD_LOGIC_VECTOR(15 downto 0);
-	 SDebugCS, SDebugDS, SDebugSS, SDebugES, SDebugIP, SDebugInternal1, SDebugInternal2, SDebugInternal3 : OUT STD_LOGIC_VECTOR(15 downto 0)
-);
+   Entrada1, Entrada2 																												: IN std_LOGIC_VECTOR(15 downto 0);
+    wsel1, wsel2, ControleSaida1, ControleSaida2, ControleSaida3														: IN STD_LOGIC_VECTOR(2 downto 0);
+    clr, w1, w2																														: IN STD_LOGIC;
+    clk 																																	: IN STD_LOGIC;
+    S1, S2 , S3																														: OUT std_LOGIC_VECTOR(15 downto 0);
+	 WriteDebug 																														: IN STD_LOGIC;
+	 EDebugCS, EDebugDS, EDebugSS, EDebugES, EDebugIP, EDebugInternal1, EDebugInternal2, EDebugInternal3 	: IN STD_LOGIC_VECTOR(15 downto 0);
+	 SDebugCS, SDebugDS, SDebugSS, SDebugES, SDebugIP, SDebugInternal1, SDebugInternal2, SDebugInternal3 	: OUT STD_LOGIC_VECTOR(15 downto 0);
+	 IPppw																																: IN STD_LOGIC;
+	 IPpp																																	: IN STD_LOGIC_VECTOR(15 downto 0)
+	 );
 end component;
 
 component RegisterTemp 			IS PORT(
@@ -118,19 +128,16 @@ end component;
 component EU_Control_System 	IS PORT(
 			reset 													: in std_logic;
 			clk     													: in std_logic;
-			QueueVazia												: in std_logic;
-			entradaInstrucao 										: in  std_logic_vector(7 downto 0);
-			EntradaRT1, EntradaRT2								: in std_logic_vector(15 downto 0);
-			entradaRG1, entradaRG2, saidaRG1, saidaRG2	: out std_logic_vector(3 downto 0);
-			LeituraQueue											: out std_logic;
-			sinalEscritaRG1, sinalEscritaRG2 				: out std_logic;
-			saidaDataBUS											: out std_logic_vector(2 downto 0);
-			sinalEscritaRT1, sinalEscritaRT2 				: out std_logic;
-			sinalDataBus											: out std_logic_vector(2 downto 0);
-			WFlag														: out std_logic;
-			IncrementaPC											: out std_logic;
-			OPULA														: out std_logic_vector(7 downto 0);
-			saidaBR1, saidaBR2, saidaBR3						: out std_logic_vector(2 downto 0));
+			 QueueVazia												: in std_logic;
+			 entradaInstrucao 									: in  std_logic_vector(7 downto 0);
+			 entradaRG1, entradaRG2, saidaRG1, saidaRG2	: out std_logic_vector(3 downto 0);
+			 LeituraQueue											: out std_logic;
+			 sinalEscritaRG1, sinalEscritaRG2 				: out std_logic;
+			 saidaDataBUS											: out std_logic_vector(2 downto 0);
+			 sinalEscritaRT1, sinalEscritaRT2 				: out std_logic;
+			 WFlag													: out std_logic;
+			 OPULA													: out std_logic_vector(7 downto 0);
+			 saidaBR1												: out std_logic_vector(2 downto 0)
 end component;
 component AddressBus				IS PORT(
 			SegmentBase, Offset 	: IN STD_LOGIC_VECTOR(15 downto 0);
@@ -138,6 +145,18 @@ component AddressBus				IS PORT(
 			Address 					: OUT STD_LOGIC_VECTOR(19 downto 0);
 			IPpp						: OUT STD_LOGIC_VECTOR(15 downto 0));
 end component;
+component MemoriaSimples 		IS PORT(
+			Dado														: IN std_LOGIC_VECTOR(15 downto 0);
+			Ender														: IN std_LOGIC_VECTOR(19 downto 0);
+			clk, reset												: IN STD_LOGIC;
+			QueueFull 												: IN std_LOGIC;
+			EscritaQueue 											: OUT std_LOGIC;
+			IncrementaPC 											: OUT std_Logic;
+			ControleBIURegister1, ControleBIURegister2 	: OUT std_logic_vector(2 downto 0);
+			SaidaQueue												: OUT std_LOGIC_VECTOR(7 downto 0);
+			SaidaRegs												: OUT std_LOGIC_VECTOR(15 downto 0)
+		);
+end component
 begin
 	--Registradores utilizados para acesso a memoria
 	RB:	BIURegisters 			port map(
@@ -148,8 +167,9 @@ begin
 												RBtoADB, RBtoAB, RBtoBCL,
 												wDEBUG,
 												entradaCS, entradaDS, entradaSS, entradaES, entradaIP, entradaI1, entradaI2, entradaI3,
-												saidaCS, saidaDS, saidaSS, saidaES, saidaIP, saidaI1, saidaI2, saidaI3
-												);
+												saidaCS, saidaDS, saidaSS, saidaES, saidaIP, saidaI1, saidaI2, saidaI3,
+												control_IPpp,
+												IPpp);
 	--Gera o endereço para memoria
 	AB:	AddressBus				port map(
 												RBtoAB, RBtoBCL,
@@ -157,14 +177,42 @@ begin
 												ABtoBCL,
 												IPpp);
 	--Memoria
+	BCL:	MemoriaSimples			port map(
+												RBtoBCL,
+												ABtoBCL,
+												clock, reset,
+												control_QueueFull,
+												control_wQueue,
+												control_IPpp,
+												Control_OutRB2, Control_OutRB3,
+												BCLtoIQ,
+												BCLtoRB,
+												);
 	--Fila de instructionQueue
 	IQ:	InstructionQueue		port map(
-												
+												reset,
+												clock,
+												control_wQueue,
+												BCLtoIQ,
+												control_QueueFull,
+												control_rQueue,
+												IQtoECS,
+												control_QueueEmpty,
 												);
 	--Controle do processador
 	ECS:	EU_Control_System		port map(
 												reset,
 												clock,
+												control_QueueEmpty,
+												IQtoECS,
+												control_InRG1, control_InRG2, Control_OutRG1, control_OutRG2,
+												control_rQueue,
+												control_wRG1, control_wRG2,
+												control_InADB,
+												control_wRT1, control_wRT2,
+												control_wFR,
+												control_OpULA,
+												control_OutRB1,
 												);
 	--Registradores de proposito geral
 	RG:	RegistradorGeral 		port map(
