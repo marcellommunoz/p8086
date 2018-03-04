@@ -44,7 +44,7 @@ begin
 	variable instrucaoAtual : std_logic_vector(7 downto 0);
 	variable destinofonte : std_logic_vector(3 downto 0);
 		begin
-		if (reset = '1') then
+		if (reset = '0') then
 			state <= boot;
 		elsif clk'event and clk = '1' then
 			case state is
@@ -116,6 +116,8 @@ begin
 							LeituraQueue <= '1'; --sinal para ler instruçao da queue
 							state <= arithmetic8;
 						end if;
+					 elsif(entradaInstrucao = "00000000") then
+						state <= boot;
 					end if;
 					
 				when arithmetic161 =>
