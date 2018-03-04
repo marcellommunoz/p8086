@@ -42,5 +42,6 @@ begin
 	memoria : Memory port map(addr, clk, data, w, Smemoria);
 	SaidaQueue <= Smemoria;
 	IncrementaPC <= not QueueFull;
+	EscritaQueue <= not QueueFull;
 	
 end comportamento;

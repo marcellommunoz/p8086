@@ -1,5 +1,5 @@
 Analysis & Synthesis report for p8086
-Sun Mar 04 15:12:09 2018
+Sun Mar 04 15:44:25 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -13,22 +13,24 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. Analysis & Synthesis IP Cores Summary
-  9. State Machine - |p8086|EU_Control_System:ECS|state
- 10. Registers Removed During Synthesis
- 11. Removed Registers Triggering Further Register Optimizations
- 12. General Register Statistics
- 13. Multiplexer Restructuring Statistics (Restructuring Performed)
- 14. Source assignments for MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated
- 15. Parameter Settings for User Entity Instance: MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component
- 16. altsyncram Parameter Settings by Entity Instance
- 17. Port Connectivity Checks: "ULA:ALU|MULB86:mulb1"
- 18. Port Connectivity Checks: "ULA:ALU|INC86:inc1"
- 19. Port Connectivity Checks: "DataBus:ADB"
- 20. Port Connectivity Checks: "MemoriaSimples:BCL|Memory:memoria"
- 21. Port Connectivity Checks: "BIURegisters:RB"
- 22. Elapsed Time Per Partition
- 23. Analysis & Synthesis Messages
+  8. Analysis & Synthesis RAM Summary
+  9. Analysis & Synthesis IP Cores Summary
+ 10. State Machine - |p8086|EU_Control_System:ECS|state
+ 11. Registers Removed During Synthesis
+ 12. Removed Registers Triggering Further Register Optimizations
+ 13. General Register Statistics
+ 14. Inverted Register Statistics
+ 15. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 16. Source assignments for MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated
+ 17. Parameter Settings for User Entity Instance: MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component
+ 18. altsyncram Parameter Settings by Entity Instance
+ 19. Port Connectivity Checks: "ULA:ALU|MULB86:mulb1"
+ 20. Port Connectivity Checks: "ULA:ALU|INC86:inc1"
+ 21. Port Connectivity Checks: "DataBus:ADB"
+ 22. Port Connectivity Checks: "MemoriaSimples:BCL|Memory:memoria"
+ 23. Port Connectivity Checks: "BIURegisters:RB"
+ 24. Elapsed Time Per Partition
+ 25. Analysis & Synthesis Messages
 
 
 
@@ -54,18 +56,18 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Mar 04 15:12:09 2018           ;
+; Analysis & Synthesis Status        ; Successful - Sun Mar 04 15:44:25 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; p8086                                           ;
 ; Top-level Entity Name              ; p8086                                           ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 248                                             ;
-;     Total combinational functions  ; 17                                              ;
-;     Dedicated logic registers      ; 248                                             ;
-; Total registers                    ; 248                                             ;
-; Total pins                         ; 515                                             ;
+; Total logic elements               ; 634                                             ;
+;     Total combinational functions  ; 439                                             ;
+;     Dedicated logic registers      ; 383                                             ;
+; Total registers                    ; 383                                             ;
+; Total pins                         ; 535                                             ;
 ; Total virtual pins                 ; 0                                               ;
-; Total memory bits                  ; 0                                               ;
+; Total memory bits                  ; 524,288                                         ;
 ; Embedded Multiplier 9-bit elements ; 0                                               ;
 ; Total PLLs                         ; 0                                               ;
 +------------------------------------+-------------------------------------------------+
@@ -227,65 +229,91 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------------+-----------------+----------------------------------+-------------------------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary         ;
-+---------------------------------------------+-------+
-; Resource                                    ; Usage ;
-+---------------------------------------------+-------+
-; Estimated Total logic elements              ; 248   ;
-;                                             ;       ;
-; Total combinational functions               ; 17    ;
-; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 0     ;
-;     -- 3 input functions                    ; 0     ;
-;     -- <=2 input functions                  ; 17    ;
-;                                             ;       ;
-; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 2     ;
-;     -- arithmetic mode                      ; 15    ;
-;                                             ;       ;
-; Total registers                             ; 248   ;
-;     -- Dedicated logic registers            ; 248   ;
-;     -- I/O registers                        ; 0     ;
-;                                             ;       ;
-; I/O pins                                    ; 515   ;
-; Embedded Multiplier 9-bit elements          ; 0     ;
-; Maximum fan-out node                        ; clock ;
-; Maximum fan-out                             ; 248   ;
-; Total fan-out                               ; 1271  ;
-; Average fan-out                             ; 1.63  ;
-+---------------------------------------------+-------+
++------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary          ;
++---------------------------------------------+--------+
+; Resource                                    ; Usage  ;
++---------------------------------------------+--------+
+; Estimated Total logic elements              ; 634    ;
+;                                             ;        ;
+; Total combinational functions               ; 439    ;
+; Logic element usage by number of LUT inputs ;        ;
+;     -- 4 input functions                    ; 208    ;
+;     -- 3 input functions                    ; 201    ;
+;     -- <=2 input functions                  ; 30     ;
+;                                             ;        ;
+; Logic elements by mode                      ;        ;
+;     -- normal mode                          ; 394    ;
+;     -- arithmetic mode                      ; 45     ;
+;                                             ;        ;
+; Total registers                             ; 383    ;
+;     -- Dedicated logic registers            ; 383    ;
+;     -- I/O registers                        ; 0      ;
+;                                             ;        ;
+; I/O pins                                    ; 535    ;
+; Total memory bits                           ; 524288 ;
+; Embedded Multiplier 9-bit elements          ; 0      ;
+; Maximum fan-out node                        ; clock  ;
+; Maximum fan-out                             ; 511    ;
+; Total fan-out                               ; 5227   ;
+; Average fan-out                             ; 3.52   ;
++---------------------------------------------+--------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                               ;
-+------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------+--------------+
-; Compilation Hierarchy Node         ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                               ; Library Name ;
-+------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------+--------------+
-; |p8086                             ; 17 (1)            ; 248 (0)      ; 0           ; 0            ; 0       ; 0         ; 515  ; 0            ; |p8086                                            ; work         ;
-;    |BIURegisters:RB|               ; 16 (0)            ; 128 (0)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB                            ; work         ;
-;       |Registrador16:RegCS|        ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegCS        ; work         ;
-;       |Registrador16:RegDS|        ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegDS        ; work         ;
-;       |Registrador16:RegES|        ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegES        ; work         ;
-;       |Registrador16:RegIP|        ; 16 (16)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegIP        ; work         ;
-;       |Registrador16:RegInternal1| ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegInternal1 ; work         ;
-;       |Registrador16:RegInternal2| ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegInternal2 ; work         ;
-;       |Registrador16:RegInternal3| ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegInternal3 ; work         ;
-;       |Registrador16:RegSS|        ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegSS        ; work         ;
-;    |RegistradorGeral:RG|           ; 0 (0)             ; 120 (0)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG                        ; work         ;
-;       |Registrador16:BP|           ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador16:BP       ; work         ;
-;       |Registrador16:DI|           ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador16:DI       ; work         ;
-;       |Registrador16:SI|           ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador16:SI       ; work         ;
-;       |Registrador16:SP|           ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador16:SP       ; work         ;
-;       |Registrador8:AH|            ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:AH        ; work         ;
-;       |Registrador8:AL|            ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:AL        ; work         ;
-;       |Registrador8:BH|            ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:BH        ; work         ;
-;       |Registrador8:BL|            ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:BL        ; work         ;
-;       |Registrador8:CH|            ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:CH        ; work         ;
-;       |Registrador8:DH|            ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:DH        ; work         ;
-;       |Registrador8:DL|            ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:DL        ; work         ;
-+------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------+--------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                      ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                            ; Library Name ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------+--------------+
+; |p8086                                       ; 439 (0)           ; 383 (0)      ; 524288      ; 0            ; 0       ; 0         ; 535  ; 0            ; |p8086                                                                                                                         ; work         ;
+;    |AddressBus:AB|                           ; 12 (12)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|AddressBus:AB                                                                                                           ; work         ;
+;    |BIURegisters:RB|                         ; 17 (1)            ; 128 (0)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB                                                                                                         ; work         ;
+;       |Registrador16:RegCS|                  ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegCS                                                                                     ; work         ;
+;       |Registrador16:RegDS|                  ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegDS                                                                                     ; work         ;
+;       |Registrador16:RegES|                  ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegES                                                                                     ; work         ;
+;       |Registrador16:RegIP|                  ; 16 (16)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegIP                                                                                     ; work         ;
+;       |Registrador16:RegInternal1|           ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegInternal1                                                                              ; work         ;
+;       |Registrador16:RegInternal2|           ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegInternal2                                                                              ; work         ;
+;       |Registrador16:RegInternal3|           ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegInternal3                                                                              ; work         ;
+;       |Registrador16:RegSS|                  ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|BIURegisters:RB|Registrador16:RegSS                                                                                     ; work         ;
+;    |DataBus:ADB|                             ; 25 (25)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|DataBus:ADB                                                                                                             ; work         ;
+;    |EU_Control_System:ECS|                   ; 26 (26)           ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|EU_Control_System:ECS                                                                                                   ; work         ;
+;    |InstructionQueue:IQ|                     ; 73 (73)           ; 68 (68)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|InstructionQueue:IQ                                                                                                     ; work         ;
+;    |MemoriaSimples:BCL|                      ; 109 (0)           ; 8 (0)        ; 524288      ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|MemoriaSimples:BCL                                                                                                      ; work         ;
+;       |Memory:memoria|                       ; 109 (0)           ; 8 (0)        ; 524288      ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|MemoriaSimples:BCL|Memory:memoria                                                                                       ; work         ;
+;          |altsyncram:altsyncram_component|   ; 109 (0)           ; 8 (0)        ; 524288      ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component                                                       ; work         ;
+;             |altsyncram_r6d1:auto_generated| ; 109 (0)           ; 8 (8)        ; 524288      ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated                        ; work         ;
+;                |decode_ppa:deep_decode|      ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|decode_ppa:deep_decode ; work         ;
+;                |mux_9kb:mux2|                ; 93 (93)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|mux_9kb:mux2           ; work         ;
+;    |RegisterTemp:RT|                         ; 0 (0)             ; 32 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegisterTemp:RT                                                                                                         ; work         ;
+;       |Registrador16:RegR1|                  ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegisterTemp:RT|Registrador16:RegR1                                                                                     ; work         ;
+;       |Registrador16:RegR2|                  ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegisterTemp:RT|Registrador16:RegR2                                                                                     ; work         ;
+;    |Registrador16:FR|                        ; 5 (5)             ; 5 (5)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|Registrador16:FR                                                                                                        ; work         ;
+;    |RegistradorGeral:RG|                     ; 145 (129)         ; 120 (0)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG                                                                                                     ; work         ;
+;       |Registrador16:BP|                     ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador16:BP                                                                                    ; work         ;
+;       |Registrador16:DI|                     ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador16:DI                                                                                    ; work         ;
+;       |Registrador16:SI|                     ; 0 (0)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador16:SI                                                                                    ; work         ;
+;       |Registrador16:SP|                     ; 16 (16)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador16:SP                                                                                    ; work         ;
+;       |Registrador8:AH|                      ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:AH                                                                                     ; work         ;
+;       |Registrador8:AL|                      ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:AL                                                                                     ; work         ;
+;       |Registrador8:BH|                      ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:BH                                                                                     ; work         ;
+;       |Registrador8:BL|                      ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:BL                                                                                     ; work         ;
+;       |Registrador8:CH|                      ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:CH                                                                                     ; work         ;
+;       |Registrador8:DH|                      ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:DH                                                                                     ; work         ;
+;       |Registrador8:DL|                      ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|RegistradorGeral:RG|Registrador8:DL                                                                                     ; work         ;
+;    |ULA:ALU|                                 ; 27 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|ULA:ALU                                                                                                                 ; work         ;
+;       |ADD86:add1|                           ; 27 (27)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |p8086|ULA:ALU|ADD86:add1                                                                                                      ; work         ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                           ;
++-------------------------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+--------+--------------------+
+; Name                                                                                                        ; Type ; Mode        ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF                ;
++-------------------------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+--------+--------------------+
+; MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ALTSYNCRAM ; AUTO ; Single Port ; 65536        ; 8            ; --           ; --           ; 524288 ; MemoriaSimples.mif ;
++-------------------------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+--------+--------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -317,166 +345,75 @@ Encoding Type:  One-Hot
 +---------------------+-------------+----------------+-----------+-------------------+---------------------+---------------------+-------------+----------+-----------------+--------------+------------+
 
 
-+---------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                            ;
-+--------------------------------------------------------+------------------------------------------------------+
-; Register name                                          ; Reason for Removal                                   ;
-+--------------------------------------------------------+------------------------------------------------------+
-; EU_Control_System:ECS|WFlag                            ; Stuck at VCC due to stuck port data_in               ;
-; EU_Control_System:ECS|instrucaoReal[3]                 ; Merged with EU_Control_System:ECS|instrucaoReal[2]   ;
-; EU_Control_System:ECS|saidaRG2[3]                      ; Merged with EU_Control_System:ECS|saidaRG1[3]        ;
-; EU_Control_System:ECS|saidaRG2[2]                      ; Merged with EU_Control_System:ECS|saidaRG1[2]        ;
-; EU_Control_System:ECS|saidaRG2[1]                      ; Merged with EU_Control_System:ECS|saidaRG1[1]        ;
-; EU_Control_System:ECS|saidaRG2[0]                      ; Merged with EU_Control_System:ECS|saidaRG1[0]        ;
-; EU_Control_System:ECS|sinalEscritaRG2                  ; Merged with EU_Control_System:ECS|sinalEscritaRG1    ;
-; EU_Control_System:ECS|entradaRG2[3]                    ; Merged with EU_Control_System:ECS|entradaRG1[3]      ;
-; EU_Control_System:ECS|entradaRG2[2]                    ; Merged with EU_Control_System:ECS|entradaRG1[2]      ;
-; EU_Control_System:ECS|entradaRG2[1]                    ; Merged with EU_Control_System:ECS|entradaRG1[1]      ;
-; EU_Control_System:ECS|OPULA[3]                         ; Merged with EU_Control_System:ECS|OPULA[2]           ;
-; EU_Control_System:ECS|instrucaoReal[5]                 ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|OPULA[5]                         ; Stuck at GND due to stuck port data_in               ;
-; InstructionQueue:IQ|vetor_queue[1][7]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[1][6]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[1][5]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[1][4]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[1][3]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[1][2]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[1][1]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[1][0]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[2][7]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[2][6]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[2][5]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[2][4]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[2][3]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[2][2]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[2][1]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[2][0]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[3][7]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[3][6]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[3][5]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[3][4]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[3][3]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[3][2]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[3][1]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[3][0]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[4][7]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[4][6]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[4][5]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[4][4]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[4][3]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[4][2]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[4][1]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[4][0]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[5][7]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[5][6]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[5][5]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[5][4]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[5][3]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[5][2]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[5][1]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|vetor_queue[5][0]                  ; Stuck at GND due to stuck port clock_enable          ;
-; InstructionQueue:IQ|index_escrita[0..2]                ; Stuck at GND due to stuck port data_in               ;
-; InstructionQueue:IQ|vetor_queue[0][7]                  ; Stuck at GND due to stuck port data_in               ;
-; InstructionQueue:IQ|vetor_queue[0][6]                  ; Stuck at GND due to stuck port data_in               ;
-; InstructionQueue:IQ|vetor_queue[0][5]                  ; Stuck at GND due to stuck port data_in               ;
-; InstructionQueue:IQ|vetor_queue[0][4]                  ; Stuck at GND due to stuck port data_in               ;
-; InstructionQueue:IQ|vetor_queue[0][3]                  ; Stuck at GND due to stuck port data_in               ;
-; InstructionQueue:IQ|vetor_queue[0][2]                  ; Stuck at GND due to stuck port data_in               ;
-; InstructionQueue:IQ|vetor_queue[0][1]                  ; Stuck at GND due to stuck port data_in               ;
-; InstructionQueue:IQ|vetor_queue[0][0]                  ; Stuck at GND due to stuck port data_in               ;
-; InstructionQueue:IQ|saida_parcial[0..7]                ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|destino[0..3]                    ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|entradaRG1[0..3]                 ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|entradaRG2[0]                    ; Stuck at VCC due to stuck port data_in               ;
-; EU_Control_System:ECS|\EU_CONTROL:instrucaoAtual[0..7] ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|instrucaoReal[0..2,4,6,7]        ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|OPULA[0..2,4,6,7]                ; Stuck at GND due to stuck port data_in               ;
-; Registrador16:FR|q[0..8,10..15]                        ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|saidaRG1[0,1]                    ; Merged with EU_Control_System:ECS|saidaRG1[2]        ;
-; EU_Control_System:ECS|saidaRG1[2]                      ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|saidaDataBUS[2]                  ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|LeituraQueue                     ; Lost fanout                                          ;
-; InstructionQueue:IQ|\p_CONTROL:contador[0..3]          ; Stuck at GND due to stuck port data_in               ;
-; InstructionQueue:IQ|w_vazio                            ; Stuck at VCC due to stuck port data_in               ;
-; InstructionQueue:IQ|w_cheio                            ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|state.arithmetic161              ; Lost fanout                                          ;
-; EU_Control_System:ECS|state.arithmetic162              ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|state.arithmetic8                ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|state.exe                        ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|state.boot                       ; Lost fanout                                          ;
-; EU_Control_System:ECS|state.writeback                  ; Lost fanout                                          ;
-; EU_Control_System:ECS|state.op                         ; Lost fanout                                          ;
-; EU_Control_System:ECS|state.fetch                      ; Lost fanout                                          ;
-; EU_Control_System:ECS|state.resposta                   ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|state.final                      ; Stuck at GND due to stuck port data_in               ;
-; RegisterTemp:RT|Registrador16:RegR1|q[1..8,10..15]     ; Merged with RegisterTemp:RT|Registrador16:RegR1|q[0] ;
-; RegisterTemp:RT|Registrador16:RegR2|q[0..8,10..15]     ; Merged with RegisterTemp:RT|Registrador16:RegR1|q[0] ;
-; EU_Control_System:ECS|saidaDataBUS[1]                  ; Merged with EU_Control_System:ECS|saidaDataBUS[0]    ;
-; EU_Control_System:ECS|sinalEscritaRT1                  ; Merged with EU_Control_System:ECS|sinalEscritaRG1    ;
-; EU_Control_System:ECS|sinalEscritaRT2                  ; Merged with EU_Control_System:ECS|sinalEscritaRG1    ;
-; RegisterTemp:RT|Registrador16:RegR2|q[9]               ; Merged with RegisterTemp:RT|Registrador16:RegR1|q[9] ;
-; RegisterTemp:RT|Registrador16:RegR1|q[0]               ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|sinalEscritaRG1                  ; Stuck at GND due to stuck port data_in               ;
-; RegisterTemp:RT|Registrador16:RegR1|q[9]               ; Stuck at GND due to stuck port clock_enable          ;
-; EU_Control_System:ECS|state.readin                     ; Stuck at GND due to stuck port data_in               ;
-; EU_Control_System:ECS|saidaDataBUS[0]                  ; Stuck at GND due to stuck port data_in               ;
-; Total Number of Removed Registers = 175                ;                                                      ;
-+--------------------------------------------------------+------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                               ;
++---------------------------------------------+----------------------------------------------------+
+; Register name                               ; Reason for Removal                                 ;
++---------------------------------------------+----------------------------------------------------+
+; EU_Control_System:ECS|WFlag                 ; Stuck at VCC due to stuck port data_in             ;
+; EU_Control_System:ECS|instrucaoReal[3]      ; Merged with EU_Control_System:ECS|instrucaoReal[2] ;
+; EU_Control_System:ECS|saidaRG2[3]           ; Merged with EU_Control_System:ECS|saidaRG1[3]      ;
+; EU_Control_System:ECS|saidaRG2[2]           ; Merged with EU_Control_System:ECS|saidaRG1[2]      ;
+; EU_Control_System:ECS|saidaRG2[1]           ; Merged with EU_Control_System:ECS|saidaRG1[1]      ;
+; EU_Control_System:ECS|saidaRG2[0]           ; Merged with EU_Control_System:ECS|saidaRG1[0]      ;
+; EU_Control_System:ECS|sinalEscritaRG2       ; Merged with EU_Control_System:ECS|sinalEscritaRG1  ;
+; EU_Control_System:ECS|entradaRG2[3]         ; Merged with EU_Control_System:ECS|entradaRG1[3]    ;
+; EU_Control_System:ECS|entradaRG2[2]         ; Merged with EU_Control_System:ECS|entradaRG1[2]    ;
+; EU_Control_System:ECS|entradaRG2[1]         ; Merged with EU_Control_System:ECS|entradaRG1[1]    ;
+; EU_Control_System:ECS|OPULA[3]              ; Merged with EU_Control_System:ECS|OPULA[2]         ;
+; EU_Control_System:ECS|instrucaoReal[5]      ; Stuck at GND due to stuck port data_in             ;
+; EU_Control_System:ECS|OPULA[5]              ; Stuck at GND due to stuck port data_in             ;
+; EU_Control_System:ECS|instrucaoReal[4]      ; Stuck at VCC due to stuck port data_in             ;
+; EU_Control_System:ECS|OPULA[4]              ; Stuck at VCC due to stuck port data_in             ;
+; EU_Control_System:ECS|saidaDataBUS[2]       ; Stuck at GND due to stuck port data_in             ;
+; EU_Control_System:ECS|saidaRG1[0,1]         ; Lost fanout                                        ;
+; RegistradorGeral:RG|Registrador8:CL|q[0]    ; Lost fanout                                        ;
+; EU_Control_System:ECS|saidaRG1[2,3]         ; Lost fanout                                        ;
+; RegistradorGeral:RG|Registrador8:CL|q[1..7] ; Lost fanout                                        ;
+; EU_Control_System:ECS|OPULA[7]              ; Stuck at GND due to stuck port clock_enable        ;
+; EU_Control_System:ECS|instrucaoReal[7]      ; Lost fanout                                        ;
+; EU_Control_System:ECS|OPULA[6]              ; Stuck at GND due to stuck port clock_enable        ;
+; EU_Control_System:ECS|instrucaoReal[6]      ; Lost fanout                                        ;
+; EU_Control_System:ECS|OPULA[2]              ; Stuck at GND due to stuck port clock_enable        ;
+; EU_Control_System:ECS|instrucaoReal[2]      ; Lost fanout                                        ;
+; EU_Control_System:ECS|OPULA[1]              ; Stuck at GND due to stuck port clock_enable        ;
+; EU_Control_System:ECS|instrucaoReal[1]      ; Lost fanout                                        ;
+; EU_Control_System:ECS|OPULA[0]              ; Stuck at GND due to stuck port clock_enable        ;
+; EU_Control_System:ECS|instrucaoReal[0]      ; Lost fanout                                        ;
+; Registrador16:FR|q[1,3,5,8..10,12..15]      ; Stuck at GND due to stuck port data_in             ;
+; Registrador16:FR|q[11]                      ; Merged with Registrador16:FR|q[0]                  ;
+; EU_Control_System:ECS|state.exe             ; Lost fanout                                        ;
+; EU_Control_System:ECS|state.readin          ; Merged with EU_Control_System:ECS|state.op         ;
+; EU_Control_System:ECS|state.writeback       ; Merged with EU_Control_System:ECS|state.op         ;
+; EU_Control_System:ECS|state.op              ; Stuck at GND due to stuck port data_in             ;
+; Total Number of Removed Registers = 53      ;                                                    ;
++---------------------------------------------+----------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                                              ;
-+--------------------------------------------+--------------------------------+----------------------------------------------------------------------------+
-; Register name                              ; Reason for Removal             ; Registers Removed due to This Register                                     ;
-+--------------------------------------------+--------------------------------+----------------------------------------------------------------------------+
-; EU_Control_System:ECS|WFlag                ; Stuck at VCC                   ; Registrador16:FR|q[15], Registrador16:FR|q[14], Registrador16:FR|q[13],    ;
-;                                            ; due to stuck port data_in      ; Registrador16:FR|q[12], Registrador16:FR|q[11], Registrador16:FR|q[10],    ;
-;                                            ;                                ; Registrador16:FR|q[8], Registrador16:FR|q[7], Registrador16:FR|q[6],       ;
-;                                            ;                                ; Registrador16:FR|q[5], Registrador16:FR|q[4], Registrador16:FR|q[3],       ;
-;                                            ;                                ; Registrador16:FR|q[2], Registrador16:FR|q[1], Registrador16:FR|q[0]        ;
-; InstructionQueue:IQ|vetor_queue[1][7]      ; Stuck at GND                   ; InstructionQueue:IQ|saida_parcial[7], EU_Control_System:ECS|destino[3],    ;
-;                                            ; due to stuck port clock_enable ; EU_Control_System:ECS|entradaRG1[3], EU_Control_System:ECS|entradaRG1[2],  ;
-;                                            ;                                ; EU_Control_System:ECS|entradaRG1[1], EU_Control_System:ECS|entradaRG1[0],  ;
-;                                            ;                                ; EU_Control_System:ECS|entradaRG2[0],                                       ;
-;                                            ;                                ; EU_Control_System:ECS|\EU_CONTROL:instrucaoAtual[7],                       ;
-;                                            ;                                ; EU_Control_System:ECS|saidaDataBUS[2], EU_Control_System:ECS|LeituraQueue, ;
-;                                            ;                                ; EU_Control_System:ECS|saidaDataBUS[0]                                      ;
-; InstructionQueue:IQ|vetor_queue[1][6]      ; Stuck at GND                   ; InstructionQueue:IQ|saida_parcial[6], EU_Control_System:ECS|destino[2],    ;
-;                                            ; due to stuck port clock_enable ; EU_Control_System:ECS|\EU_CONTROL:instrucaoAtual[6]                        ;
-; InstructionQueue:IQ|vetor_queue[1][5]      ; Stuck at GND                   ; InstructionQueue:IQ|saida_parcial[5], EU_Control_System:ECS|destino[1],    ;
-;                                            ; due to stuck port clock_enable ; EU_Control_System:ECS|\EU_CONTROL:instrucaoAtual[5]                        ;
-; InstructionQueue:IQ|vetor_queue[1][4]      ; Stuck at GND                   ; InstructionQueue:IQ|saida_parcial[4], EU_Control_System:ECS|destino[0],    ;
-;                                            ; due to stuck port clock_enable ; EU_Control_System:ECS|\EU_CONTROL:instrucaoAtual[4]                        ;
-; InstructionQueue:IQ|vetor_queue[1][0]      ; Stuck at GND                   ; InstructionQueue:IQ|saida_parcial[0],                                      ;
-;                                            ; due to stuck port clock_enable ; EU_Control_System:ECS|\EU_CONTROL:instrucaoAtual[0],                       ;
-;                                            ;                                ; EU_Control_System:ECS|saidaRG1[2]                                          ;
-; EU_Control_System:ECS|instrucaoReal[5]     ; Stuck at GND                   ; EU_Control_System:ECS|OPULA[5], RegisterTemp:RT|Registrador16:RegR1|q[9]   ;
-;                                            ; due to stuck port data_in      ;                                                                            ;
-; InstructionQueue:IQ|vetor_queue[1][3]      ; Stuck at GND                   ; InstructionQueue:IQ|saida_parcial[3],                                      ;
-;                                            ; due to stuck port clock_enable ; EU_Control_System:ECS|\EU_CONTROL:instrucaoAtual[3]                        ;
-; InstructionQueue:IQ|vetor_queue[1][2]      ; Stuck at GND                   ; InstructionQueue:IQ|saida_parcial[2],                                      ;
-;                                            ; due to stuck port clock_enable ; EU_Control_System:ECS|\EU_CONTROL:instrucaoAtual[2]                        ;
-; InstructionQueue:IQ|vetor_queue[1][1]      ; Stuck at GND                   ; InstructionQueue:IQ|saida_parcial[1],                                      ;
-;                                            ; due to stuck port clock_enable ; EU_Control_System:ECS|\EU_CONTROL:instrucaoAtual[1]                        ;
-; EU_Control_System:ECS|instrucaoReal[4]     ; Stuck at GND                   ; EU_Control_System:ECS|OPULA[4], RegisterTemp:RT|Registrador16:RegR1|q[0]   ;
-;                                            ; due to stuck port data_in      ;                                                                            ;
-; InstructionQueue:IQ|\p_CONTROL:contador[0] ; Stuck at GND                   ; InstructionQueue:IQ|w_vazio, InstructionQueue:IQ|w_cheio                   ;
-;                                            ; due to stuck port data_in      ;                                                                            ;
-; EU_Control_System:ECS|instrucaoReal[7]     ; Stuck at GND                   ; EU_Control_System:ECS|OPULA[7]                                             ;
-;                                            ; due to stuck port data_in      ;                                                                            ;
-; EU_Control_System:ECS|instrucaoReal[6]     ; Stuck at GND                   ; EU_Control_System:ECS|OPULA[6]                                             ;
-;                                            ; due to stuck port data_in      ;                                                                            ;
-; EU_Control_System:ECS|instrucaoReal[2]     ; Stuck at GND                   ; EU_Control_System:ECS|OPULA[2]                                             ;
-;                                            ; due to stuck port data_in      ;                                                                            ;
-; EU_Control_System:ECS|instrucaoReal[1]     ; Stuck at GND                   ; EU_Control_System:ECS|OPULA[1]                                             ;
-;                                            ; due to stuck port data_in      ;                                                                            ;
-; EU_Control_System:ECS|instrucaoReal[0]     ; Stuck at GND                   ; EU_Control_System:ECS|OPULA[0]                                             ;
-;                                            ; due to stuck port data_in      ;                                                                            ;
-; EU_Control_System:ECS|state.arithmetic162  ; Stuck at GND                   ; EU_Control_System:ECS|state.writeback                                      ;
-;                                            ; due to stuck port data_in      ;                                                                            ;
-; EU_Control_System:ECS|state.resposta       ; Stuck at GND                   ; EU_Control_System:ECS|sinalEscritaRG1                                      ;
-;                                            ; due to stuck port data_in      ;                                                                            ;
-+--------------------------------------------+--------------------------------+----------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                      ;
++----------------------------------------+--------------------------------+------------------------------------------------------------------------+
+; Register name                          ; Reason for Removal             ; Registers Removed due to This Register                                 ;
++----------------------------------------+--------------------------------+------------------------------------------------------------------------+
+; EU_Control_System:ECS|WFlag            ; Stuck at VCC                   ; Registrador16:FR|q[9], Registrador16:FR|q[8], Registrador16:FR|q[1],   ;
+;                                        ; due to stuck port data_in      ; Registrador16:FR|q[10], Registrador16:FR|q[3], Registrador16:FR|q[12], ;
+;                                        ;                                ; Registrador16:FR|q[13], Registrador16:FR|q[5], Registrador16:FR|q[14], ;
+;                                        ;                                ; Registrador16:FR|q[15]                                                 ;
+; EU_Control_System:ECS|instrucaoReal[4] ; Stuck at VCC                   ; EU_Control_System:ECS|OPULA[4], EU_Control_System:ECS|saidaRG1[0],     ;
+;                                        ; due to stuck port data_in      ; EU_Control_System:ECS|saidaRG1[1], EU_Control_System:ECS|saidaRG1[2]   ;
+; EU_Control_System:ECS|instrucaoReal[5] ; Stuck at GND                   ; EU_Control_System:ECS|OPULA[5]                                         ;
+;                                        ; due to stuck port data_in      ;                                                                        ;
+; EU_Control_System:ECS|OPULA[7]         ; Stuck at GND                   ; EU_Control_System:ECS|instrucaoReal[7]                                 ;
+;                                        ; due to stuck port clock_enable ;                                                                        ;
+; EU_Control_System:ECS|OPULA[6]         ; Stuck at GND                   ; EU_Control_System:ECS|instrucaoReal[6]                                 ;
+;                                        ; due to stuck port clock_enable ;                                                                        ;
+; EU_Control_System:ECS|OPULA[2]         ; Stuck at GND                   ; EU_Control_System:ECS|instrucaoReal[2]                                 ;
+;                                        ; due to stuck port clock_enable ;                                                                        ;
+; EU_Control_System:ECS|OPULA[1]         ; Stuck at GND                   ; EU_Control_System:ECS|instrucaoReal[1]                                 ;
+;                                        ; due to stuck port clock_enable ;                                                                        ;
+; EU_Control_System:ECS|OPULA[0]         ; Stuck at GND                   ; EU_Control_System:ECS|instrucaoReal[0]                                 ;
+;                                        ; due to stuck port clock_enable ;                                                                        ;
++----------------------------------------+--------------------------------+------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -484,26 +421,57 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 248   ;
+; Total registers                              ; 383   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 8     ;
-; Number of registers using Asynchronous Clear ; 248   ;
+; Number of registers using Synchronous Load   ; 88    ;
+; Number of registers using Asynchronous Clear ; 304   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 232   ;
+; Number of registers using Clock Enable       ; 357   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                       ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |p8086|RegistradorGeral:RG|Registrador8:AL|q[3]  ;
-; 6:1                ; 16 bits   ; 64 LEs        ; 16 LEs               ; 48 LEs                 ; Yes        ; |p8086|BIURegisters:RB|Registrador16:RegIP|q[10] ;
-; 4:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; No         ; |p8086|DataBus:ADB|Mux0                          ;
-; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |p8086|InstructionQueue:IQ|contador              ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; InstructionQueue:IQ|w_vazio            ; 13      ;
+; Total number of inverted registers = 1 ;         ;
++----------------------------------------+---------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------+
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |p8086|RegistradorGeral:RG|Registrador8:AL|q[5]            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |p8086|RegistradorGeral:RG|Registrador8:AH|q[5]            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |p8086|RegistradorGeral:RG|Registrador8:BL|q[0]            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |p8086|RegistradorGeral:RG|Registrador8:BH|q[7]            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |p8086|RegistradorGeral:RG|Registrador8:DL|q[6]            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |p8086|RegistradorGeral:RG|Registrador8:CH|q[1]            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |p8086|RegistradorGeral:RG|Registrador8:DH|q[2]            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |p8086|RegistradorGeral:RG|Registrador8:CL|q[4]            ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 16 LEs               ; 48 LEs                 ; Yes        ; |p8086|BIURegisters:RB|Registrador16:RegIP|q[4]            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |p8086|InstructionQueue:IQ|vetor_queue[0][0]               ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |p8086|InstructionQueue:IQ|index_leitura[2]                ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |p8086|InstructionQueue:IQ|index_escrita[2]                ;
+; 9:1                ; 3 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; Yes        ; |p8086|EU_Control_System:ECS|entradaRG1[1]                 ;
+; 8:1                ; 8 bits    ; 40 LEs        ; 32 LEs               ; 8 LEs                  ; Yes        ; |p8086|InstructionQueue:IQ|saida_parcial[0]                ;
+; 7:1                ; 6 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; Yes        ; |p8086|EU_Control_System:ECS|instrucaoReal[4]              ;
+; 7:1                ; 8 bits    ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |p8086|EU_Control_System:ECS|\EU_CONTROL:instrucaoAtual[5] ;
+; 7:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |p8086|EU_Control_System:ECS|saidaRG1[2]                   ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |p8086|ULA:ALU|ADD86:add1|Add4                             ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |p8086|InstructionQueue:IQ|contador                        ;
+; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; No         ; |p8086|EU_Control_System:ECS|state                         ;
+; 8:1                ; 8 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |p8086|RegistradorGeral:RG|Mux66                           ;
+; 15:1               ; 16 bits   ; 160 LEs       ; 144 LEs              ; 16 LEs                 ; No         ; |p8086|DataBus:ADB|Mux1                                    ;
+; 78:1               ; 4 bits    ; 208 LEs       ; 40 LEs               ; 168 LEs                ; No         ; |p8086|ULA:ALU|SOperando1[5]                               ;
+; 38:1               ; 3 bits    ; 75 LEs        ; 30 LEs               ; 45 LEs                 ; No         ; |p8086|ULA:ALU|SOperando1[3]                               ;
+; 38:1               ; 8 bits    ; 200 LEs       ; 80 LEs               ; 120 LEs                ; No         ; |p8086|ULA:ALU|SOperando1[8]                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------+
@@ -648,7 +616,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:02     ;
 +----------------+--------------+
 
 
@@ -658,7 +626,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Mar 04 15:12:06 2018
+    Info: Processing started: Sun Mar 04 15:44:20 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off p8086 -c p8086
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file memoriasimples.vhd
@@ -794,17 +762,16 @@ Info (12021): Found 2 design units, including 1 entities, in source file ula.vhd
     Info (12022): Found design unit 1: ULA-comportamento
     Info (12023): Found entity 1: ULA
 Info (12127): Elaborating entity "p8086" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(23): used implicit default value for signal "ADBtoRB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(24): used implicit default value for signal "control_InRB1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(24): used implicit default value for signal "control_InRB2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(25): used implicit default value for signal "control_wRB1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at p8086.vhd(25): used implicit default value for signal "control_wRB2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10036): Verilog HDL or VHDL warning at p8086.vhd(26): object "RBtoADB" assigned a value but never read
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(25): used implicit default value for signal "ADBtoRB" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(26): used implicit default value for signal "control_InRB1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(26): used implicit default value for signal "control_InRB2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(27): used implicit default value for signal "control_wRB1" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at p8086.vhd(27): used implicit default value for signal "control_wRB2" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10036): Verilog HDL or VHDL warning at p8086.vhd(28): object "RBtoADB" assigned a value but never read
 Info (12128): Elaborating entity "BIURegisters" for hierarchy "BIURegisters:RB"
 Info (12128): Elaborating entity "Registrador16" for hierarchy "BIURegisters:RB|Registrador16:RegCS"
 Info (12128): Elaborating entity "AddressBus" for hierarchy "AddressBus:AB"
 Info (12128): Elaborating entity "MemoriaSimples" for hierarchy "MemoriaSimples:BCL"
-Warning (10541): VHDL Signal Declaration warning at MemoriaSimples.vhd(10): used implicit default value for signal "EscritaQueue" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Warning (10541): VHDL Signal Declaration warning at MemoriaSimples.vhd(14): used implicit default value for signal "SaidaRegs" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Info (12128): Elaborating entity "Memory" for hierarchy "MemoriaSimples:BCL|Memory:memoria"
 Info (12128): Elaborating entity "altsyncram" for hierarchy "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component"
@@ -827,7 +794,6 @@ Info (12133): Instantiated megafunction "MemoriaSimples:BCL|Memory:memoria|altsy
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_r6d1.tdf
     Info (12023): Found entity 1: altsyncram_r6d1
 Info (12128): Elaborating entity "altsyncram_r6d1" for hierarchy "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated"
-Critical Warning (127005): Memory depth (65536) in the design file differs from memory depth (256) in the Memory Initialization File "C:/Users/Marcello/Desktop/p8086/MemoriaSimples.mif" -- setting initial value for remaining addresses to 0
 Info (12021): Found 1 design units, including 1 entities, in source file db/decode_ppa.tdf
     Info (12023): Found entity 1: decode_ppa
 Info (12128): Elaborating entity "decode_ppa" for hierarchy "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|decode_ppa:decode3"
@@ -1490,335 +1456,83 @@ Warning (10492): VHDL Process Statement warning at CMP86.vhd(80): signal "BByte"
 Warning (10492): VHDL Process Statement warning at CMP86.vhd(82): signal "half2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at CMP86.vhd(82): signal "half1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at CMP86.vhd(84): signal "half3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (14284): Synthesized away the following node(s):
-    Warning (14285): Synthesized away the following RAM node(s):
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a0"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a1"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a2"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a3"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a4"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a5"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a6"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a7"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a8"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a9"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a10"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a11"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a12"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a13"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a14"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a15"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a16"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a17"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a18"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a19"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a20"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a21"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a22"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a23"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a24"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a25"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a26"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a27"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a28"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a29"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a30"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a31"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a32"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a33"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a34"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a35"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a36"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a37"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a38"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a39"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a40"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a41"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a42"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a43"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a44"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a45"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a46"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a47"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a48"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a49"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a50"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a51"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a52"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a53"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a54"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a55"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a56"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a57"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a58"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a59"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a60"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a61"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a62"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a63"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a64"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a65"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a66"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a67"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a68"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a69"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a70"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a71"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a72"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a73"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a74"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a75"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a76"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a77"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a78"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a79"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a80"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a81"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a82"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a83"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a84"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a85"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a86"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a87"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a88"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a89"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a90"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a91"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a92"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a93"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a94"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a95"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a96"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a97"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a98"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a99"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a100"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a101"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a102"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a103"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a104"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a105"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a106"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a107"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a108"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a109"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a110"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a111"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a112"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a113"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a114"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a115"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a116"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a117"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a118"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a119"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a120"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a121"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a122"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a123"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a124"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a125"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a126"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a127"
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[3]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[4]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[5]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[6]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[7]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[8]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[9]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[10]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[11]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[12]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[13]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[14]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[15]" is permanently disabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[1]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[2]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[3]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[4]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[5]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[6]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[7]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[8]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADD86:add1|SByte[7]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[8]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADC86:adc1|SByte[7]" is permanently disabled
+Warning (14025): LATCH primitive "ULA:ALU|ADD86:add1|SByte[0]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[0]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADC86:adc1|SByte[0]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[0]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[9]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[9]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[1]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADD86:add1|SByte[1]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[1]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADC86:adc1|SByte[1]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[10]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[10]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[2]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADD86:add1|SByte[2]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[2]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADC86:adc1|SByte[2]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[11]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[11]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[3]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADD86:add1|SByte[3]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[3]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADC86:adc1|SByte[3]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[12]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[12]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[4]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADD86:add1|SByte[4]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[4]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADC86:adc1|SByte[4]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[13]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[13]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[5]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADD86:add1|SByte[5]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[5]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADC86:adc1|SByte[5]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[14]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[14]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[6]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADD86:add1|SByte[6]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[6]" is permanently enabled
+Warning (14025): LATCH primitive "ULA:ALU|ADC86:adc1|SByte[6]" is permanently disabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[15]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[15]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADD86:add1|S[7]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|ADC86:adc1|S[7]" is permanently enabled
 Warning (14026): LATCH primitive "ULA:ALU|SOperando1[8]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SOperando1[0]" is permanently enabled
 Warning (14026): LATCH primitive "ULA:ALU|SOperando1[9]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[10]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[11]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[12]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[13]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[14]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[15]" is permanently enabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[2]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[1]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[0]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[0]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[1]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[2]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[3]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[4]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[5]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[6]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[7]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[8]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[10]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[11]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[12]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[13]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[14]" is permanently disabled
-Warning (14025): LATCH primitive "ULA:ALU|SFlags[15]" is permanently disabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[0]" is permanently enabled
-Warning (14025): LATCH primitive "ULA:ALU|SOperando2[3]" is permanently disabled
-Warning (14284): Synthesized away the following node(s):
-    Warning (14285): Synthesized away the following RAM node(s):
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a0"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a1"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a2"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a3"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a4"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a5"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a6"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a7"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a8"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a9"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a10"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a11"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a12"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a13"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a14"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a15"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a16"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a17"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a18"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a19"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a20"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a21"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a22"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a23"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a24"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a25"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a26"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a27"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a28"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a29"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a30"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a31"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a32"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a33"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a34"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a35"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a36"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a37"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a38"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a39"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a40"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a41"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a42"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a43"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a44"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a45"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a46"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a47"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a48"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a49"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a50"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a51"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a52"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a53"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a54"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a55"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a56"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a57"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a58"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a59"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a60"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a61"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a62"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a63"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a64"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a65"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a66"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a67"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a68"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a69"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a70"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a71"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a72"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a73"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a74"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a75"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a76"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a77"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a78"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a79"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a80"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a81"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a82"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a83"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a84"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a85"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a86"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a87"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a88"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a89"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a90"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a91"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a92"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a93"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a94"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a95"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a96"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a97"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a98"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a99"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a100"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a101"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a102"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a103"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a104"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a105"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a106"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a107"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a108"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a109"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a110"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a111"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a112"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a113"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a114"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a115"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a116"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a117"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a118"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a119"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a120"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a121"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a122"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a123"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a124"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a125"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a126"
-        Warning (14320): Synthesized away node "MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component|altsyncram_r6d1:auto_generated|ram_block1a127"
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[0]" is permanently enabled
 Warning (14026): LATCH primitive "ULA:ALU|SOperando1[1]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[2]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[3]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[4]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[5]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[6]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[7]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[8]" is permanently enabled
-Warning (14026): LATCH primitive "ULA:ALU|SOperando1[9]" is permanently enabled
 Warning (14026): LATCH primitive "ULA:ALU|SOperando1[10]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SOperando1[2]" is permanently enabled
 Warning (14026): LATCH primitive "ULA:ALU|SOperando1[11]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SOperando1[3]" is permanently enabled
 Warning (14026): LATCH primitive "ULA:ALU|SOperando1[12]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SOperando1[4]" is permanently enabled
 Warning (14026): LATCH primitive "ULA:ALU|SOperando1[13]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SOperando1[5]" is permanently enabled
 Warning (14026): LATCH primitive "ULA:ALU|SOperando1[14]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SOperando1[6]" is permanently enabled
 Warning (14026): LATCH primitive "ULA:ALU|SOperando1[15]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SOperando1[7]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SFlags[0]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SFlags[2]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SFlags[11]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SFlags[4]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SFlags[6]" is permanently enabled
+Warning (14026): LATCH primitive "ULA:ALU|SFlags[7]" is permanently enabled
 Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
-Info (17049): 6 registers lost all their fanouts during netlist optimizations.
+Info (13000): Registers with preset signals will power-up high
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Info (17049): 18 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 24 input pin(s) that do not drive logic
+Warning (21074): Design contains 8 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "entradaCX[0]"
     Warning (15610): No output dependent on input pin "entradaCX[1]"
     Warning (15610): No output dependent on input pin "entradaCX[2]"
@@ -1827,30 +1541,15 @@ Warning (21074): Design contains 24 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "entradaCX[5]"
     Warning (15610): No output dependent on input pin "entradaCX[6]"
     Warning (15610): No output dependent on input pin "entradaCX[7]"
-    Warning (15610): No output dependent on input pin "entradaIP[0]"
-    Warning (15610): No output dependent on input pin "entradaIP[1]"
-    Warning (15610): No output dependent on input pin "entradaIP[2]"
-    Warning (15610): No output dependent on input pin "entradaIP[3]"
-    Warning (15610): No output dependent on input pin "entradaIP[4]"
-    Warning (15610): No output dependent on input pin "entradaIP[5]"
-    Warning (15610): No output dependent on input pin "entradaIP[6]"
-    Warning (15610): No output dependent on input pin "entradaIP[7]"
-    Warning (15610): No output dependent on input pin "entradaIP[8]"
-    Warning (15610): No output dependent on input pin "entradaIP[9]"
-    Warning (15610): No output dependent on input pin "entradaIP[10]"
-    Warning (15610): No output dependent on input pin "entradaIP[11]"
-    Warning (15610): No output dependent on input pin "entradaIP[12]"
-    Warning (15610): No output dependent on input pin "entradaIP[13]"
-    Warning (15610): No output dependent on input pin "entradaIP[14]"
-    Warning (15610): No output dependent on input pin "entradaIP[15]"
-Info (21057): Implemented 764 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1330 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 259 input pins
-    Info (21059): Implemented 256 output pins
-    Info (21061): Implemented 249 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 853 warnings
-    Info: Peak virtual memory: 513 megabytes
-    Info: Processing ended: Sun Mar 04 15:12:09 2018
-    Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:03
+    Info (21059): Implemented 276 output pins
+    Info (21061): Implemented 667 logic cells
+    Info (21064): Implemented 128 RAM segments
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 581 warnings
+    Info: Peak virtual memory: 523 megabytes
+    Info: Processing ended: Sun Mar 04 15:44:25 2018
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:05
 
 

@@ -528,6 +528,26 @@ saidaI3[12] <= BIURegisters:RB.SDebugInternal3[12]
 saidaI3[13] <= BIURegisters:RB.SDebugInternal3[13]
 saidaI3[14] <= BIURegisters:RB.SDebugInternal3[14]
 saidaI3[15] <= BIURegisters:RB.SDebugInternal3[15]
+saidaIQ[0] <= InstructionQueue:IQ.saida[0]
+saidaIQ[1] <= InstructionQueue:IQ.saida[1]
+saidaIQ[2] <= InstructionQueue:IQ.saida[2]
+saidaIQ[3] <= InstructionQueue:IQ.saida[3]
+saidaIQ[4] <= InstructionQueue:IQ.saida[4]
+saidaIQ[5] <= InstructionQueue:IQ.saida[5]
+saidaIQ[6] <= InstructionQueue:IQ.saida[6]
+saidaIQ[7] <= InstructionQueue:IQ.saida[7]
+saidaMem[0] <= MemoriaSimples:BCL.SaidaQueue[0]
+saidaMem[1] <= MemoriaSimples:BCL.SaidaQueue[1]
+saidaMem[2] <= MemoriaSimples:BCL.SaidaQueue[2]
+saidaMem[3] <= MemoriaSimples:BCL.SaidaQueue[3]
+saidaMem[4] <= MemoriaSimples:BCL.SaidaQueue[4]
+saidaMem[5] <= MemoriaSimples:BCL.SaidaQueue[5]
+saidaMem[6] <= MemoriaSimples:BCL.SaidaQueue[6]
+saidaMem[7] <= MemoriaSimples:BCL.SaidaQueue[7]
+saidaQueueVazia <= InstructionQueue:IQ.vazio
+saidaQueueW <= MemoriaSimples:BCL.EscritaQueue
+saidaQueueR <= EU_Control_System:ECS.LeituraQueue
+saidaQueueFull <= InstructionQueue:IQ.cheio
 
 
 |p8086|BIURegisters:RB
@@ -2517,7 +2537,8 @@ Ender[19] => ~NO_FANOUT~
 clk => Memory:memoria.clock
 reset => ~NO_FANOUT~
 QueueFull => IncrementaPC.DATAIN
-EscritaQueue <= EscritaQueue.DB_MAX_OUTPUT_PORT_TYPE
+QueueFull => EscritaQueue.DATAIN
+EscritaQueue <= QueueFull.DB_MAX_OUTPUT_PORT_TYPE
 IncrementaPC <= QueueFull.DB_MAX_OUTPUT_PORT_TYPE
 ControleBIURegister1[0] <= <GND>
 ControleBIURegister1[1] <= <GND>

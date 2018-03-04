@@ -9,8 +9,10 @@ entity p8086 is
 	wDEBUG	: in std_logic;
    entradaAX, entradaBX, entradaCX, entradaDX, entradaSP, entradaBP, entradaDI, entradaSI	: in  std_logic_vector(15 downto 0);
 	entradaCS, entradaDS, entradaSS, entradaES, entradaIP, entradaI1, entradaI2, entradaI3	: in  std_logic_vector(15 downto 0);
-	saidaAX, saidaBX, saidaCX, saidaDX, saidaSP, saidaBP, saidaDI, saidaSI						: out  std_logic_vector(15 downto 0);
-	saidaCS, saidaDS, saidaSS, saidaES, saidaIP, saidaI1, saidaI2, saidaI3						: out  std_logic_vector(15 downto 0)
+	saidaAX, saidaBX, saidaCX, saidaDX, saidaSP, saidaBP, saidaDI, saidaSI						: out std_logic_vector(15 downto 0);
+	saidaCS, saidaDS, saidaSS, saidaES, saidaIP, saidaI1, saidaI2, saidaI3						: out std_logic_vector(15 downto 0);
+	saidaIQ, saidaMem							 																	: out std_logic_vector(7 downto 0);
+	saidaQueueVazia, saidaQueueW, saidaQueueR, saidaQueueFull										: out std_logic
     );
 end p8086;
  --controle = sinais de escrita e leitura; selecao = escolher entre varias entradas ou saidas; entrada e saida = sinal que liga dois componente; flags = sinais que sai dos componentes.
@@ -201,6 +203,12 @@ begin
 												IQtoECS,
 												control_QueueEmpty
 												);
+	saidaMem <= BCLtoIQ;
+	saidaIQ <= IQtoECS;
+	saidaQueueVazia <= control_QueueEmpty;
+	saidaQueueFull	 <= control_QueueFull;
+	saidaQueueW		 <= control_wQueue;
+	saidaQueueR		 <= control_rQueue;
 	--Controle do processador
 	ECS:	EU_Control_System		port map(
 												reset,

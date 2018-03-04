@@ -1,0 +1,81 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\Marcello\Desktop\p8086\simulation\qsim
+vp8086
+Z1 IX1I2DQUg`g:Mk5U_A^gER1
+Z2 V54VB[H32N6OVa[HKCP;5P0
+Z3 dC:\Users\Marcello\Desktop\p8086\simulation\qsim
+Z4 w1520189139
+Z5 8p8086.vo
+Z6 Fp8086.vo
+L0 31
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s90 -work|work|p8086.vo|
+Z9 o-work work -O0
+!i10b 1
+Z10 !s100 WI][eIj;gh650ZFPXm4EC1
+!s85 0
+Z11 !s108 1520189140.463000
+Z12 !s107 p8086.vo|
+!s101 -O0
+vp8086_vlg_check_tst
+!i10b 1
+Z13 !s100 h7Q0LKOO<zTB0`XiPHELP1
+Z14 ILd2TDBDSihBKgKG:0IhTA0
+Z15 V2lK4?R=b7R9bD75V<:XfW0
+R3
+Z16 w1520189138
+Z17 8p8086.vt
+Z18 Fp8086.vt
+L0 93
+R7
+r1
+!s85 0
+31
+Z19 !s108 1520189141.028000
+Z20 !s107 p8086.vt|
+Z21 !s90 -work|work|p8086.vt|
+!s101 -O0
+R9
+vp8086_vlg_sample_tst
+!i10b 1
+Z22 !s100 51i8ZLjFeGRggi[_A_YMN0
+Z23 IDZ0In?QOe1GnJ=jYNBCcM2
+Z24 VeSdVZ1;;4FBePU]`]`YWo2
+R3
+R16
+R17
+R18
+L0 29
+R7
+r1
+!s85 0
+31
+R19
+R20
+R21
+!s101 -O0
+R9
+vp8086_vlg_vec_tst
+!i10b 1
+Z25 !s100 b;C6XM7aSdhP[6<QR2F7R2
+Z26 I;JWZ8`FAOOdE<]:z1;5:A2
+Z27 V2GUN1h`Nj1gGgoDlGX_>73
+R3
+R16
+R17
+R18
+Z28 L0 5309
+R7
+r1
+!s85 0
+31
+R19
+R20
+R21
+!s101 -O0
+R9
