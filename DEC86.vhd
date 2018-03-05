@@ -22,7 +22,7 @@ architecture comportamento of DEC86 is
 		process(clk)
 		begin
 		if ByteControl = '0' then
-			S <= A + "1000000000000000";
+			S <= A + "1111111111111111";
 			Overflow <= '0';
 			zero <= '0';
 			SF <= '0';
@@ -46,7 +46,7 @@ architecture comportamento of DEC86 is
 			end if;
 		
 		else
-			S(7 downto 0) <= AByte + "10000000";
+			S(7 downto 0) <= AByte + "11111111";
 			S(15 downto 8) <= "00000000";
 			Overflow <= '0';
 			zero <= '0';

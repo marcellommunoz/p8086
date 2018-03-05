@@ -30,7 +30,7 @@ begin
   p_CONTROL : process (clk, reset) is
 	VARIABLE contador 		: integer range -1 to 6 := 0;
   begin
-	if(reset = '1') then
+	if(reset = '0') then
         contador := 0;
         index_leitura   <= 0;
         index_escrita   <= 0;

@@ -11,7 +11,7 @@ entity InstructionQueue is
     cheio   	: out std_logic;
     r   : in  std_logic;
     saida : out std_logic_vector(7 downto 0);
-    vazio   : out std_logic;
+    vazio   : out std_logic
     );
 end InstructionQueue;
  

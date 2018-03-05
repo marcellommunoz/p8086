@@ -46,6 +46,8 @@ set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name MIF_FILE MemoriaSimples.mif
+set_global_assignment -name VHDL_FILE MemoriaSimples.vhd
 set_global_assignment -name VHDL_FILE EU_Control_System.vhd
 set_global_assignment -name VHDL_FILE XOR86.vhd
 set_global_assignment -name VHDL_FILE XCHG86.vhd
@@ -90,4 +92,10 @@ set_global_assignment -name VHDL_FILE BIURegisters.vhd
 set_global_assignment -name VHDL_FILE p8086.vhd
 set_global_assignment -name VHDL_FILE ULA.vhd
 set_global_assignment -name MIF_FILE p8086.mif
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
+set_global_assignment -name SIMULATION_MODE FUNCTIONAL
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST ON -section_id eda_simulation
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "C:/Users/Tuturu/Desktop/Trabalhos Universidade/p8086/Waveform.vwf"

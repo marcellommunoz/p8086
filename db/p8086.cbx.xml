@@ -1,6 +1,12 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="p8086">
-		<CBX_INST_ENTRY INSTANCE_NAME="|p8086|BusControlLogic:BSL|Memory:memoria|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_5ba1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|p8086|ULA:ALU|DIV86:div1|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_qlo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|p8086|ULA:ALU|IDIV86:idiv1|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_qlo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|p8086|MemoriaSimples:BCL|Memory:memoria|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_r6d1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|p8086|ULA:ALU|DIV86:div1|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_nto.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|p8086|ULA:ALU|IDIV86:idiv1|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_nto.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|p8086|ULA:ALU|MUL86:mul1|lpm_mult:Mult0" CBX_FILE_NAME="mult_h1t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|p8086|ULA:ALU|MULB86:mulb1|lpm_mult:Mult0" CBX_FILE_NAME="mult_lus.tdf"/>
 	</PROJECT>
 </LOG_ROOT>
