@@ -39,6 +39,7 @@ entity p8086 is
         saidaI3         : out    vl_logic_vector(15 downto 0);
         saidaIQ         : out    vl_logic_vector(7 downto 0);
         saidaMem        : out    vl_logic_vector(7 downto 0);
+        SFROut          : out    vl_logic_vector(15 downto 0);
         saidaQueueVazia : out    vl_logic;
         saidaQueueW     : out    vl_logic;
         saidaQueueR     : out    vl_logic;

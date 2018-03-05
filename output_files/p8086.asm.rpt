@@ -1,5 +1,5 @@
 Assembler report for p8086
-Sun Mar 04 15:44:49 2018
+Mon Mar 05 17:45:30 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -10,8 +10,8 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/Users/Marcello/Desktop/p8086/output_files/p8086.sof
-  6. Assembler Device Options: C:/Users/Marcello/Desktop/p8086/output_files/p8086.pof
+  5. Assembler Device Options: C:/Users/Tuturu/Desktop/Trabalhos Universidade/p8086/output_files/p8086.sof
+  6. Assembler Device Options: C:/Users/Tuturu/Desktop/Trabalhos Universidade/p8086/output_files/p8086.pof
   7. Assembler Messages
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Mar 04 15:44:49 2018 ;
+; Assembler Status      ; Successful - Mon Mar 05 17:45:30 2018 ;
 ; Revision Name         ; p8086                                 ;
 ; Top-level Entity Name ; p8086                                 ;
 ; Family                ; Cyclone II                            ;
@@ -78,37 +78,37 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+--------------------------------------------------------+
-; Assembler Generated Files                              ;
-+--------------------------------------------------------+
-; File Name                                              ;
-+--------------------------------------------------------+
-; C:/Users/Marcello/Desktop/p8086/output_files/p8086.sof ;
-; C:/Users/Marcello/Desktop/p8086/output_files/p8086.pof ;
-+--------------------------------------------------------+
++-----------------------------------------------------------------------------+
+; Assembler Generated Files                                                   ;
++-----------------------------------------------------------------------------+
+; File Name                                                                   ;
++-----------------------------------------------------------------------------+
+; C:/Users/Tuturu/Desktop/Trabalhos Universidade/p8086/output_files/p8086.sof ;
+; C:/Users/Tuturu/Desktop/Trabalhos Universidade/p8086/output_files/p8086.pof ;
++-----------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/Marcello/Desktop/p8086/output_files/p8086.sof ;
-+----------------+-----------------------------------------------------------------+
-; Option         ; Setting                                                         ;
-+----------------+-----------------------------------------------------------------+
-; Device         ; EP2C70F896C6                                                    ;
-; JTAG usercode  ; 0x006F0FAD                                                      ;
-; Checksum       ; 0x006F0FAD                                                      ;
-+----------------+-----------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/Tuturu/Desktop/Trabalhos Universidade/p8086/output_files/p8086.sof ;
++----------------+--------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                              ;
++----------------+--------------------------------------------------------------------------------------+
+; Device         ; EP2C70F896C6                                                                         ;
+; JTAG usercode  ; 0x00B2DD88                                                                           ;
+; Checksum       ; 0x00B2DD88                                                                           ;
++----------------+--------------------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/Marcello/Desktop/p8086/output_files/p8086.pof ;
-+--------------------+-------------------------------------------------------------+
-; Option             ; Setting                                                     ;
-+--------------------+-------------------------------------------------------------+
-; Device             ; EPCS16                                                      ;
-; JTAG usercode      ; 0x00000000                                                  ;
-; Checksum           ; 0x18634EB3                                                  ;
-; Compression Ratio  ; 3                                                           ;
-+--------------------+-------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/Tuturu/Desktop/Trabalhos Universidade/p8086/output_files/p8086.pof ;
++--------------------+----------------------------------------------------------------------------------+
+; Option             ; Setting                                                                          ;
++--------------------+----------------------------------------------------------------------------------+
+; Device             ; EPCS16                                                                           ;
+; JTAG usercode      ; 0x00000000                                                                       ;
+; Checksum           ; 0x17E4C108                                                                       ;
+; Compression Ratio  ; 2                                                                                ;
++--------------------+----------------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -117,14 +117,14 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Mar 04 15:44:46 2018
+    Info: Processing started: Mon Mar 05 17:45:26 2018
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off p8086 -c p8086
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 455 megabytes
-    Info: Processing ended: Sun Mar 04 15:44:49 2018
-    Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Peak virtual memory: 467 megabytes
+    Info: Processing ended: Mon Mar 05 17:45:30 2018
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:04
 
 

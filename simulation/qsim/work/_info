@@ -4,10 +4,10 @@ K3
 cModel Technology
 Z0 dC:\Users\Marcello\Desktop\p8086\simulation\qsim
 vp8086
-Z1 IX1I2DQUg`g:Mk5U_A^gER1
-Z2 V54VB[H32N6OVa[HKCP;5P0
-Z3 dC:\Users\Marcello\Desktop\p8086\simulation\qsim
-Z4 w1520189139
+Z1 ICNkJJMk<U7QgK??<2>R_b2
+Z2 VANAP72GS=;?DM8PGSU20D3
+Z3 dC:\Users\Tuturu\Desktop\Trabalhos Universidade\p8086\simulation\qsim
+Z4 w1520282883
 Z5 8p8086.vo
 Z6 Fp8086.vo
 L0 31
@@ -17,18 +17,18 @@ r1
 Z8 !s90 -work|work|p8086.vo|
 Z9 o-work work -O0
 !i10b 1
-Z10 !s100 WI][eIj;gh650ZFPXm4EC1
+Z10 !s100 eZ4T8XnDkY?L@Kl105Fk93
 !s85 0
-Z11 !s108 1520189140.463000
+Z11 !s108 1520282884.220000
 Z12 !s107 p8086.vo|
 !s101 -O0
 vp8086_vlg_check_tst
 !i10b 1
-Z13 !s100 h7Q0LKOO<zTB0`XiPHELP1
-Z14 ILd2TDBDSihBKgKG:0IhTA0
-Z15 V2lK4?R=b7R9bD75V<:XfW0
+Z13 !s100 >gcQ?2abEN>H;Y>ghdWPL3
+Z14 IO6eigmJiLH^=200kRa[RB2
+Z15 VIf8_g86@M0j6XA^j;i9z90
 R3
-Z16 w1520189138
+Z16 w1520282880
 Z17 8p8086.vt
 Z18 Fp8086.vt
 L0 93
@@ -36,7 +36,7 @@ R7
 r1
 !s85 0
 31
-Z19 !s108 1520189141.028000
+Z19 !s108 1520282886.042000
 Z20 !s107 p8086.vt|
 Z21 !s90 -work|work|p8086.vt|
 !s101 -O0
@@ -62,14 +62,14 @@ R21
 R9
 vp8086_vlg_vec_tst
 !i10b 1
-Z25 !s100 b;C6XM7aSdhP[6<QR2F7R2
-Z26 I;JWZ8`FAOOdE<]:z1;5:A2
+Z25 !s100 G5NeDUV2Xg>bo2APY]8kJ2
+Z26 Ia>J5N8:Eb1YJd<Ol02MOj0
 Z27 V2GUN1h`Nj1gGgoDlGX_>73
 R3
 R16
 R17
 R18
-Z28 L0 5309
+Z28 L0 5605
 R7
 r1
 !s85 0

@@ -30,7 +30,7 @@ entity EU_Control_System is
 end EU_Control_System;
  
 architecture description of EU_Control_System is
-	TYPE State_type IS (fetch, arithmetic161, arithmetic162, arithmetic8, exe, resposta, final);
+	TYPE State_type IS (fetch, arithmetic161, arithmetic162, exe, resposta, final, halt);
 	SIGNAL state : State_Type;
 	signal destino : std_logic_vector(3 downto 0);
 	signal instrucaoReal : std_logic_vector(7 downto 0);
@@ -70,7 +70,7 @@ begin
 							if(QueueVazia = '1') then
 								state <= fetch;
 							else
-								LeituraQueue <= '0'; --sinal para ler instruçao da queue
+								LeituraQueue <= '0'; --sinal para parar de ler instruçao da queue
 								state <= arithmetic161;
 							end if;
 							
@@ -80,7 +80,7 @@ begin
 							if(QueueVazia = '1') then
 								state <= fetch;
 							else
-								LeituraQueue <= '1'; --sinal para ler instruçao da queue
+								LeituraQueue <= '0'; --sinal para parar de ler instruçao da queue
 								state <= arithmetic161;
 							end if;
 							
@@ -90,7 +90,7 @@ begin
 							if(QueueVazia = '1') then
 								state <= fetch;
 							else
-								LeituraQueue <= '1'; --sinal para ler instruçao da queue
+								LeituraQueue <= '0'; --sinal para parar de ler instruçao da queue
 								state <= arithmetic161;
 							end if;
 							
@@ -100,7 +100,7 @@ begin
 							if(QueueVazia = '1') then
 								state <= fetch;
 							else
-								LeituraQueue <= '1'; --sinal para ler instruçao da queue
+								LeituraQueue <= '0'; --sinal para parar de ler instruçao da queue
 								state <= arithmetic161;
 							end if;
 						
@@ -110,22 +110,47 @@ begin
 							if(QueueVazia = '1') then
 								state <= fetch;
 							else
-								LeituraQueue <= '1'; --sinal para ler instruçao da queue
+								LeituraQueue <= '0'; --sinal para parar de ler instruçao da queue
 								state <= arithmetic161;
 							end if;
 							
-						elsif(instrucao = "00000111") then -- ADD registrador registrador 8
+						elsif(instrucao = "00000111") then -- ADC registrador registrador 16
 							instrucaoAtual := entradaInstrucao;
-							instrucaoReal <= "01010000";
+							instrucaoReal <= "00010001";
 							if(QueueVazia = '1') then
 								state <= fetch;
 							else
-								LeituraQueue <= '1'; --sinal para ler instruçao da queue
-								state <= arithmetic8;
+								LeituraQueue <= '0'; --sinal para parar de ler instruçao da queue
+								state <= arithmetic161;
 							end if;
-						 elsif(instrucao = "00000000") then
+							
+						elsif(instrucao = "00001000") then -- NOT registrador registrador 16
+							instrucaoAtual := entradaInstrucao;
+							instrucaoReal <= "00011010";
+							if(QueueVazia = '1') then
+								state <= fetch;
+							else
+								LeituraQueue <= '0'; --sinal para parar de ler instruçao da queue
+								state <= arithmetic161;
+							end if;
+							
+						elsif(instrucao = "00001001") then -- SUBC registrador registrador 16
+							instrucaoAtual := entradaInstrucao;
+							instrucaoReal <= "10010001";
+							if(QueueVazia = '1') then
+								state <= fetch;
+							else
+								LeituraQueue <= '0'; --sinal para parar de ler instruçao da queue
+								state <= arithmetic161;
+							end if;
+
+						elsif(instrucao = "00000000") then -- NOP
 							--LeituraQueue <= '0';
 							state <= fetch;
+							
+						elsif(instrucao = "11111111") then --HALT
+							--LeituraQueue <= '0';
+							state <= halt;
 						end if;
 					end if;
 					
@@ -216,51 +241,6 @@ begin
 						sinalEscritaRT1 <= '0';
 						sinalEscritaRT2 <= '1'; --sinal para escrever no regitrador temporario 2
 						state <= exe;
-
-				
-				when arithmetic8 =>
-					LeituraQueue <= '0';
-					if entradaInstrucao(7 downto 4) = "0000" then
-						saidaRG1 <= "0000"; 
-						elsif entradaInstrucao(7 downto 4) = "0001" then
-						saidaRG1 <= "0001";
-						elsif entradaInstrucao(7 downto 4) = "0010" then
-						saidaRG1 <= "0010";
-						elsif entradaInstrucao(7 downto 4) = "0011" then
-						saidaRG1 <= "0011";
-						elsif entradaInstrucao(7 downto 4) = "0100" then
-						saidaRG1 <= "0100";
-						elsif entradaInstrucao(7 downto 4) = "0101" then
-						saidaRG1 <= "0101";
-						elsif entradaInstrucao(7 downto 4) = "0110" then
-						saidaRG1 <= "0110";
-						elsif entradaInstrucao(7 downto 4) = "0111" then
-						saidaRG1 <= "0111";
-					end if;
-					
-					if entradaInstrucao(7 downto 4) = "0000" then
-						saidaRG2<= "0000";
-						elsif entradaInstrucao(7 downto 4) = "0001" then
-						saidaRG2<= "0001";
-						elsif entradaInstrucao(7 downto 4) = "0010" then
-						saidaRG2<= "0010";
-						elsif entradaInstrucao(7 downto 4) = "0011" then
-						saidaRG2<= "0011";
-						elsif entradaInstrucao(7 downto 4) = "0100" then
-						saidaRG2<= "0100";
-						elsif entradaInstrucao(7 downto 4) = "0101" then
-						saidaRG2<= "0101";
-						elsif entradaInstrucao(7 downto 4) = "0110" then
-						saidaRG2<= "0110";
-						elsif entradaInstrucao(7 downto 4) = "0111" then
-						saidaRG2<= "0111";
-					end if;
-								
-						saidaDataBUS <= "000";
-						LeituraQueue <= '0';
-						destino <= entradaInstrucao(7 downto 4);
-						sinalEscritaRT1 <= '1'; --sinal para escrever no regitrador temporario 1 
-						state <= exe;
 						
 			when exe => --Parte final da instruçao 
 					LeituraQueue <= '0';
@@ -320,8 +300,14 @@ begin
 					sinalEscritaRT1 <= '0';
 					sinalEscritaRT2 <= '0';
 					state <= fetch;
+					
+				when halt => 
+					LeituraQueue <= '0';
+					sinalEscritaRG1 <= '0'; 
+					sinalEscritaRG2 <= '0';
+					sinalEscritaRT1 <= '0';
+					sinalEscritaRT2 <= '0';
 
-				
 			end case;
 		end if;
 	end process EU_CONTROL;

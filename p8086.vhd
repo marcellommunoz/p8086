@@ -12,12 +12,12 @@ entity p8086 is
 	saidaAX, saidaBX, saidaCX, saidaDX, saidaSP, saidaBP, saidaDI, saidaSI						: out std_logic_vector(15 downto 0);
 	saidaCS, saidaDS, saidaSS, saidaES, saidaIP, saidaI1, saidaI2, saidaI3						: out std_logic_vector(15 downto 0);
 	saidaIQ, saidaMem							 																	: out std_logic_vector(7 downto 0);
-	SControlInRG1, SControlInRG2,	SControlOutRG1,	SControlOutRG2									: out std_logic_vector(3 downto 0);--debug
-	SControlwRG1, 	SControlwRG2, 	SControlwRT1,	SControlwRT2										: out std_logic;--debug
-	SControlOpULA																									: out std_logic_vector(7 downto 0);--debug
-	SRTtoULA1, SRTtoULA2 																						: out std_logic_vector(15 downto 0);--debug
-	SRGtoADB1, SRGtoADB2																							: out std_logic_vector(7 downto 0);--debug
-	
+	--SControlInRG1, SControlInRG2,	SControlOutRG1,	SControlOutRG2									: out std_logic_vector(3 downto 0);--debug
+	--SControlwRG1, 	SControlwRG2, 	SControlwRT1,	SControlwRT2										: out std_logic;--debug
+	--SControlOpULA																									: out std_logic_vector(7 downto 0);--debug
+	--SRTtoULA1, SRTtoULA2 																						: out std_logic_vector(15 downto 0);--debug
+	--SRGtoADB1, SRGtoADB2																							: out std_logic_vector(7 downto 0);--debug
+	SFROut																											: out std_logic_vector(15 downto 0);
 	saidaQueueVazia, saidaQueueW, saidaQueueR, saidaQueueFull										: out std_logic
     );
 end p8086;
@@ -230,15 +230,15 @@ begin
 												control_OpULA,
 												control_OutRB1
 												);
-	SControlInRG1 <= Control_InRG1;
-	SControlInRG2 <= Control_InRG2;
-	SControlOutRG1 <= Control_OutRG1;
-	SControlOutRG2 <= Control_OutRG2;
-	SControlwRG1 <= Control_wRG1;
-	SControlwRG2 <= Control_wrG2;
-	SControlwRT1 <= Control_wRT1;
-	SControlwRT2 <= Control_wrT2;
-	SControlOpULA<= control_OpULA;
+	--SControlInRG1 <= Control_InRG1;
+	--SControlInRG2 <= Control_InRG2;
+	--SControlOutRG1 <= Control_OutRG1;
+	--SControlOutRG2 <= Control_OutRG2;
+	--SControlwRG1 <= Control_wRG1;
+	--SControlwRG2 <= Control_wrG2;
+	--SControlwRT1 <= Control_wRT1;
+	--SControlwRT2 <= Control_wrT2;
+	--SControlOpULA<= control_OpULA;
 				 
 	--Registradores de proposito geral
 	RG:	RegistradorGeral 		port map(
@@ -250,8 +250,8 @@ begin
 												entradaAX, entradaBX, entradaCX, entradaDX, entradaSP, entradaBP, entradaDI, entradaSI,
 												saidaAX, saidaBX, saidaCX, saidaDX, saidaSP, saidaBP, saidaDI, saidaSI
 												);
-		SRGtoADB1 <= RGtoADB1;
-		SRGtoADB2 <= RGtoADB2;
+		--SRGtoADB1 <= RGtoADB1;
+		--SRGtoADB2 <= RGtoADB2;
 	--Registradores dos operandos da ULA
 	RT:	RegisterTemp 			port map(
 												ADBtoRT1, ADBtoRT2,
@@ -259,8 +259,8 @@ begin
 												clock, 
 												RTtoADB1, RTtoADB2, RTtoULA1, RTtoULA2);
 												
-	SRTtoULA1 <= RTtoULA1;
-	SRTtoULA2 <= RTtoULA2;											
+	--SRTtoULA1 <= RTtoULA1;
+	--SRTtoULA2 <= RTtoULA2;											
 	--barramento da ULA
 	ADB:	DataBus 					port map(
 												control_InADB,
@@ -284,5 +284,6 @@ begin
 												reset,
 												clock,
 												FRout);
+	SFRout <= FRout;
 	saidaIP <= IPAtual;
 end description;

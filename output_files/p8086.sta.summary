@@ -2,9 +2,17 @@
 TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
+Type  : Slow Model Setup 'EU_Control_System:ECS|OPULA[0]'
+Slack : -123.785
+TNS   : -2090.800
+
 Type  : Slow Model Setup 'clock'
-Slack : -5.479
-TNS   : -9530.173
+Slack : -6.592
+TNS   : -10410.875
+
+Type  : Slow Model Hold 'EU_Control_System:ECS|OPULA[0]'
+Slack : -2.877
+TNS   : -53.530
 
 Type  : Slow Model Hold 'clock'
 Slack : 0.391
@@ -12,11 +20,23 @@ TNS   : 0.000
 
 Type  : Slow Model Minimum Pulse Width 'clock'
 Slack : -2.000
-TNS   : -8064.380
+TNS   : -8096.380
+
+Type  : Slow Model Minimum Pulse Width 'EU_Control_System:ECS|OPULA[0]'
+Slack : -0.002
+TNS   : -0.140
+
+Type  : Fast Model Setup 'EU_Control_System:ECS|OPULA[0]'
+Slack : -56.479
+TNS   : -942.221
 
 Type  : Fast Model Setup 'clock'
-Slack : -2.113
-TNS   : -3542.617
+Slack : -2.603
+TNS   : -3948.178
+
+Type  : Fast Model Hold 'EU_Control_System:ECS|OPULA[0]'
+Slack : -1.729
+TNS   : -32.300
 
 Type  : Fast Model Hold 'clock'
 Slack : 0.215
@@ -24,6 +44,10 @@ TNS   : 0.000
 
 Type  : Fast Model Minimum Pulse Width 'clock'
 Slack : -2.000
-TNS   : -8064.380
+TNS   : -8096.380
+
+Type  : Fast Model Minimum Pulse Width 'EU_Control_System:ECS|OPULA[0]'
+Slack : 0.285
+TNS   : 0.000
 
 ------------------------------------------------------------

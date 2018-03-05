@@ -18,7 +18,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "03/04/2018 15:45:38"
+// Generated on "03/05/2018 17:48:00"
                                                                         
 // Verilog Self-Checking Test Bench (with test vectors) for design :    p8086
 // 
@@ -113,6 +113,7 @@ module p8086_vlg_check_tst (
 	saidaSI,
 	saidaSP,
 	saidaSS,
+	SFROut,
 	sampler_rx
 );
 input [15:0] saidaAX;
@@ -137,6 +138,7 @@ input  saidaQueueW;
 input [15:0] saidaSI;
 input [15:0] saidaSP;
 input [15:0] saidaSS;
+input [15:0] SFROut;
 input sampler_rx;
 
 reg [15:0] saidaAX_expected;
@@ -161,6 +163,7 @@ reg  saidaQueueW_expected;
 reg [15:0] saidaSI_expected;
 reg [15:0] saidaSP_expected;
 reg [15:0] saidaSS_expected;
+reg [15:0] SFROut_expected;
 
 reg [15:0] saidaAX_prev;
 reg [15:0] saidaBP_prev;
@@ -184,6 +187,7 @@ reg  saidaQueueW_prev;
 reg [15:0] saidaSI_prev;
 reg [15:0] saidaSP_prev;
 reg [15:0] saidaSS_prev;
+reg [15:0] SFROut_prev;
 
 reg [15:0] saidaAX_expected_prev;
 reg [15:0] saidaBP_expected_prev;
@@ -207,6 +211,7 @@ reg  saidaQueueW_expected_prev;
 reg [15:0] saidaSI_expected_prev;
 reg [15:0] saidaSP_expected_prev;
 reg [15:0] saidaSS_expected_prev;
+reg [15:0] SFROut_expected_prev;
 
 reg [15:0] last_saidaAX_exp;
 reg [15:0] last_saidaBP_exp;
@@ -230,13 +235,14 @@ reg  last_saidaQueueW_exp;
 reg [15:0] last_saidaSI_exp;
 reg [15:0] last_saidaSP_exp;
 reg [15:0] last_saidaSS_exp;
+reg [15:0] last_SFROut_exp;
 
 reg trigger;
 
 integer i;
 integer nummismatches;
 
-reg [1:22] on_first_change ;
+reg [1:23] on_first_change ;
 
 
 initial
@@ -244,7 +250,7 @@ begin
 trigger = 0;
 i = 0;
 nummismatches = 0;
-on_first_change = 22'b1;
+on_first_change = 23'b1;
 end
 
 // update real /o prevs
@@ -273,6 +279,7 @@ begin
 	saidaSI_prev = saidaSI;
 	saidaSP_prev = saidaSP;
 	saidaSS_prev = saidaSS;
+	SFROut_prev = SFROut;
 end
 
 // update expected /o prevs
@@ -301,6 +308,7 @@ begin
 	saidaSI_expected_prev = saidaSI_expected;
 	saidaSP_expected_prev = saidaSP_expected;
 	saidaSS_expected_prev = saidaSS_expected;
+	SFROut_expected_prev = SFROut_expected;
 end
 
 
@@ -1688,8 +1696,88 @@ initial
 begin
 	saidaQueueW_expected = 1'bX;
 end 
+// expected SFROut[ 15 ]
+initial
+begin
+	SFROut_expected[15] = 1'bX;
+end 
+// expected SFROut[ 14 ]
+initial
+begin
+	SFROut_expected[14] = 1'bX;
+end 
+// expected SFROut[ 13 ]
+initial
+begin
+	SFROut_expected[13] = 1'bX;
+end 
+// expected SFROut[ 12 ]
+initial
+begin
+	SFROut_expected[12] = 1'bX;
+end 
+// expected SFROut[ 11 ]
+initial
+begin
+	SFROut_expected[11] = 1'bX;
+end 
+// expected SFROut[ 10 ]
+initial
+begin
+	SFROut_expected[10] = 1'bX;
+end 
+// expected SFROut[ 9 ]
+initial
+begin
+	SFROut_expected[9] = 1'bX;
+end 
+// expected SFROut[ 8 ]
+initial
+begin
+	SFROut_expected[8] = 1'bX;
+end 
+// expected SFROut[ 7 ]
+initial
+begin
+	SFROut_expected[7] = 1'bX;
+end 
+// expected SFROut[ 6 ]
+initial
+begin
+	SFROut_expected[6] = 1'bX;
+end 
+// expected SFROut[ 5 ]
+initial
+begin
+	SFROut_expected[5] = 1'bX;
+end 
+// expected SFROut[ 4 ]
+initial
+begin
+	SFROut_expected[4] = 1'bX;
+end 
+// expected SFROut[ 3 ]
+initial
+begin
+	SFROut_expected[3] = 1'bX;
+end 
+// expected SFROut[ 2 ]
+initial
+begin
+	SFROut_expected[2] = 1'bX;
+end 
+// expected SFROut[ 1 ]
+initial
+begin
+	SFROut_expected[1] = 1'bX;
+end 
+// expected SFROut[ 0 ]
+initial
+begin
+	SFROut_expected[0] = 1'bX;
+end 
 // generate trigger
-always @(saidaAX_expected or saidaAX or saidaBP_expected or saidaBP or saidaBX_expected or saidaBX or saidaCS_expected or saidaCS or saidaCX_expected or saidaCX or saidaDI_expected or saidaDI or saidaDS_expected or saidaDS or saidaDX_expected or saidaDX or saidaES_expected or saidaES or saidaI1_expected or saidaI1 or saidaI2_expected or saidaI2 or saidaI3_expected or saidaI3 or saidaIP_expected or saidaIP or saidaIQ_expected or saidaIQ or saidaMem_expected or saidaMem or saidaQueueFull_expected or saidaQueueFull or saidaQueueR_expected or saidaQueueR or saidaQueueVazia_expected or saidaQueueVazia or saidaQueueW_expected or saidaQueueW or saidaSI_expected or saidaSI or saidaSP_expected or saidaSP or saidaSS_expected or saidaSS)
+always @(saidaAX_expected or saidaAX or saidaBP_expected or saidaBP or saidaBX_expected or saidaBX or saidaCS_expected or saidaCS or saidaCX_expected or saidaCX or saidaDI_expected or saidaDI or saidaDS_expected or saidaDS or saidaDX_expected or saidaDX or saidaES_expected or saidaES or saidaI1_expected or saidaI1 or saidaI2_expected or saidaI2 or saidaI3_expected or saidaI3 or saidaIP_expected or saidaIP or saidaIQ_expected or saidaIQ or saidaMem_expected or saidaMem or saidaQueueFull_expected or saidaQueueFull or saidaQueueR_expected or saidaQueueR or saidaQueueVazia_expected or saidaQueueVazia or saidaQueueW_expected or saidaQueueW or saidaSI_expected or saidaSI or saidaSP_expected or saidaSP or saidaSS_expected or saidaSS or SFROut_expected or SFROut)
 begin
 	trigger <= ~trigger;
 end
@@ -1699,8 +1787,8 @@ begin
 `ifdef debug_tbench
 	$display("Scanning pattern %d @time = %t",i,$realtime );
 	i = i + 1;
-	$display("| expected saidaAX = %b | expected saidaBP = %b | expected saidaBX = %b | expected saidaCS = %b | expected saidaCX = %b | expected saidaDI = %b | expected saidaDS = %b | expected saidaDX = %b | expected saidaES = %b | expected saidaI1 = %b | expected saidaI2 = %b | expected saidaI3 = %b | expected saidaIP = %b | expected saidaIQ = %b | expected saidaMem = %b | expected saidaQueueFull = %b | expected saidaQueueR = %b | expected saidaQueueVazia = %b | expected saidaQueueW = %b | expected saidaSI = %b | expected saidaSP = %b | expected saidaSS = %b | ",saidaAX_expected_prev,saidaBP_expected_prev,saidaBX_expected_prev,saidaCS_expected_prev,saidaCX_expected_prev,saidaDI_expected_prev,saidaDS_expected_prev,saidaDX_expected_prev,saidaES_expected_prev,saidaI1_expected_prev,saidaI2_expected_prev,saidaI3_expected_prev,saidaIP_expected_prev,saidaIQ_expected_prev,saidaMem_expected_prev,saidaQueueFull_expected_prev,saidaQueueR_expected_prev,saidaQueueVazia_expected_prev,saidaQueueW_expected_prev,saidaSI_expected_prev,saidaSP_expected_prev,saidaSS_expected_prev);
-	$display("| real saidaAX = %b | real saidaBP = %b | real saidaBX = %b | real saidaCS = %b | real saidaCX = %b | real saidaDI = %b | real saidaDS = %b | real saidaDX = %b | real saidaES = %b | real saidaI1 = %b | real saidaI2 = %b | real saidaI3 = %b | real saidaIP = %b | real saidaIQ = %b | real saidaMem = %b | real saidaQueueFull = %b | real saidaQueueR = %b | real saidaQueueVazia = %b | real saidaQueueW = %b | real saidaSI = %b | real saidaSP = %b | real saidaSS = %b | ",saidaAX_prev,saidaBP_prev,saidaBX_prev,saidaCS_prev,saidaCX_prev,saidaDI_prev,saidaDS_prev,saidaDX_prev,saidaES_prev,saidaI1_prev,saidaI2_prev,saidaI3_prev,saidaIP_prev,saidaIQ_prev,saidaMem_prev,saidaQueueFull_prev,saidaQueueR_prev,saidaQueueVazia_prev,saidaQueueW_prev,saidaSI_prev,saidaSP_prev,saidaSS_prev);
+	$display("| expected saidaAX = %b | expected saidaBP = %b | expected saidaBX = %b | expected saidaCS = %b | expected saidaCX = %b | expected saidaDI = %b | expected saidaDS = %b | expected saidaDX = %b | expected saidaES = %b | expected saidaI1 = %b | expected saidaI2 = %b | expected saidaI3 = %b | expected saidaIP = %b | expected saidaIQ = %b | expected saidaMem = %b | expected saidaQueueFull = %b | expected saidaQueueR = %b | expected saidaQueueVazia = %b | expected saidaQueueW = %b | expected saidaSI = %b | expected saidaSP = %b | expected saidaSS = %b | expected SFROut = %b | ",saidaAX_expected_prev,saidaBP_expected_prev,saidaBX_expected_prev,saidaCS_expected_prev,saidaCX_expected_prev,saidaDI_expected_prev,saidaDS_expected_prev,saidaDX_expected_prev,saidaES_expected_prev,saidaI1_expected_prev,saidaI2_expected_prev,saidaI3_expected_prev,saidaIP_expected_prev,saidaIQ_expected_prev,saidaMem_expected_prev,saidaQueueFull_expected_prev,saidaQueueR_expected_prev,saidaQueueVazia_expected_prev,saidaQueueW_expected_prev,saidaSI_expected_prev,saidaSP_expected_prev,saidaSS_expected_prev,SFROut_expected_prev);
+	$display("| real saidaAX = %b | real saidaBP = %b | real saidaBX = %b | real saidaCS = %b | real saidaCX = %b | real saidaDI = %b | real saidaDS = %b | real saidaDX = %b | real saidaES = %b | real saidaI1 = %b | real saidaI2 = %b | real saidaI3 = %b | real saidaIP = %b | real saidaIQ = %b | real saidaMem = %b | real saidaQueueFull = %b | real saidaQueueR = %b | real saidaQueueVazia = %b | real saidaQueueW = %b | real saidaSI = %b | real saidaSP = %b | real saidaSS = %b | real SFROut = %b | ",saidaAX_prev,saidaBP_prev,saidaBX_prev,saidaCS_prev,saidaCX_prev,saidaDI_prev,saidaDS_prev,saidaDX_prev,saidaES_prev,saidaI1_prev,saidaI2_prev,saidaI3_prev,saidaIP_prev,saidaIQ_prev,saidaMem_prev,saidaQueueFull_prev,saidaQueueR_prev,saidaQueueVazia_prev,saidaQueueW_prev,saidaSI_prev,saidaSP_prev,saidaSS_prev,SFROut_prev);
 `endif
 	if (
 		( saidaAX_expected_prev[0] !== 1'bx ) && ( saidaAX_prev[0] !== saidaAX_expected_prev[0] )
@@ -5290,6 +5378,214 @@ begin
 		on_first_change[22] = 1'b0;
 		last_saidaSS_exp[15] = saidaSS_expected_prev[15];
 	end
+	if (
+		( SFROut_expected_prev[0] !== 1'bx ) && ( SFROut_prev[0] !== SFROut_expected_prev[0] )
+		&& ((SFROut_expected_prev[0] !== last_SFROut_exp[0]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[0] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[0] = SFROut_expected_prev[0];
+	end
+	if (
+		( SFROut_expected_prev[1] !== 1'bx ) && ( SFROut_prev[1] !== SFROut_expected_prev[1] )
+		&& ((SFROut_expected_prev[1] !== last_SFROut_exp[1]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[1] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[1] = SFROut_expected_prev[1];
+	end
+	if (
+		( SFROut_expected_prev[2] !== 1'bx ) && ( SFROut_prev[2] !== SFROut_expected_prev[2] )
+		&& ((SFROut_expected_prev[2] !== last_SFROut_exp[2]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[2] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[2] = SFROut_expected_prev[2];
+	end
+	if (
+		( SFROut_expected_prev[3] !== 1'bx ) && ( SFROut_prev[3] !== SFROut_expected_prev[3] )
+		&& ((SFROut_expected_prev[3] !== last_SFROut_exp[3]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[3] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[3] = SFROut_expected_prev[3];
+	end
+	if (
+		( SFROut_expected_prev[4] !== 1'bx ) && ( SFROut_prev[4] !== SFROut_expected_prev[4] )
+		&& ((SFROut_expected_prev[4] !== last_SFROut_exp[4]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[4] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[4] = SFROut_expected_prev[4];
+	end
+	if (
+		( SFROut_expected_prev[5] !== 1'bx ) && ( SFROut_prev[5] !== SFROut_expected_prev[5] )
+		&& ((SFROut_expected_prev[5] !== last_SFROut_exp[5]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[5] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[5] = SFROut_expected_prev[5];
+	end
+	if (
+		( SFROut_expected_prev[6] !== 1'bx ) && ( SFROut_prev[6] !== SFROut_expected_prev[6] )
+		&& ((SFROut_expected_prev[6] !== last_SFROut_exp[6]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[6] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[6] = SFROut_expected_prev[6];
+	end
+	if (
+		( SFROut_expected_prev[7] !== 1'bx ) && ( SFROut_prev[7] !== SFROut_expected_prev[7] )
+		&& ((SFROut_expected_prev[7] !== last_SFROut_exp[7]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[7] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[7] = SFROut_expected_prev[7];
+	end
+	if (
+		( SFROut_expected_prev[8] !== 1'bx ) && ( SFROut_prev[8] !== SFROut_expected_prev[8] )
+		&& ((SFROut_expected_prev[8] !== last_SFROut_exp[8]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[8] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[8] = SFROut_expected_prev[8];
+	end
+	if (
+		( SFROut_expected_prev[9] !== 1'bx ) && ( SFROut_prev[9] !== SFROut_expected_prev[9] )
+		&& ((SFROut_expected_prev[9] !== last_SFROut_exp[9]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[9] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[9] = SFROut_expected_prev[9];
+	end
+	if (
+		( SFROut_expected_prev[10] !== 1'bx ) && ( SFROut_prev[10] !== SFROut_expected_prev[10] )
+		&& ((SFROut_expected_prev[10] !== last_SFROut_exp[10]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[10] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[10] = SFROut_expected_prev[10];
+	end
+	if (
+		( SFROut_expected_prev[11] !== 1'bx ) && ( SFROut_prev[11] !== SFROut_expected_prev[11] )
+		&& ((SFROut_expected_prev[11] !== last_SFROut_exp[11]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[11] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[11] = SFROut_expected_prev[11];
+	end
+	if (
+		( SFROut_expected_prev[12] !== 1'bx ) && ( SFROut_prev[12] !== SFROut_expected_prev[12] )
+		&& ((SFROut_expected_prev[12] !== last_SFROut_exp[12]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[12] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[12] = SFROut_expected_prev[12];
+	end
+	if (
+		( SFROut_expected_prev[13] !== 1'bx ) && ( SFROut_prev[13] !== SFROut_expected_prev[13] )
+		&& ((SFROut_expected_prev[13] !== last_SFROut_exp[13]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[13] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[13] = SFROut_expected_prev[13];
+	end
+	if (
+		( SFROut_expected_prev[14] !== 1'bx ) && ( SFROut_prev[14] !== SFROut_expected_prev[14] )
+		&& ((SFROut_expected_prev[14] !== last_SFROut_exp[14]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[14] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[14] = SFROut_expected_prev[14];
+	end
+	if (
+		( SFROut_expected_prev[15] !== 1'bx ) && ( SFROut_prev[15] !== SFROut_expected_prev[15] )
+		&& ((SFROut_expected_prev[15] !== last_SFROut_exp[15]) ||
+			on_first_change[23])
+	)
+	begin
+		$display ("ERROR! Vector Mismatch for output port SFROut[15] :: @time = %t",  $realtime);
+		$display ("     Expected value = %b", SFROut_expected_prev);
+		$display ("     Real value = %b", SFROut_prev);
+		nummismatches = nummismatches + 1;
+		on_first_change[23] = 1'b0;
+		last_SFROut_exp[15] = SFROut_expected_prev[15];
+	end
 
 	trigger <= ~trigger;
 end
@@ -5351,6 +5647,7 @@ wire saidaQueueW;
 wire [15:0] saidaSI;
 wire [15:0] saidaSP;
 wire [15:0] saidaSS;
+wire [15:0] SFROut;
 
 wire sampler;                             
 
@@ -5397,6 +5694,7 @@ p8086 i1 (
 	.saidaSI(saidaSI),
 	.saidaSP(saidaSP),
 	.saidaSS(saidaSS),
+	.SFROut(SFROut),
 	.wDEBUG(wDEBUG)
 );
 
@@ -5475,7 +5773,7 @@ end
 // entradaAX[ 2 ]
 initial
 begin
-	entradaAX[2] = 1'b1;
+	entradaAX[2] = 1'b0;
 end 
 // entradaAX[ 1 ]
 initial
@@ -5550,7 +5848,7 @@ end
 // entradaBX[ 3 ]
 initial
 begin
-	entradaBX[3] = 1'b1;
+	entradaBX[3] = 1'b0;
 end 
 // entradaBX[ 2 ]
 initial
@@ -5640,12 +5938,12 @@ end
 // entradaCX[ 1 ]
 initial
 begin
-	entradaCX[1] = 1'b0;
+	entradaCX[1] = 1'b1;
 end 
 // entradaCX[ 0 ]
 initial
 begin
-	entradaCX[0] = 1'b0;
+	entradaCX[0] = 1'b1;
 end 
 // entradaDX[ 15 ]
 initial
@@ -5715,7 +6013,7 @@ end
 // entradaDX[ 2 ]
 initial
 begin
-	entradaDX[2] = 1'b0;
+	entradaDX[2] = 1'b1;
 end 
 // entradaDX[ 1 ]
 initial
@@ -5725,7 +6023,7 @@ end
 // entradaDX[ 0 ]
 initial
 begin
-	entradaDX[0] = 1'b0;
+	entradaDX[0] = 1'b1;
 end 
 // entradaBP[ 15 ]
 initial
@@ -5795,17 +6093,17 @@ end
 // entradaBP[ 2 ]
 initial
 begin
-	entradaBP[2] = 1'b0;
+	entradaBP[2] = 1'b1;
 end 
 // entradaBP[ 1 ]
 initial
 begin
-	entradaBP[1] = 1'b0;
+	entradaBP[1] = 1'b1;
 end 
 // entradaBP[ 0 ]
 initial
 begin
-	entradaBP[0] = 1'b0;
+	entradaBP[0] = 1'b1;
 end 
 // entradaDI[ 15 ]
 initial
@@ -6505,27 +6803,27 @@ end
 // entradaSI[ 4 ]
 initial
 begin
-	entradaSI[4] = 1'b0;
+	entradaSI[4] = 1'b1;
 end 
 // entradaSI[ 3 ]
 initial
 begin
-	entradaSI[3] = 1'b0;
+	entradaSI[3] = 1'b1;
 end 
 // entradaSI[ 2 ]
 initial
 begin
-	entradaSI[2] = 1'b0;
+	entradaSI[2] = 1'b1;
 end 
 // entradaSI[ 1 ]
 initial
 begin
-	entradaSI[1] = 1'b0;
+	entradaSI[1] = 1'b1;
 end 
 // entradaSI[ 0 ]
 initial
 begin
-	entradaSI[0] = 1'b0;
+	entradaSI[0] = 1'b1;
 end 
 // entradaSP[ 15 ]
 initial
@@ -6585,7 +6883,7 @@ end
 // entradaSP[ 4 ]
 initial
 begin
-	entradaSP[4] = 1'b0;
+	entradaSP[4] = 1'b1;
 end 
 // entradaSP[ 3 ]
 initial
@@ -6595,17 +6893,17 @@ end
 // entradaSP[ 2 ]
 initial
 begin
-	entradaSP[2] = 1'b0;
+	entradaSP[2] = 1'b1;
 end 
 // entradaSP[ 1 ]
 initial
 begin
-	entradaSP[1] = 1'b0;
+	entradaSP[1] = 1'b1;
 end 
 // entradaSP[ 0 ]
 initial
 begin
-	entradaSP[0] = 1'b0;
+	entradaSP[0] = 1'b1;
 end 
 // entradaSS[ 15 ]
 initial
@@ -6699,7 +6997,7 @@ end
 initial
 begin
 	wDEBUG = 1'b1;
-	wDEBUG = #10000 1'b0;
+	wDEBUG = #20000 1'b0;
 end 
 
 p8086_vlg_sample_tst tb_sample (
@@ -6748,6 +7046,7 @@ p8086_vlg_check_tst tb_out(
 	.saidaSI(saidaSI),
 	.saidaSP(saidaSP),
 	.saidaSS(saidaSS),
+	.SFROut(SFROut),
 	.sampler_rx(sampler)
 );
 endmodule

@@ -512,19 +512,19 @@ process (clk)
 			end if;
 			
 			elsif Controle = "10010000" or Controle = "11010000" or Controle = "00010000" or Controle = "01010000"then --ADD
-			SOperando1 <= SaidaAdd;
-			SFlags(4) <= FAdd(0);
-			SFlags(0) <= FAdd(1);
-			SFlags(11) <= FAdd(2);
-			SFlags(2) <= FAdd(3);
-			SFlags(7) <= FAdd(4);
-			SFlags(6) <= FAdd(5);
-			SFlags(1) <= '0';
-			SFlags(3) <= '0';
-			SFlags(5) <= '0';
-			SFlags(10 downto 8) <= "000";
-			SFlags(15 downto 12) <= "0000";
-			Word2 <= '0';
+				SOperando1 <= SaidaAdd;
+				SFlags(4) <= FAdd(0);
+				SFlags(0) <= FAdd(1);
+				SFlags(11) <= FAdd(2);
+				SFlags(2) <= FAdd(3);
+				SFlags(7) <= FAdd(4);
+				SFlags(6) <= FAdd(5);
+				SFlags(1) <= '0';
+				SFlags(3) <= '0';
+				SFlags(5) <= '0';
+				SFlags(10 downto 8) <= "000";
+				SFlags(15 downto 12) <= "0000";
+				Word2 <= '0';
 			
 			elsif Controle = "10010001" or Controle = "11010001" or Controle = "00010001" or Controle = "01010001" then --ADC
 				SOperando1 <= SaidaAdc;
@@ -565,6 +565,7 @@ process (clk)
 				Word2 <= '1';	
 			
 			elsif Controle = "00010101" or Controle = "01010101"then --INC
+				SOperando1 <= SInc;
 				SFlags(6) <= FInc(0);
 				SFlags(7) <= FInc(1);
 				SFlags(11) <= FInc(2);
@@ -713,6 +714,7 @@ process (clk)
 				SFlags(3 downto 1) <= "000";
 				SFlags(15 downto 5) <= "00000000000";
 				Word2 <= '0';
+				
 			elsif Controle = "00101001" then
 				SOperando1 <= SAam;
 				SFlags(6) <= FAam(0);
@@ -789,11 +791,11 @@ process (clk)
 
 
 		end if;
-		Saida <= SOperando1;
+		SExtra <= SOperando1; --Saida
 		if Word2 = '1' then 
 			Saida <= SOperando2;
 		end if;	
 end process;
-SExtra <= Saida;
+--SExtra <= Saida;
 
 end comportamento;

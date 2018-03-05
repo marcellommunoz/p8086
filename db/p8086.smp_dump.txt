@@ -1,14 +1,10 @@
 
 State Machine - |p8086|EU_Control_System:ECS|state
-Name state.final state.resposta state.exe state.arithmetic8 state.arithmetic162 state.arithmetic161 state.fetch state.op state.writeback state.readin state.boot 
-state.boot 0 0 0 0 0 0 0 0 0 0 0 
-state.readin 0 0 0 0 0 0 0 0 0 1 1 
-state.writeback 0 0 0 0 0 0 0 0 1 0 1 
-state.op 0 0 0 0 0 0 0 1 0 0 1 
-state.fetch 0 0 0 0 0 0 1 0 0 0 1 
-state.arithmetic161 0 0 0 0 0 1 0 0 0 0 1 
-state.arithmetic162 0 0 0 0 1 0 0 0 0 0 1 
-state.arithmetic8 0 0 0 1 0 0 0 0 0 0 1 
-state.exe 0 0 1 0 0 0 0 0 0 0 1 
-state.resposta 0 1 0 0 0 0 0 0 0 0 1 
-state.final 1 0 0 0 0 0 0 0 0 0 1 
+Name state.halt state.final state.resposta state.exe state.arithmetic162 state.arithmetic161 state.fetch 
+state.fetch 0 0 0 0 0 0 0 
+state.arithmetic161 0 0 0 0 0 1 1 
+state.arithmetic162 0 0 0 0 1 0 1 
+state.exe 0 0 0 1 0 0 1 
+state.resposta 0 0 1 0 0 0 1 
+state.final 0 1 0 0 0 0 1 
+state.halt 1 0 0 0 0 0 1 

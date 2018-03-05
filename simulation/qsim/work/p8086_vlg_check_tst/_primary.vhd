@@ -24,6 +24,7 @@ entity p8086_vlg_check_tst is
         saidaSI         : in     vl_logic_vector(15 downto 0);
         saidaSP         : in     vl_logic_vector(15 downto 0);
         saidaSS         : in     vl_logic_vector(15 downto 0);
+        SFROut          : in     vl_logic_vector(15 downto 0);
         sampler_rx      : in     vl_logic
     );
 end p8086_vlg_check_tst;

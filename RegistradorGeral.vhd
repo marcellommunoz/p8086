@@ -192,7 +192,7 @@ BEGIN
 	
 	sDebugAX <= saidaAH&saidaAL;
 	sDebugBX <= saidaBH&saidaBL;
-	sDebugCX <= saidaCH&saidaDL;
+	sDebugCX <= saidaCH&saidaCL;
 	sDebugDX <= saidaDH&saidaDL;
 	sDebugSP <= saidaSP;
 	sDebugBP <= saidaBP;
